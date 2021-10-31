@@ -1,3 +1,4 @@
 const content  = {
   prop: {},
+  utility: {},
 }
