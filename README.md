@@ -49,3 +49,12 @@ gulp dev
 | Flag | Description |
 | - | - |
 | `--debug` | Suppresses minification. |
+
+## Credits
+These fonts are free for noncommercial use and not covered by the license of this project:
+
+- **Fira Mono** by Mozilla
+- **MB-Element Brutalized** by Irina ModBlackmoon
+- **Roboto** by Google
+
+Thanks for playing!
