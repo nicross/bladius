@@ -1,12 +1,15 @@
 const cleancss = require('gulp-clean-css')
 const concat = require('gulp-concat')
 const electron = require('gulp-run-electron')
+const footer = require('gulp-footer')
 const gulp = require('gulp')
-const header = require('gulp-header')
 const gulpif = require('gulp-if')
+const header = require('gulp-header')
 const iife = require('gulp-iife')
+const merge = require('merge-stream')
 const package = require('./package.json')
 const packager = require('electron-packager')
+const rename = require('gulp-rename')
 const serve = require('gulp-serve')
 const uglify = require('gulp-uglify-es').default
 const zip = require('gulp-zip')
@@ -31,6 +34,8 @@ gulp.task('build-js', () => {
     getJs()
   ).pipe(
     concat('scripts.min.js')
+  ).pipe(
+    footer(`;app.version=()=>'${package.version + (isDebug ? '-debug' : '')}';`)
   ).pipe(
     gulpif(!isDebug, iife(), header("'use strict';\n\n"))
   ).pipe(
@@ -72,7 +77,19 @@ gulp.task('dist-electron', async () => {
 
   // XXX: Archives have no root directory
   paths.forEach((path) => {
-    gulp.src(path + '/**/*').pipe(
+    const build = gulp.src(path + '/**/*')
+
+    const manual = gulp.src([
+      'public/favicon.png',
+      'public/font/*',
+      'public/manual.html'
+    ], {base: 'public'}).pipe(
+      rename((path) => {
+        path.dirname = '/documentation/' + path.dirname
+      })
+    )
+
+    merge(build, manual).pipe(
       zip(path.replace('dist\\', '') + '.zip')
     ).pipe(
       gulp.dest('dist')
@@ -86,6 +103,7 @@ gulp.task('dist-html5', () => {
     'public/favicon.png',
     'public/font/*',
     'public/index.html',
+    'public/manual.html',
     'public/scripts.min.js',
     'public/styles.min.css',
   ], {base: 'public'}).pipe(
@@ -137,7 +155,8 @@ function getAppJs() {
   const srcs = [
     'src/js/app.js',
     'src/js/app/*.js',
-    'src/js/app/**/*.js',
+    'src/js/app/*/*.js',
+    'src/js/app/*/*/*.js',
   ]
 
   return srcs
@@ -146,6 +165,8 @@ function getAppJs() {
 function getContentJs() {
   const srcs = [
     'src/js/content.js',
+    'src/js/content/const.js',
+    'src/js/content/utility/*.js',
     'src/js/content/*.js',
     'src/js/content/**/*.js',
   ]
