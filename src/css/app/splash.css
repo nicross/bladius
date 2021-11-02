@@ -1,1 +1,23 @@
-.a-splash {}
+.a-splash {
+  overflow: hidden;
+}
+  .a-splash--logo {
+    align-items: stretch;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    letter-spacing: 0;
+  }
+  .a-splash--row {
+    display: flex;
+    font-family: FiraMonoRegular, monospace;
+    justify-content: space-between;
+    padding: 0 1em;
+  }
+  .a-splash--title {
+    color: #FF0069;
+    font-family: MbElementBrutalized, fantasy;
+    font-size: 12em;
+    line-height: 1;
+  }

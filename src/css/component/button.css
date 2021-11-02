@@ -1,0 +1,17 @@
+.c-button {
+  background-color: #000000;
+  border: 1px solid #FF0069;
+  color: #FF0069;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  transition: all 0.25s ease;
+  transition-property: border-width, color, padding;
+}
+
+.c-button:active,
+.c-button:focus,
+.c-button:hover {
+  border-width: calc(1px + 0.25em);
+  color: #FFFFFF;
+  padding: 0.25em 1.25em;
+}
