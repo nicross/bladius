@@ -11,6 +11,8 @@ const app = {
 
     return this
   },
+  screen: {},
+  state: {},
   utility: {},
 }
 
