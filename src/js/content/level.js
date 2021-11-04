@@ -12,7 +12,7 @@ content.level = (() => {
   }
 
   return {
-    canlevelUp: function () {
+    canLevelUp: function () {
       return content.experience.get() >= this.getExperienceToNext()
     },
     get: () => level,
