@@ -33,7 +33,7 @@ TK
 - If 2 shields drawn, discard weakest, redraw indefinitely
 - Randomly assigned to right/left hands
 - Hands can be unarmed
-- Can spend 1 currency to discard and redraw
+- Can spend 1 gold to discard and redraw
 
 ### Combat
 - Fight a wave of enemies scaled according to experience
@@ -81,14 +81,15 @@ Or, f(L) = L + f(L - 1)
 Use a generator?
 
 ### Store
-- Purchase items with currency earned
+- Purchase items with gold earned
 - Health potion
   - Offered if below max number of health potions
-  - Always 1 currency
+  - Always 1 gold
 - Cards
-  - Two random cards are generated
+  - Three random cards are generated
   - Cost depends on strength of card
   - Card strengths scale with matches won
+  - Can reroll for 1 gold
 
 ## Controls
 ### Gamepad
