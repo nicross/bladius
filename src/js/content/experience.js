@@ -2,11 +2,11 @@ content.experience = (() => {
   let experience = 0
 
   return {
-    get: () => experience,
-    increment: function (value = 1) {
+    add: function (value = 1) {
       experience += value
       return this
     },
+    get: () => experience,
     reset: function () {
       experience = 0
 
