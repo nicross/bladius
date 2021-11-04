@@ -5,7 +5,10 @@ content.deck = (() => {
   return {
     add: function (...cards) {
       for (const card of cards) {
-        deck.push(card)
+        deck.push({
+          ...card,
+          uuid: engine.utility.uuid(),
+        })
       }
 
       return this
