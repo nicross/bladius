@@ -20,7 +20,6 @@ content.potions = (() => {
     count: () => potions,
     reset: function () {
       potions = startCount
-
       return this
     },
     use: function () {

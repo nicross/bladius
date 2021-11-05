@@ -34,7 +34,6 @@ content.level = (() => {
     },
     reset: function () {
       level = 0
-
       return this
     },
   }

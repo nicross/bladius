@@ -9,7 +9,6 @@ content.experience = (() => {
     get: () => experience,
     reset: function () {
       experience = 0
-
       return this
     },
   }

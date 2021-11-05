@@ -10,7 +10,6 @@ content.gold = (() => {
     has: (value = 1) => gold >= value,
     reset: function () {
       gold = 0
-
       return this
     },
     spend: function (value = 0) {

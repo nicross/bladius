@@ -28,7 +28,6 @@ content.packs = (() => {
     },
     reset: function () {
       nextRedeem = 1
-
       return this
     },
   }
