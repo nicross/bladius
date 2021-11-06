@@ -1,15 +1,5 @@
-content.arms = {}
-
-// Beware loading order in Gulpfile.js
-content.arms.left = content.arm.create({
-  angle: Math.PI/2,
-})
-
-content.arms.right = content.arm.create({
-  angle: -Math.PI/2,
-})
+content.arms = content.component.arms.create()
 
 engine.state.on('reset', () => {
-  content.arms.left.reset()
-  content.arms.right.reset()
+  content.arms.reset()
 })
