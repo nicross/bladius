@@ -1,13 +1,13 @@
-app.screen.draw = (() => {
+app.screen.hand = (() => {
   let root
 
   engine.ready(() => {
-    root = document.querySelector('.a-draw')
+    root = document.querySelector('.a-hand')
 
     app.utility.focus.trap(root)
 
-    app.state.screen.on('enter-draw', onEnter)
-    app.state.screen.on('exit-draw', onExit)
+    app.state.screen.on('enter-hand', onEnter)
+    app.state.screen.on('exit-hand', onExit)
   })
 
   function onEnter() {

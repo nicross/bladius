@@ -13,10 +13,10 @@ app.state.screen = engine.utility.machine.create({
     },
     booster: {
       next: function () {
-        this.change('draw')
+        this.change('hand')
       },
     },
-    draw: {
+    hand: {
       next: function () {
         this.change('fight')
       },
@@ -36,8 +36,7 @@ app.state.screen = engine.utility.machine.create({
     },
     win: {
       next: function () {
-        // TODO
-        const isLevelUp = false
+        const isLevelUp = content.hero.level.canLevelUp()
         this.change(isLevelUp ? 'level' : 'store')
       },
     },
@@ -48,9 +47,8 @@ app.state.screen = engine.utility.machine.create({
     },
     store: {
       next: function () {
-        // TODO
-        const isBooster = false
-        this.change(isBooster ? 'booster' : 'draw')
+        const isBooster = content.booster.canRedeem()
+        this.change(isBooster ? 'booster' : 'hand')
       },
     },
   },
@@ -89,8 +87,8 @@ app.state.screen.on('exit', (e) => {
 app.state.screen.on('enter', (e) => {
   const selectors = {
     booster: '.a-app--booster',
-    draw: '.a-app--draw',
     fight: '.a-app--fight',
+    hand: '.a-app--hand',
     level: '.a-app--level',
     loss: '.a-app--loss',
     splash: '.a-app--splash',
