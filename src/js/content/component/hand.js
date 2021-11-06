@@ -11,6 +11,12 @@ content.component.hand.prototype = {
 
     return this
   },
+  reset: function () {
+    this.attributes = {}
+    this.cards = []
+
+    return this
+  },
   set: function (cards = []) {
     // Require valid hand
     const validation = this.validate(cards)
