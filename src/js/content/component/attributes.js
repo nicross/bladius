@@ -28,6 +28,16 @@ content.component.attributes.prototype = {
 
     return this
   },
+  compute: function (mask = {}) {
+    const result = {}
+
+    for (const attribute of this.attributes) {
+      const key = attribute.key
+      result[key] = attribute.compute(mask[key])
+    }
+
+    return result
+  },
   reset: function () {
     return this.set(this.defaults)
   },

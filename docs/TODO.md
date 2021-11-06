@@ -1,7 +1,24 @@
 # TODO
 ## Interface sprint
-- Systems
 - Screen contents and controls
+  - Booster
+    - Acquired cards
+    - Next (Draw Cards)
+  - Draw
+    - Hand
+    - Redraw button
+    - Next button (Fight)
+  - Winnings
+    - Gold prompt
+    - Experience prompt
+    - Stats table
+    - Next (Level Up or Store)
+  - Level Up
+    - Buttons to increase each stat
+  - Store
+    - Buttons for each card
+    - Button to
+    - Next (Open Booster or Next Fight)
 - Flow
   - Booster
     - Redeem cards and add to deck

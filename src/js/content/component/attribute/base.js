@@ -11,9 +11,23 @@ content.component.attribute.base = {
 
     return this
   },
-  compute: function () {
-    this.value = Math.max(this.level + this.modifier, 0) * this.multiplier
-    return this
+  compute: () => 0,
+  computeLinear: function ({
+    base = 0,
+    increment = 0,
+    mask = {},
+  }) {
+    const {
+      level: maskLevel = 0,
+      modifier: maskModifier = 0,
+      multiplier: maskMultiplier = 1,
+    } = mask
+
+    const level = this.level + maskLevel + this.modifier + maskModifier,
+      modifier = increment * level,
+      multiplier = this.multiplier * maskMultiplier
+
+    return (base + modifier) * multiplier
   },
   getLevel: function () {
     return this.level
@@ -29,7 +43,7 @@ content.component.attribute.base = {
   },
   incrementLevel: function () {
     this.level += 1
-    this.compute()
+    this.value = this.compute()
 
     return this
   },
@@ -52,25 +66,25 @@ content.component.attribute.base = {
     this.modifier = modifier
     this.multiplier = multiplier
 
-    this.compute()
+    this.value = this.compute()
 
     return this
   },
   setLevel: function (level = 0) {
     this.level = level
-    this.compute()
+    this.value = this.compute()
 
     return this
   },
   setModifier: function (modifier = 0) {
     this.multiplier = modifier
-    this.compute()
+    this.value = this.compute()
 
     return this
   },
   setMultiplier: function (multiplier = 1) {
     this.multiplier = multiplier
-    this.compute()
+    this.value = this.compute()
 
     return this
   },

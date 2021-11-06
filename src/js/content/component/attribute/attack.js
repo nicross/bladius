@@ -5,12 +5,12 @@ content.component.attribute.attack = content.component.attribute.register(
     isEnemy: true,
     isHero: true,
     isPublic: true,
-    compute: function () {
-      const base = 10,
-        level = this.level + this.modifier,
-        modifier = 1 * level
-
-      return (base + modifier) * this.multiplier
+    compute: function (mask) {
+      return this.computeLinear({
+        base: 10,
+        increment: 1,
+        mask,
+      })
     },
   })
 )
