@@ -13,6 +13,12 @@ app.screen.booster = (() => {
   function onEnter() {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
+
+    const cards = content.packs.redeem()
+    content.deck.add(...cards)
+
+    updateCards(cards)
+    updateHeader(cards)
   }
 
   function onExit() {
@@ -37,6 +43,33 @@ app.screen.booster = (() => {
     if (ui.down || ui.right) {
       return app.utility.focus.setNextFocusable(root)
     }
+  }
+
+  function updateCards(pack) {
+    const parent = root.querySelector('.a-booster--cards')
+
+    parent.innerHTML = ''
+
+    for (const card of pack) {
+      const container = document.createElement('li')
+      container.className = 'a-booster--card'
+
+      app.component.card.create({
+        card,
+      }).attach(container)
+
+      parent.appendChild(container)
+    }
+  }
+
+  function updateHeader(cards) {
+    const isStarter = cards.length > 3
+
+    root.querySelector('.a-booster--title').innerHTML = isStarter
+      ? 'Starter Pack'
+      : 'Booster Pack'
+
+    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards`
   }
 
   return {}

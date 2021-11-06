@@ -3,6 +3,7 @@ const app = {
     document.querySelector('.a-app').classList.add('a-app-active')
     return this
   },
+  component: {},
   isElectron: () => typeof ElectronApi != 'undefined',
   quit: function () {
     if (this.isElectron()) {
