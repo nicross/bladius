@@ -32,10 +32,18 @@ content.cards.bane = (() => {
     }
   }
 
-  function invent(definition) {
+  function define(definition) {
+    definition = {...definition}
+
     definition.isBonus = true
     definition.isPassive = true
     definition.type = 'Bane'
+
+    return definition
+  }
+
+  function invent(definition) {
+    definition = define(definition)
 
     content.cards.register(definition)
     archetypes.push(definition)
@@ -43,6 +51,7 @@ content.cards.bane = (() => {
 
   return {
     archetypes: [...archetypes],
+    define,
     invent,
   }
 })()

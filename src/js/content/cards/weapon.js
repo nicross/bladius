@@ -13,9 +13,17 @@ content.cards.weapon = (() => {
   const types = [
     {name: 'Axe', bonus: 5, speed: 0.75},
     {name: 'Dagger', bonus: 1, speed: 1.5},
-    {name: 'Mace', bonus: 2, speed: 0},
-    {name: 'Sword', bonus: 3, speed: 0},
+    {name: 'Mace', bonus: 2, speed: 1},
+    {name: 'Sword', bonus: 3, speed: 1},
   ]
+
+  const unarmed = define({
+    cost: 0,
+    isStarter: false,
+    name: 'Unarmed',
+    stats: {},
+    weight: 0,
+  })
 
   for (const material of materials) {
     for (const type of types) {
@@ -33,11 +41,18 @@ content.cards.weapon = (() => {
     }
   }
 
-  function invent(definition) {
+  function define(definition) {
+    definition = {...definition}
+
     definition.action = 'attack'
     definition.isActive = true
-    definition.isPassive = false
     definition.type = 'Weapon'
+
+    return definition
+  }
+
+  function invent(definition) {
+    definition = define(definition)
 
     content.cards.register(definition)
     archetypes.push(definition)
@@ -45,6 +60,8 @@ content.cards.weapon = (() => {
 
   return {
     archetypes: [...archetypes],
+    define,
     invent,
+    unarmed: () => ({...unarmed}),
   }
 })()

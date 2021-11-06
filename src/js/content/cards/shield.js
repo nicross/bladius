@@ -22,10 +22,18 @@ content.cards.shield = (() => {
     })
   }
 
-  function invent(definition) {
+  function define(definition) {
+    definition = {...definition}
+
     definition.action = 'defend'
     definition.isActive = true
     definition.type = 'Shield'
+
+    return definition
+  }
+
+  function invent(definition) {
+    definition = define(definition)
 
     content.cards.register(definition)
     archetypes.push(definition)
@@ -33,6 +41,7 @@ content.cards.shield = (() => {
 
   return {
     archetypes: [...archetypes],
+    define,
     invent,
   }
 })()

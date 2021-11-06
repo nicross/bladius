@@ -31,10 +31,18 @@ content.cards.boon = (() => {
     }
   }
 
-  function invent(definition) {
+  function define(definition) {
+    definition = {...definition}
+
     definition.action = 'passive'
     definition.isPassive = true
     definition.type = 'Boon'
+
+    return definition
+  }
+
+  function invent(definition) {
+    definition = define(definition)
 
     content.cards.register(definition)
     archetypes.push(definition)
@@ -42,6 +50,7 @@ content.cards.boon = (() => {
 
   return {
     archetypes: [...archetypes],
+    define,
     invent,
   }
 })()
