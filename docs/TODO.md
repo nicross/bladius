@@ -1,10 +1,6 @@
 # TODO
 ## Interface sprint
 - Systems
-  - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
-  - Attributes component (reusable)
-  - Hero attributes
-  - Define strength/defense/health/stamina attribute prototypes
 - Screen contents and controls
 - Flow
   - Booster
@@ -35,6 +31,7 @@
   - Xenakis/THX sound generator?
 
 ## Combat sprint
+- Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
 - Health component (reusable)
 - Hero health system
 - Potion use events

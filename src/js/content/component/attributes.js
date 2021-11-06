@@ -12,6 +12,7 @@ content.component.attributes.prototype = {
     const prototypes = content.component.attribute.all()
 
     this.attributes = []
+    this.defaults = {...defaults}
 
     for (const prototype of prototypes) {
       if (!filter(prototype)) {
@@ -26,6 +27,9 @@ content.component.attributes.prototype = {
     }
 
     return this
+  },
+  reset: function () {
+    return this.set(this.defaults)
   },
   set: function (data = {}) {
     for (const attribute of this.attributes) {
