@@ -9,8 +9,10 @@
     - Redraw button
     - Next button (Fight)
   - Winnings
-    - Gold prompt
-    - Experience prompt
+    - Prompts
+      - Random win message
+      - Gold prompt
+      - Experience prompt
     - Stats table
     - Next (Level Up or Store)
   - Level Up

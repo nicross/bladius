@@ -22,48 +22,97 @@
             </div>
           </h1>
           <div class="a-splash--content">
-            <button class="a-splash--start c-button" type="button">Open Starter Pack</button>
+            <button class="a-splash--start c-button" type="button">New Game</button>
           </div>
         </section>
       </div>
 
       <div class="a-app--screen a-app--booster">
-        <section class="a-booster c-screen">
-
+        <section class="a-booster c-screen" aria-labelledby="a-booster--header">
+          <div class="c-screen--header" id="a-booster--header">
+            <h1 class="a-booster--title c-screen--title"></h1>
+            <div class="a-booster--subtitle c-screen--subtitle"><div>
+          </div>
+          <ul class="a-booster--cards" aria-label="Contents"></ul>
+          <button class="a-booster--next c-button">Draw Cards</button>
         </section>
       </div>
 
-
       <div class="a-app--screen a-app--hand">
-        <section class="a-hand c-screen">
+        <section class="a-hand c-screen" aria-labelledby="a-hand--header">
+          <div class="c-screen--header" id="a-hand--header">
+            <h1 class="c-screen--title">Hand</h1>
+            <div class="c-screen--subtitle">Draw Three Cards</div>
+          </div>
+          <ul class="a-hand--cards" aria-label="Hand">
+            <!-- app.component.card -->
+          </ul>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="a-hand--redraw c-button" disabled>
+                Redraw <div class="c-currency" aria-label="1 gold">1</div>
+              </button>
+            </li>
+            <li class="c-screen--action">
+              <button class="a-hand--next c-button">Fight</button>
+            </li>
         </section>
       </div>
 
       <div class="a-app--screen a-app--fight">
-        <section class="a-fight c-screen"></section>
+        <section class="a-fight c-screen" aria-label="Fight"></section>
       </div>
 
       <div class="a-app--screen a-app--loss">
-        <section class="a-loss c-screen">
-
+        <section class="a-loss c-screen" aria-labelledby="a-loss--header">
+          <div class="c-screen--header" id="a-loss--header">
+            <h1 class="c-screen--title">Game Over</h1>
+          </div>
+          <!-- TODO: Statistics -->
+          <button class="c-button a-booster--next">New Game</button>
         </section>
       </div>
 
       <div class="a-app--screen a-app--win">
         <section class="a-win c-screen">
-
+          <div class="a-win--prompts">
+            <!-- app.component.prompt -->
+          </div>
         </section>
       </div>
 
       <div class="a-app--screen a-app--level">
-        <section class="a-level c-screen">
-
+        <section class="a-level c-screen" aria-labelledby="a-level--header">
+          <div class="c-screen--header" id="a-level--header">
+            <h1 class="c-screen--title">Level Up</h1>
+            <div class="c-screen--subtitle">Choose an Attribute</div>
+          </div>
+          <ul class="a-level--attributes">
+            <!-- app.component.attribute -->
+          </ul>
         </section>
       </div>
 
       <div class="a-app--screen a-app--store">
-        <section class="a-store c-screen">
-
+        <section class="a-store c-screen" aria-labelledby="a-store--header">
+          <div class="c-screen--header" id="a-store--header">
+            <h1 class="c-screen--title">Store</h1>
+            <div class="c-screen--subtitle">Spend Gold to Restock</div>
+          </div>
+          <ul class="a-store--cards" aria-label="Cards">
+            <!-- app.component.card -->
+          </ul>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="a-store--potion c-button" disabled>
+                Buy Potion <div class="c-currency" aria-label="1 gold">1</div>
+              </button>
+            </li>
+            <li class="c-screen--action">
+              <button class="a-store--next c-button"></button>
+            </li>
+          </ul>
+          <div class="a-store--toasts"></div>
         </section>
       </div>
     </main>

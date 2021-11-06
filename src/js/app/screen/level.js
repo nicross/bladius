@@ -11,7 +11,7 @@ app.screen.level = (() => {
   })
 
   function onEnter() {
-    app.utility.focus.setWithin(root)
+    app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
   }
 
