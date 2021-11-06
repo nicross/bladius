@@ -60,19 +60,18 @@ TK
   - The player health increases as the counter ticks to zero
   - More points in the Healing attribute increase the rate of healing
 
-### Score
-- Time elapsed
-- Damage dealt vs damage taken
-
-### Rewards
+### Winnings screen
 - Currency
   - Earn 1 per kill
 - Experience
   - Earn 1 per match
+- Time elapsed
+- Damage dealt vs damage taken
 
 ### Level Up
 - Shown when enough experience is gained to earn a level
 - List of all attributes with one point to spend
+- Ability to skip? Can you get higher rewards for being underleveled?
 
 #### Experience curve
 See: https://oeis.org/A000217
@@ -253,5 +252,9 @@ TK
 - Enemy sounds
 - Attack sounds
   - Signifiers
-  - Swings
+  - Swings (panned brown noise which goes from hard left/right to center and back)
   - Hits
+  - Blocks (muted hits + shield sound)
+- Between rounds the game loop is always running
+  - breathing/heartbeat filtered out but still audible, returning to resting rate
+  - enemies are spawned in when new rounds begin
