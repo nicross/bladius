@@ -28,13 +28,17 @@ content.cards.weapon = (() => {
   for (const material of materials) {
     for (const type of types) {
       invent({
+        attributes: {
+          attack: {
+            modifier: material.bonus + type.bonus,
+          },
+          attackSpeed: {
+            multiplier: type.speed,
+          },
+        },
         cost: material.bonus + Math.min(4, type.bonus),
         isStarter: material.bonus <= 2,
         name: `${material.name} ${type.name}`,
-        stats: {
-          attack: material.bonus + type.bonus,
-          attackSpeed: type.speed,
-        },
         subtype: type.name,
         weight: engine.utility.scale(material.bonus, 1, 6, 1/4, 1/4/6),
       })

@@ -6,8 +6,8 @@ content.component.hand.create = function (...args) {
 
 content.component.hand.prototype = {
   construct: function () {
+    this.attributes = {}
     this.cards = []
-    this.stats = {}
 
     return this
   },
@@ -20,8 +20,8 @@ content.component.hand.prototype = {
     }
 
     // Set cards
+    this.attributes = {}
     this.cards = [...cards].slice(0, 3)
-    this.stats = {}
 
     // Analyze cards
     const actives = []
@@ -32,14 +32,21 @@ content.component.hand.prototype = {
         actives.push(card)
       } else if (card.isPassive) {
         // Collect passive stats
-        for (const [key, value] of Object.entries(card.stats || {})) {
-          if (!this.stats[key]) {
-            this.stats[key] = 0
+        for (const [key, values] of Object.entries(card.attributes || {})) {
+          if (!this.attributes[key]) {
+            this.attributes[key] = {
+              modifier: 0,
+              multiplier: 1,
+            }
           }
 
-          // XXX: This will not work with stacking multipliers, e.g. 0.5 + 1.5 = 0.75, not 2.0
-          // TODO: Improve sophistication of stat types
-          this.stats[key] += value
+          if (values.modifier) {
+            this.attributes[key].modifier += values.modifier
+          }
+
+          if (values.multiplier) {
+            this.attributes[key].multiplier *= values.multiplier
+          }
         }
       }
     }
@@ -56,7 +63,7 @@ content.component.hand.prototype = {
       }
 
       // Prefer stronger primary
-      return b.stats.attack - a.stats.attack
+      return b.attributes.attack.modifier - a.attributes.attack.modifier
     })
 
     // Pad actives with special unarmed cards
@@ -101,7 +108,7 @@ content.component.hand.prototype = {
     // Limit one piece of armor per subtype
     for (const indices of Object.values(armors)) {
       if (indices.length > 1) {
-        indices.sort((a, b) => cards[a].stats.defense - cards[b].stats.defense)
+        indices.sort((a, b) => cards[a].attributes.defense - cards[b].attributes.defense)
 
         for (const index of indices.slice(1, indices.length)) {
           result[index] = false
@@ -111,7 +118,7 @@ content.component.hand.prototype = {
 
     // Limit one shield
     if (shields.length > 1) {
-      shields.sort((a, b) => cards[a].stats.defense - cards[b].stats.defense)
+      shields.sort((a, b) => cards[a].attributes.defense - cards[b].attributes.defense)
 
       for (const index of shields.slice(1, shields.length)) {
         result[index] = false
@@ -122,7 +129,7 @@ content.component.hand.prototype = {
 
     // Limit two weapons
     if (weapons.length > 2) {
-      weapons.sort((a, b) => cards[a].stats.attack - cards[b].stats.attack)
+      weapons.sort((a, b) => cards[a].attributes.attack - cards[b].attributes.attack)
 
       for (const index of weapons.slice(2, weapons.length)) {
         result[index] = false

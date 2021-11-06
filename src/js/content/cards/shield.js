@@ -12,12 +12,14 @@ content.cards.shield = (() => {
 
   for (const material of materials) {
     invent({
+      attributes: {
+        defense: {
+          modifier: material.bonus,
+        },
+      },
       cost: 1 + material.bonus,
       isStarter: material.bonus <= 2,
       name: `${material.name} Shield`,
-      stats: {
-        defense: material.bonus,
-      },
       weight: engine.utility.scale(material.bonus, 1, 6, 1/4, 1/4/6),
     })
   }

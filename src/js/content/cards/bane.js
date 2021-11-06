@@ -4,10 +4,10 @@ content.cards.bane = (() => {
   const levels = 4
 
   const types = [
-    {name: 'Wounded', stat: 'health'},
-    {name: 'Fatigued', stat: 'stamina'},
-    {name: 'Weakened', stat: 'attack'},
-    {name: 'Vulnerable', stat: 'defense'},
+    {name: 'Wounded', modifier: 'health'},
+    {name: 'Fatigued', modifier: 'stamina'},
+    {name: 'Weakened', modifier: 'attack'},
+    {name: 'Vulnerable', modifier: 'defense'},
     /*
     {name: 'Tolerance', stat: 'healing'},
     {name: 'Dazed', stat: 'attackSpeed'},
@@ -18,15 +18,26 @@ content.cards.bane = (() => {
 
   for (let level = 1; level <= levels; level += 1) {
     for (const type of types) {
-      const stats = {}
-      stats[type.stat] = -level
+      const attributes = {}
+
+      if (type.modifier) {
+        attributes[type.modifier] = {
+          modifier: -level,
+        }
+      }
+
+      if (type.multiplier) {
+        attributes[type.multiplier] = {
+          multiplier: 1 - (level / 5),
+        }
+      }
 
       invent({
+        attributes,
         bonus: level,
         cost: 2 ** level,
         isStarter: level == 1,
         name: `${type.name} ${level}`,
-        stats,
         weight: engine.utility.scale(level, 1, 4, 1/4, 1/4/4),
       })
     }

@@ -4,10 +4,10 @@ content.cards.boon = (() => {
   const levels = 4
 
   const types = [
-    {name: 'Vitality', stat: 'health'},
-    {name: 'Endurance', stat: 'stamina'},
-    {name: 'Might', stat: 'attack'},
-    {name: 'Protection', stat: 'defense'},
+    {name: 'Vitality', modifier: 'health'},
+    {name: 'Endurance', modifier: 'stamina'},
+    {name: 'Might', modifier: 'attack'},
+    {name: 'Protection', modifier: 'defense'},
     /*
     {name: 'Healing', stat: 'healing'},
     {name: 'Quickness', stat: 'attackSpeed'},
@@ -18,14 +18,25 @@ content.cards.boon = (() => {
 
   for (let level = 1; level <= levels; level += 1) {
     for (const type of types) {
-      const stats = {}
-      stats[type.stat] = level
+      const attributes = {}
+
+      if (type.modifier) {
+        attributes[type.modifier] = {
+          modifier: level,
+        }
+      }
+
+      if (type.multiplier) {
+        attributes[type.multiplier] = {
+          multiplier: 1 + (level / 4),
+        }
+      }
 
       invent({
+        attributes,
         cost: 2 * level,
         isStarter: level == 1,
         name: `${type.name} ${level}`,
-        stats,
         weight: engine.utility.scale(level, 1, 4, 1/4, 1/4/4),
       })
     }

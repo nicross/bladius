@@ -22,12 +22,14 @@ content.cards.armor = (() => {
   for (const material of materials) {
     for (const type of types) {
       invent({
+        attributes: {
+          defense: {
+            modifier: material.bonus + type.bonus,
+          },
+        },
         cost: material.bonus + type.bonus,
         isStarter: (material.bonus + type.bonus) <= 2,
         name: `${material.name} ${type.name}`,
-        stats: {
-          defense: material.bonus + type.bonus,
-        },
         subtype: type.name,
         weight: engine.utility.scale(material.bonus, 1, 6, 1/6, 1/6/6),
       })

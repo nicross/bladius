@@ -38,6 +38,9 @@ content.component.attributes.prototype = {
 
     return this
   },
+  setWithHand: function (hand = {}) {
+    return this.set(hand.attributes)
+  },
   setLevels: function (values = {}) {
     for (const attribute of this.attributes) {
       attribute.setLevel(values[attribute.key])
