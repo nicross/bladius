@@ -1,4 +1,4 @@
-content.level = (() => {
+content.hero.level = (() => {
   let level = 0
 
   function calculateExperienceTo(level) {
@@ -39,4 +39,4 @@ content.level = (() => {
   }
 })()
 
-engine.state.on('reset', () => content.level.reset())
+engine.state.on('reset', () => content.hero.level.reset())

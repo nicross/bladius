@@ -12,17 +12,17 @@ content.packs = (() => {
   }
 
   return {
-    canRedeem: (round = 0) => round >= nextRedeem,
+    canRedeem: () => content.round.get() >= nextRedeem,
     getNextRedeem: () => nextRedeem,
-    getNextRedeemDelta: (round = 0) => Math.max(nextRedeem - round, 0),
-    redeem: (round = 0) => {
+    getNextRedeemDelta: () => Math.max(nextRedeem - content.round.get(), 0),
+    redeem: function () {
       if (!this.canRedeem()) {
-        return
+        return []
       }
 
       nextRedeem = calculateNextRedeem()
 
-      return round == 1
+      return content.round.get() == 1
         ? content.cards.generateStarterPack()
         : content.cards.generateBoosterPack()
     },

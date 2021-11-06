@@ -1,4 +1,4 @@
-content.gold = (() => {
+content.hero.gold = (() => {
   let gold = 0
 
   return {
@@ -19,4 +19,4 @@ content.gold = (() => {
   }
 })()
 
-engine.state.on('reset', () => content.gold.reset())
+engine.state.on('reset', () => content.hero.gold.reset())

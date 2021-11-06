@@ -1,4 +1,4 @@
-content.experience = (() => {
+content.hero.experience = (() => {
   let experience = 0
 
   return {
@@ -14,4 +14,4 @@ content.experience = (() => {
   }
 })()
 
-engine.state.on('reset', () => content.experience.reset())
+engine.state.on('reset', () => content.hero.experience.reset())
