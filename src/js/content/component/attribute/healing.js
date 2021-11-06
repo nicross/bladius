@@ -4,5 +4,9 @@ content.component.attribute.healing = content.component.attribute.register(
     name: 'Healing',
     isHero: true,
     isPublic: false,
+    compute: function () {
+      // Heal half of total health per second
+      return 0.5 * this.multiplier
+    },
   })
 )
