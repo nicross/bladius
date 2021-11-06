@@ -105,6 +105,21 @@ content.component.hand.prototype = {
 
     const result = cards.map(() => true)
 
+    // Limit to unique UUIDs
+    const uuids = new Set()
+
+    for (const index in cards) {
+      const card = cards[index]
+
+      if (card.uuid) {
+        if (uuids.has(card.uuid)) {
+          result[index] = false
+        } else {
+          uuids.add(card.uuid)
+        }
+      }
+    }
+
     // Limit one piece of armor per subtype
     for (const indices of Object.values(armors)) {
       if (indices.length > 1) {
