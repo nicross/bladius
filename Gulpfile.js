@@ -167,7 +167,10 @@ function getContentJs() {
     'src/js/content.js',
     'src/js/content/const.js',
     'src/js/content/utility/*.js',
+    'src/js/content/component/attribute.js',
+    'src/js/content/component/attribute/base.js',
     'src/js/content/component/*.js',
+    'src/js/content/component/*/*.js',
     'src/js/content/*.js',
     'src/js/content/**/*.js',
   ]
