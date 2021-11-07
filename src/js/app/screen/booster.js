@@ -42,12 +42,32 @@ app.screen.booster = (() => {
       }
     }
 
-    if (ui.up || ui.left) {
-      return app.utility.focus.setPreviousFocusable(root)
+    // Left and right to cycle cards
+    if (app.utility.focus.isWithin(root.querySelector('.c-cards'))) {
+      if (ui.left) {
+        return app.utility.focus.setPreviousFocusable(root, (element) => {
+          return element.matches('.c-card')
+        })
+      }
+
+      if (ui.right) {
+        return app.utility.focus.setNextFocusable(root, (element) => {
+          return element.matches('.c-card')
+        })
+      }
     }
 
-    if (ui.down || ui.right) {
-      return app.utility.focus.setNextFocusable(root)
+    // Up and down to main landmarks
+    if (ui.up) {
+      return app.utility.focus.setPreviousFocusable(root, (element) => {
+        return !element.matches('.c-cards--card:nth-child(n+2) .c-card')
+      })
+    }
+
+    if (ui.down) {
+      return app.utility.focus.setNextFocusable(root, (element) => {
+        return !element.matches('.c-cards--card:nth-child(n+2) .c-card')
+      })
     }
   }
 
