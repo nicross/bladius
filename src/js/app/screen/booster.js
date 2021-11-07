@@ -21,6 +21,7 @@ app.screen.booster = (() => {
 
     const isStarter = cards.length > 3
     content.hero.potions.add(isStarter ? 3 : 1)
+    content.hero.gold.add(content.round.get())
 
     updateCards(cards)
     updateHeader(cards)
@@ -78,7 +79,7 @@ app.screen.booster = (() => {
       ? 'Starter Pack'
       : 'Booster Pack'
 
-    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards + ${app.utility.component.potion(isStarter ? 3 : 1)}`
+    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards + ${app.utility.component.potion(isStarter ? 3 : 1)} + ${app.utility.component.gold(content.round.get())}`
   }
 
   return {}
