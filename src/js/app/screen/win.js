@@ -1,4 +1,6 @@
 app.screen.win = (() => {
+  const prompts = []
+
   let root
 
   engine.ready(() => {
@@ -9,6 +11,42 @@ app.screen.win = (() => {
     app.state.screen.on('enter-win', onEnter)
     app.state.screen.on('exit-win', onExit)
   })
+
+  function createPrompts({
+    bonus,
+    experience,
+    gold,
+    kills,
+  } = {}) {
+    const parent = root.querySelector('.a-win--prompts')
+
+    prompts.push(
+      app.component.prompt.win.create()
+    )
+
+    prompts.push(
+      app.component.prompt.gold.create({
+        bonus,
+        gold,
+      })
+    )
+
+    prompts.push(
+      app.component.prompt.experience.create({
+        bonus,
+        experience,
+      })
+    )
+
+    // TODO: Statistics?
+
+    for (const prompt of prompts) {
+      prompt.on('confirm', onPromptConfirm)
+      prompt.attach(parent)
+    }
+
+    prompts[0].open()
+  }
 
   function onEnter(e) {
     app.utility.focus.set(root)
@@ -21,8 +59,14 @@ app.screen.win = (() => {
 
     content.hero.experience.add(experience)
     content.hero.gold.add(gold)
+    content.round.increment()
 
-    // TODO: Prompts
+    createPrompts({
+      bonus,
+      experience,
+      gold,
+      ...e,
+    })
   }
 
   function onExit() {
@@ -46,6 +90,19 @@ app.screen.win = (() => {
 
     if (ui.down || ui.right) {
       return app.utility.focus.setNextFocusable(root)
+    }
+  }
+
+  function onPromptConfirm() {
+    const current = prompts.shift(),
+      next = prompts[0]
+
+    current.close().then(() => current.destroy())
+
+    if (next) {
+      next.open()
+    } else {
+      app.screen.state.dispatch('next')
     }
   }
 
