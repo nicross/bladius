@@ -10,9 +10,19 @@ app.screen.win = (() => {
     app.state.screen.on('exit-win', onExit)
   })
 
-  function onEnter() {
+  function onEnter(e) {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
+
+    const {bonus} = content.hero.attributes.compute()
+
+    const experience = e.kills * bonus,
+      gold = 1 * bonus
+
+    content.hero.experience.add(experience)
+    content.hero.gold.add(gold)
+
+    // TODO: Prompts
   }
 
   function onExit() {

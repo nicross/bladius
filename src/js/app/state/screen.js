@@ -25,8 +25,8 @@ app.state.screen = engine.utility.machine.create({
       loss: function () {
         this.change('loss')
       },
-      win: function () {
-        this.change('win')
+      win: function (...args) {
+        this.change('win', ...args)
       },
     },
     loss: {
