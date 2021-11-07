@@ -65,35 +65,10 @@ app.screen.hand = (() => {
   }
 
   function updateCards() {
-    const hand = content.hero.hand
-
-    const cards = [...hand.cards],
+    const cards = content.hero.hand.sort(),
       parent = root.querySelector('.a-hand--cards')
 
     parent.innerHTML = ''
-
-    // Sort with primary and secondary first
-    cards.sort((a, b) => {
-      if (a === hand.primary) {
-        return -1
-      }
-
-      if (a === hand.secondary) {
-        return b === hand.primary
-          ? 1
-          : -1
-      }
-
-      if (b === hand.primary) {
-        return 1
-      }
-
-      if (b === hand.secondary) {
-        return 1
-      }
-
-      return a.name.localeCompare(b.name)
-    })
 
     // Build components
     for (const card of cards) {

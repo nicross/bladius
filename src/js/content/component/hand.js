@@ -82,6 +82,31 @@ content.component.hand.prototype = {
 
     return this
   },
+  sort: function (cards = this.cards) {
+    cards = [...cards].sort((a, b) => {
+      if (a === this.primary) {
+        return -1
+      }
+
+      if (a === this.secondary) {
+        return b === this.primary
+          ? 1
+          : -1
+      }
+
+      if (b === this.primary) {
+        return 1
+      }
+
+      if (b === this.secondary) {
+        return 1
+      }
+
+      return a.name.localeCompare(b.name)
+    })
+
+    return cards
+  },
   validate: function (cards = []) {
     cards = [...cards].slice(0, 3)
 
