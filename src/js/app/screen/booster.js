@@ -8,6 +8,8 @@ app.screen.booster = (() => {
 
     app.state.screen.on('enter-booster', onEnter)
     app.state.screen.on('exit-booster', onExit)
+
+    root.querySelector('.a-booster--next').addEventListener('click', onNextClick)
   })
 
   function onEnter() {
@@ -48,6 +50,10 @@ app.screen.booster = (() => {
     }
   }
 
+  function onNextClick() {
+    app.state.screen.dispatch('next')
+  }
+
   function updateCards(pack) {
     const parent = root.querySelector('.a-booster--cards')
 
@@ -55,7 +61,7 @@ app.screen.booster = (() => {
 
     for (const card of pack) {
       const container = document.createElement('li')
-      container.className = 'a-booster--card'
+      container.className = 'c-cards--card'
 
       app.component.card.create({
         card,

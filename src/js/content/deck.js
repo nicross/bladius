@@ -18,12 +18,24 @@ content.deck = (() => {
 
       count = Math.min(count, deck.length)
 
-      for (const i = 0; i < count; i += 1) {
+      for (let i = 0; i < count; i += 1) {
         const pick = this.pick()
         picks.push(pick)
       }
 
       return picks
+    },
+    drawValidHand: function (hand = content.component.hand.create()) {
+      let cards = this.draw(3),
+        validation = hand.validate(cards)
+
+      while (validation.filter((result) => !result).length) {
+        cards = cards.filter((card, index) => validation[index])
+        cards = cards.concat(this.draw(3 - cards.length))
+        validation = content.hero.hand.validate(cards)
+      }
+
+      return cards
     },
     get: () => [...deck],
     length: () => deck.length,

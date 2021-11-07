@@ -1,0 +1,65 @@
+.c-cards {
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0 -0.5em;
+  width: 100%;
+}
+  .c-cards--card {
+    align-items: stretch;
+    animation: c-cards--card 1s ease 0s normal 1 backwards;
+    flex: 0 1 16.66%;
+    display: flex;
+    padding: 0 0.5em;
+    transition: opacity 0.25s ease;
+  }
+  .c-cards--card:nth-child(2) {
+    animation-delay: 0.25s;
+  }
+  .c-cards--card:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+  .c-cards--card:nth-child(4) {
+    animation-delay: 0.75s;
+  }
+  .c-cards--card:nth-child(5) {
+    animation-delay: 1s;
+  }
+  .c-cards--card:nth-child(6) {
+    animation-delay: 1.25s;
+  }
+  .c-cards:focus-within .c-cards--card {
+    opacity: 0.666;
+  }
+  .c-cards:hover .c-cards--card {
+    opacity: 0.666;
+  }
+  .c-cards:focus-within .c-cards--card:focus-within {
+    opacity: 1;
+  }
+  .c-cards:hover .c-cards--card:hover {
+    opacity: 1;
+  }
+
+@keyframes c-cards--card {
+  0% {
+    opacity: 0;
+    transform: translateX(2em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduced) {
+  @keyframes c-cards--card {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

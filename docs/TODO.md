@@ -1,10 +1,6 @@
 # TODO
 ## Interface sprint
 - Screen contents and controls
-  - Draw
-    - Hand
-    - Redraw button
-    - Next button (Fight)
   - Winnings
     - Prompts
       - Random win message
@@ -19,8 +15,6 @@
     - Button to
     - Next (Open Booster or Next Fight)
 - Flow
-  - Deck
-    - Set hand
   - Game
     - Generate round
     - Automatic win/loss (random weighted towards winning)

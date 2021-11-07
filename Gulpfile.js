@@ -136,6 +136,8 @@ function getCss() {
     'src/css/reset.css',
     'src/css/main.css',
     'src/css/*.css',
+    'src/css/utility/*.css',
+    'src/css/component/*.css',
     'src/css/**/*.css',
   ]
 

@@ -10,6 +10,17 @@
   text-align: center;
   width: 100%;
 }
+  .c-screen--actions {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0 -0.5em;
+  }
+  .c-screen--action {
+    flex: 0 0 auto;
+    margin: 0 0.5em;
+  }
   .c-screen:focus {
     outline: 0;
   }
