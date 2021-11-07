@@ -1,0 +1,16 @@
+.c-prompt {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 1s ease;
+  z-index: 0;
+}
+.c-prompt-active {
+  opacity: 1;
+  z-index: 2;
+}
+.c-prompt-inactive {
+  opacity: 0;
+  z-index: 1;
+}

@@ -21,7 +21,9 @@ app.screen.win = (() => {
     const parent = root.querySelector('.a-win--prompts')
 
     prompts.push(
-      app.component.prompt.win.create()
+      app.component.prompt.win.create({
+        kills,
+      })
     )
 
     prompts.push(
@@ -76,14 +78,26 @@ app.screen.win = (() => {
   function onFrame() {
     const ui = app.controls.ui()
 
-    if (ui.confirm) {
+    // Confirm prompts even if not focused
+    if (ui.confirm || ui.start) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
-        return focused.click()
+        return focused.matches('.c-prompt')
+          ? onPromptConfirm()
+          : focused.click()
       }
     }
 
+    if (ui.enter || ui.space) {
+      const focused = app.utility.focus.get(root)
+
+      if (focused && focused.matches('.c-prompt')) {
+        onPromptConfirm()
+      }
+    }
+
+    // Prompt navigation
     if (ui.up || ui.left) {
       return app.utility.focus.setPreviousFocusable(root)
     }
@@ -102,7 +116,7 @@ app.screen.win = (() => {
     if (next) {
       next.open()
     } else {
-      app.screen.state.dispatch('next')
+      app.state.screen.dispatch('next')
     }
   }
 

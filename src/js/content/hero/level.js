@@ -13,12 +13,12 @@ content.hero.level = (() => {
 
   return {
     canLevelUp: function () {
-      return content.experience.get() >= this.getExperienceToNext()
+      return content.hero.experience.get() >= this.getExperienceToNext()
     },
     get: () => level,
     getExperienceToNext: () => calculateExperienceTo(level + 1),
     getExperienceToNextDelta: function () {
-      const experience = content.experience.get(),
+      const experience = content.hero.experience.get(),
         next = this.getExperienceToNext()
 
       return Math.max(next - experience, 0)

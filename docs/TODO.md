@@ -1,27 +1,13 @@
 # TODO
 ## Interface sprint
 - Screen contents and controls
-  - Winnings
-    - Prompts
-      - Random win message
-      - Gold prompt
-      - Experience prompt
-    - Stats table
-    - Next (Level Up or Store)
   - Level Up
     - Buttons to increase each stat
   - Store
     - Buttons for each card
-    - Button to
+    - Button to buy potion
     - Next (Open Booster or Next Fight)
 - Flow
-  - Game
-    - Generate round
-    - Automatic win/loss (random weighted towards winning)
-    - Increment round
-    - Pass gold / experience to next screen
-  - Win screen
-    - Increment experience and gold
   - Level up
     - Increment level and selected attribute
   - Store

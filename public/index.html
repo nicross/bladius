@@ -29,10 +29,10 @@
 
       <div class="a-app--screen a-app--booster">
         <section class="a-booster c-screen" aria-labelledby="a-booster--header" tabindex="-1">
-          <div class="c-screen--header" id="a-booster--header">
+          <header class="c-screen--header" id="a-booster--header">
             <h1 class="a-booster--title c-screen--title"></h1>
             <div class="a-booster--subtitle c-screen--subtitle"></div>
-          </div>
+          </header>
           <ul class="a-booster--cards c-cards" aria-label="Contents"></ul>
           <button class="a-booster--next c-button">Shuffle and Draw</button>
         </section>
@@ -40,12 +40,12 @@
 
       <div class="a-app--screen a-app--hand">
         <section class="a-hand c-screen" aria-labelledby="a-hand--header" tabindex="-1">
-          <div class="c-screen--header" id="a-hand--header">
+          <header class="c-screen--header" id="a-hand--header">
             <h1 class="c-screen--title">Hand</h1>
             <div class="c-screen--subtitle">Draw Three Cards</div>
-          </div>
+          </header>
           <ul class="a-hand--cards c-cards" aria-label="Hand"></ul>
-          <ul class="a-hand--actions c-screen--actions">
+          <ul class="a-hand--actions c-screen--actions" aria-label="Actions">
             <li class="c-screen--action">
               <button class="a-hand--redraw c-button" disabled>
                 Redraw for <span class="c-gold">1 <i aria-label="gold" title="Gold">◈</i></span>
@@ -63,9 +63,9 @@
 
       <div class="a-app--screen a-app--loss">
         <section class="a-loss c-screen" aria-labelledby="a-loss--header" tabindex="-1">
-          <div class="c-screen--header" id="a-loss--header">
+          <header class="c-screen--header" id="a-loss--header">
             <h1 class="c-screen--title">Game Over</h1>
-          </div>
+          </header>
           <!-- TODO: Statistics -->
           <button class="c-button a-booster--next">New Game</button>
         </section>
@@ -79,10 +79,10 @@
 
       <div class="a-app--screen a-app--level">
         <section class="a-level c-screen" aria-labelledby="a-level--header" tabindex="-1">
-          <div class="c-screen--header" id="a-level--header">
-            <h1 class="c-screen--title">Level Up</h1>
+          <header class="c-screen--header" id="a-level--header">
+            <h1 class="c-screen--title">Leveled Up</h1>
             <div class="c-screen--subtitle">Choose an Attribute</div>
-          </div>
+          </header>
           <ul class="a-level--attributes">
             <!-- app.component.attribute -->
           </ul>
@@ -91,10 +91,10 @@
 
       <div class="a-app--screen a-app--store">
         <section class="a-store c-screen" aria-labelledby="a-store--header" tabindex="-1">
-          <div class="c-screen--header" id="a-store--header">
+          <header class="c-screen--header" id="a-store--header">
             <h1 class="c-screen--title">Store</h1>
             <div class="c-screen--subtitle">Pay to Win</div>
-          </div>
+          </header>
           <ul class="a-store--cards" aria-label="Cards">
             <!-- app.component.card -->
           </ul>
