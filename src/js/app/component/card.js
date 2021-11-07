@@ -31,27 +31,31 @@ app.component.card.prototype = {
     name.innerHTML = card.name
     this.rootElement.appendChild(name)
 
+    const effects = document.createElement('ul')
+    effects.className = 'c-card--effects'
+    this.rootElement.appendChild(effects)
+
     for (const [key, values] of Object.entries(card.attributes)) {
       const attribute = content.component.attribute[key]
 
       if (values.modifier) {
-        const effect = document.createElement('p')
+        const effect = document.createElement('li')
         effect.className = 'c-card--effect'
         effect.innerHTML = `${values.modifier > 0 ? '+' : ''}${values.modifier} ${attribute.name}`
-        this.rootElement.appendChild(effect)
+        effects.appendChild(effect)
       }
 
-      if (values.multiplier) {
-        const effect = document.createElement('p')
+      if (values.multiplier && values.multiplier != 1) {
+        const effect = document.createElement('li')
         effect.className = 'c-card--effect'
         effect.innerHTML = `${attribute.name} ${Math.round(values.multiplier * 100)}%`
-        this.rootElement.appendChild(effect)
+        effects.appendChild(effect)
       }
     }
 
     const cost = document.createElement('p')
     cost.className = 'c-card--cost'
-    cost.innerHTML = `${isButton ? 'Buy for ' : ''}<span class="c-currency" arial-label="${card.cost} gold">${card.cost}</span>`
+    cost.innerHTML = `${isButton ? 'Buy for ' : ''}${app.utility.component.gold(card.cost)}`
     this.rootElement.appendChild(cost)
 
     return this

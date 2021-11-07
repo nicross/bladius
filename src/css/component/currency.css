@@ -1,4 +1,0 @@
-.c-currency {}
-.c-currency::after {
-  content: ' ◈';
-}

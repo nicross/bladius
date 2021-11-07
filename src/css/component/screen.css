@@ -5,10 +5,23 @@
   flex-direction: column;
   height: 100%;
   justify-content: center;
+  overflow: hidden;
+  padding: 2em;
   text-align: center;
-  padding: 4em;
   width: 100%;
 }
   .c-screen:focus {
     outline: 0;
+  }
+  .c-screen--header {
+    margin-bottom: 2em;
+  }
+  .c-screen--subtitle {
+    color: #EAEAEA;
+    font-family: RobotoLight, sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .c-screen--title {
+    font-size: 3em;
   }

@@ -1,0 +1,35 @@
+.c-card {
+  border: 1px solid #FF0069;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  font-size: 1em;
+  padding: 0 0 1em 0;
+}
+.c-card:focus {
+  outline: 0;
+}
+  .c-card > * {
+    flex: 0 0 auto;
+  }
+  .c-card--cost {
+    margin-top: 0.5rem;
+  }
+  .c-card--effect {
+    font-family: RobotoLight, sans-serif;
+    font-size: 0.75em;
+    font-weight: 300;
+  }
+  .c-card--effects {
+    flex: 1 0 auto;
+    list-style-type: none;
+  }
+  .c-card--name {
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .c-card--type {
+    background-color: #FF0069;
+    color: #000000;
+    margin-bottom: 1em;
+  }

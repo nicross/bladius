@@ -1,11 +1,14 @@
 content.hero.potions = (() => {
   const cost = 1,
-    pubsub = engine.utility.pubsub.create(),
-    startCount = 3
+    pubsub = engine.utility.pubsub.create()
 
-  let potions = startCount
+  let potions = 0
 
   return engine.utility.pubsub.decorate({
+    add: function (value = 0) {
+      potions += value
+      return this
+    },
     buy: function () {
       if (!this.canBuy()) {
         return this
@@ -19,7 +22,7 @@ content.hero.potions = (() => {
     canUse: () => potions > 0,
     count: () => potions,
     reset: function () {
-      potions = startCount
+      potions = 0
       return this
     },
     use: function () {

@@ -15,7 +15,10 @@ app.screen.booster = (() => {
     engine.loop.on('frame', onFrame)
 
     const cards = content.packs.redeem()
-    content.deck.add(...cards)
+    content.deck.add(...cards).shuffle()
+
+    const isStarter = cards.length > 3
+    content.hero.potions.add(isStarter ? 3 : 1)
 
     updateCards(cards)
     updateHeader(cards)
@@ -69,7 +72,7 @@ app.screen.booster = (() => {
       ? 'Starter Pack'
       : 'Booster Pack'
 
-    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards`
+    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards + ${app.utility.component.potion(isStarter ? 3 : 1)}`
   }
 
   return {}

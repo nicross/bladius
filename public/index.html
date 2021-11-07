@@ -11,7 +11,7 @@
       <canvas class="a-app--overlaySupport"></canvas>
 
       <div class="a-app--screen a-app--splash">
-        <section class="a-splash c-screen">
+        <section class="a-splash c-screen" tabindex="-1">
           <h1 class="a-splash--logo">
             <div class="a-splash--title">
               <span class="a-splash--cycle-background">Bladius</span>
@@ -28,7 +28,7 @@
       </div>
 
       <div class="a-app--screen a-app--booster">
-        <section class="a-booster c-screen" aria-labelledby="a-booster--header">
+        <section class="a-booster c-screen" aria-labelledby="a-booster--header" tabindex="-1">
           <div class="c-screen--header" id="a-booster--header">
             <h1 class="a-booster--title c-screen--title"></h1>
             <div class="a-booster--subtitle c-screen--subtitle"></div>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="a-app--screen a-app--hand">
-        <section class="a-hand c-screen" aria-labelledby="a-hand--header">
+        <section class="a-hand c-screen" aria-labelledby="a-hand--header" tabindex="-1">
           <div class="c-screen--header" id="a-hand--header">
             <h1 class="c-screen--title">Hand</h1>
             <div class="c-screen--subtitle">Draw Three Cards</div>
@@ -50,7 +50,7 @@
           <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="a-hand--redraw c-button" disabled>
-                Redraw <div class="c-currency" aria-label="1 gold">1</div>
+                Redraw for <span class="c-gold">1 <i aria-label="gold">◈</i></span>
               </button>
             </li>
             <li class="c-screen--action">
@@ -60,11 +60,11 @@
       </div>
 
       <div class="a-app--screen a-app--fight">
-        <section class="a-fight c-screen" aria-label="Fight"></section>
+        <section class="a-fight c-screen" aria-label="Fight" tabindex="-1"></section>
       </div>
 
       <div class="a-app--screen a-app--loss">
-        <section class="a-loss c-screen" aria-labelledby="a-loss--header">
+        <section class="a-loss c-screen" aria-labelledby="a-loss--header" tabindex="-1">
           <div class="c-screen--header" id="a-loss--header">
             <h1 class="c-screen--title">Game Over</h1>
           </div>
@@ -82,7 +82,7 @@
       </div>
 
       <div class="a-app--screen a-app--level">
-        <section class="a-level c-screen" aria-labelledby="a-level--header">
+        <section class="a-level c-screen" aria-labelledby="a-level--header" tabindex="-1">
           <div class="c-screen--header" id="a-level--header">
             <h1 class="c-screen--title">Level Up</h1>
             <div class="c-screen--subtitle">Choose an Attribute</div>
@@ -94,7 +94,7 @@
       </div>
 
       <div class="a-app--screen a-app--store">
-        <section class="a-store c-screen" aria-labelledby="a-store--header">
+        <section class="a-store c-screen" aria-labelledby="a-store--header" tabindex="-1">
           <div class="c-screen--header" id="a-store--header">
             <h1 class="c-screen--title">Store</h1>
             <div class="c-screen--subtitle">Spend Gold to Restock</div>
@@ -105,7 +105,7 @@
           <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="a-store--potion c-button" disabled>
-                Buy Potion <div class="c-currency" aria-label="1 gold">1</div>
+                Buy Potion for <span class="c-gold">1 <i aria-label="gold">◈</i></span>
               </button>
             </li>
             <li class="c-screen--action">

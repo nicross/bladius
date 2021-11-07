@@ -1,9 +1,6 @@
 # TODO
 ## Interface sprint
 - Screen contents and controls
-  - Booster
-    - Acquired cards
-    - Next (Draw Cards)
   - Draw
     - Hand
     - Redraw button
@@ -22,8 +19,6 @@
     - Button to
     - Next (Open Booster or Next Fight)
 - Flow
-  - Booster
-    - Redeem cards and add to deck
   - Deck
     - Set hand
   - Game
