@@ -53,6 +53,13 @@ app.component.card.prototype = {
       }
     }
 
+    if (card.bonus) {
+      const effect = document.createElement('li')
+      effect.className = 'c-card--effect'
+      effect.innerHTML = `Rewards <i aria-label="times">×</i>${1 + card.bonus}`
+      effects.appendChild(effect)
+    }
+
     const cost = document.createElement('p')
     cost.className = 'c-card--cost'
     cost.innerHTML = `${isButton ? 'Buy for ' : ''}${app.utility.component.gold(card.cost)}`
