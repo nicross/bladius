@@ -15,16 +15,16 @@
   }
   .a-app--screen-active .c-attributes--attribute,
   .a-app--screen-inactive .c-attributes--attribute {
-    animation: c-attributes--attribute 1s ease 0s normal 1 backwards;
+    animation: c-attributes--attribute 0.5s ease 0s normal 1 backwards;
   }
   .c-attributes--attribute:nth-child(2) {
-    animation-delay: 0.25s;
+    animation-delay: 0.125s;
   }
   .c-attributes--attribute:nth-child(3) {
-    animation-delay: 0.5s;
+    animation-delay: 0.25s;
   }
   .c-attributes--attribute:nth-child(4) {
-    animation-delay: 0.75s;
+    animation-delay: 0.375s;
   }
   .c-attributes:focus-within .c-attributes--attribute {
     opacity: 0.333;
