@@ -57,8 +57,9 @@ app.screen.booster = (() => {
 
   function updateCards(pack) {
     const parent = root.querySelector('.a-booster--cards')
-
     parent.innerHTML = ''
+
+    pack.sort((a, b) => b.cost - a.cost)
 
     for (const card of pack) {
       const container = document.createElement('li')
