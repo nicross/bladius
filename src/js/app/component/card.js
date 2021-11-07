@@ -48,16 +48,11 @@ app.component.card.prototype = {
       if (values.multiplier && values.multiplier != 1) {
         const effect = document.createElement('li')
         effect.className = 'c-card--effect'
-        effect.innerHTML = `${attribute.name} ${Math.round(values.multiplier * 100)}%`
+        effect.innerHTML = key == 'bonus'
+          ? `Rewards <i aria-label="times ">×</i>${values.multiplier}`
+          : `${attribute.name} ${Math.round(values.multiplier * 100)}%`
         effects.appendChild(effect)
       }
-    }
-
-    if (card.bonus) {
-      const effect = document.createElement('li')
-      effect.className = 'c-card--effect'
-      effect.innerHTML = `Rewards <i aria-label="times">×</i>${1 + card.bonus}`
-      effects.appendChild(effect)
     }
 
     const cost = document.createElement('p')

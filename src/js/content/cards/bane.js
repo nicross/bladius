@@ -32,9 +32,12 @@ content.cards.bane = (() => {
         }
       }
 
+      attributes.bonus = {
+        multiplier: 1 + level,
+      }
+
       invent({
         attributes,
-        bonus: level,
         cost: 2 + (2 ** level),
         isStarter: level == 1,
         name: `${type.name} ${level}`,
