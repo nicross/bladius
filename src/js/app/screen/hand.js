@@ -48,37 +48,29 @@ app.screen.hand = (() => {
       }
     }
 
-    // Left and right to cycle cards
-    if (app.utility.focus.isWithin(root.querySelector('.c-cards'))) {
-      if (ui.left) {
-        return app.utility.focus.setPreviousFocusable(root, (element) => {
-          return element.matches('.c-card')
-        })
+    if (ui.left || ui.right) {
+      const leftRight = {
+        '.c-cards': '.c-card',
+        '.c-screen--actions': '.c-screen--action *',
       }
 
-      if (ui.right) {
-        return app.utility.focus.setNextFocusable(root, (element) => {
-          return element.matches('.c-card')
-        })
-      }
-    }
+      for (const [parent, target] of Object.entries(leftRight)) {
+        if (app.utility.focus.isWithin(root.querySelector(parent))) {
+          if (ui.left) {
+            return app.utility.focus.setPreviousFocusable(root, (element) => {
+              return element.matches(target)
+            })
+          }
 
-    // Left and right to cycle actions
-    if (app.utility.focus.isWithin(root.querySelector('.c-screen--actions'))) {
-      if (ui.left) {
-        return app.utility.focus.setPreviousFocusable(root, (element) => {
-          return element.matches('.c-screen--action *')
-        })
-      }
-
-      if (ui.right) {
-        return app.utility.focus.setNextFocusable(root, (element) => {
-          return element.matches('.c-screen--action *')
-        })
+          if (ui.right) {
+            return app.utility.focus.setNextFocusable(root, (element) => {
+              return element.matches(target)
+            })
+          }
+        }
       }
     }
 
-    // Up and down to main landmarks
     if (ui.up) {
       return app.utility.focus.setPreviousFocusable(root, (element) => {
         return !element.matches('.c-cards--card:nth-child(n+2) *')
