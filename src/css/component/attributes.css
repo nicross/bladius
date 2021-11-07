@@ -11,7 +11,7 @@
     flex: 0 1 25%;
     display: flex;
     padding: 0 0.5em;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.5s ease;
   }
   .a-app--screen-active .c-attributes--attribute,
   .a-app--screen-inactive .c-attributes--attribute {
@@ -27,10 +27,10 @@
     animation-delay: 0.75s;
   }
   .c-attributes:focus-within .c-attributes--attribute {
-    opacity: 0.666;
+    opacity: 0.333;
   }
   .c-attributes:hover .c-attributes--attribute {
-    opacity: 0.666;
+    opacity: 0.333;
   }
   .c-attributes:focus-within .c-attributes--attribute:focus-within {
     opacity: 1;
