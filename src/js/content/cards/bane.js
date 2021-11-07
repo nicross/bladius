@@ -35,7 +35,7 @@ content.cards.bane = (() => {
       invent({
         attributes,
         bonus: level,
-        cost: 2 ** level,
+        cost: 2 + (2 ** level),
         isStarter: level == 1,
         name: `${type.name} ${level}`,
         weight: engine.utility.scale(level, 1, 4, 1/4, 1/4/4),
