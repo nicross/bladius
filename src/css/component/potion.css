@@ -4,3 +4,7 @@
   font-weight: 700;
   word-spacing: -0.25em;
 }
+
+[disabled] .c-potion {
+  color: inherit;
+}

@@ -8,10 +8,15 @@
   transition-property: border-width, color, padding;
 }
 
-.c-button:active,
-.c-button:focus,
-.c-button:hover {
+.c-button:active:not([disabled]),
+.c-button:focus:not([disabled]),
+.c-button:hover:not([disabled]) {
   border-width: calc(1px + 0.25em);
   color: #FFFFFF;
   padding: 0.25em 1.25em;
+}
+
+.c-button[disabled] {
+  border-color: #666666;
+  color: #666666;
 }

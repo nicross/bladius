@@ -9,6 +9,10 @@
   padding: 0;
 }
 
-button, button *, button *::after, button *::before {
+button, button *, button *::after, button *::before, button * {
   cursor: pointer;
+}
+
+button[disabled], button[disabled] *, button[disabled] *::after, button[disabled] *::before, button[disabled] * {
+  cursor: not-allowed;
 }
