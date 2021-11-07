@@ -30,14 +30,16 @@
   .a-booster--card:nth-child(6) {
     animation-delay: 1.25s;
   }
-  .a-booster--cards:hover .a-booster--card {
-    opacity: 0.666;
-  }
   .a-booster--cards:focus-within .a-booster--card {
     opacity: 0.666;
   }
-  .a-booster--cards .a-booster--card:focus,
-  .a-booster--cards .a-booster--card:hover {
+  .a-booster--cards:hover .a-booster--card {
+    opacity: 0.666;
+  }
+  .a-booster--cards:focus-within .a-booster--card:focus-within {
+    opacity: 1;
+  }
+  .a-booster--cards:hover .a-booster--card:hover {
     opacity: 1;
   }
   .a-booster--next {
