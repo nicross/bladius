@@ -1,4 +1,6 @@
 app.screen.level = (() => {
+  const components = []
+
   let root
 
   engine.ready(() => {
@@ -8,11 +10,46 @@ app.screen.level = (() => {
 
     app.state.screen.on('enter-level', onEnter)
     app.state.screen.on('exit-level', onExit)
+
+    createAttributes()
   })
+
+  function createAttributes() {
+    const parent = root.querySelector('.a-level--attributes')
+    parent.innerHTML = ''
+
+    const attributes = content.hero.attributes.attributes.filter((attribute) => attribute.isPublic)
+    attributes.sort((a, b) => a.name.localeCompare(b.name))
+
+    for (const attribute of attributes) {
+      const container = document.createElement('li')
+      container.className = 'c-attributes--attribute'
+
+      const component = app.component.attribute.create({
+        attribute,
+      }).attach(container)
+
+      component.on('click', onAttributeClick.bind(component))
+
+      parent.appendChild(container)
+      components.push(component)
+    }
+  }
+
+  function onAttributeClick() {
+    const attribute = this.attribute
+
+    content.hero.level.levelUp()
+    content.hero.attributes[attribute.key].incrementLevel()
+
+    app.state.screen.dispatch('next')
+  }
 
   function onEnter() {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
+
+    updateAttributes()
   }
 
   function onExit() {
@@ -36,6 +73,12 @@ app.screen.level = (() => {
 
     if (ui.down || ui.right) {
       return app.utility.focus.setNextFocusable(root)
+    }
+  }
+
+  function updateAttributes() {
+    for (const component of components) {
+      component.update()
     }
   }
 

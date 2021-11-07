@@ -1,0 +1,62 @@
+.c-attributes {
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0 -0.5em;
+  width: 100%;
+}
+  .c-attributes--attribute {
+    align-items: stretch;
+    flex: 0 1 25%;
+    display: flex;
+    padding: 0 0.5em;
+    transition: opacity 0.25s ease;
+  }
+  .a-app--screen-active .c-attributes--attribute,
+  .a-app--screen-inactive .c-attributes--attribute {
+    animation: c-attributes--attribute 1s ease 0s normal 1 backwards;
+  }
+  .c-attributes--attribute:nth-child(2) {
+    animation-delay: 0.25s;
+  }
+  .c-attributes--attribute:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+  .c-attributes--attribute:nth-child(4) {
+    animation-delay: 0.75s;
+  }
+  .c-attributes:focus-within .c-attributes--attribute {
+    opacity: 0.666;
+  }
+  .c-attributes:hover .c-attributes--attribute {
+    opacity: 0.666;
+  }
+  .c-attributes:focus-within .c-attributes--attribute:focus-within {
+    opacity: 1;
+  }
+  .c-attributes:hover .c-attributes--attribute:hover {
+    opacity: 1;
+  }
+
+@keyframes c-attributes--attribute {
+  0% {
+    opacity: 0;
+    transform: translateX(2em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduced) {
+  @keyframes c-attributes--attribute {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

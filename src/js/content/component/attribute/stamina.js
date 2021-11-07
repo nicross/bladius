@@ -2,6 +2,7 @@ content.component.attribute.stamina = content.component.attribute.register(
   content.component.attribute.base.invent({
     key: 'stamina',
     name: 'Stamina',
+    description: 'Increases maxmimum stamina.',
     isEnemy: true,
     isHero: true,
     isPublic: true,

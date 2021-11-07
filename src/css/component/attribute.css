@@ -1,0 +1,44 @@
+.c-attribute {
+  background-color: #000000;
+  border: 1px solid #FF0069;
+  font-size: 1em;
+  padding: 1em;
+  transition: all 0.25s ease;
+  transition-property: border-width, padding;
+  width: 100%;
+}
+  .c-attribute:focus,
+  .c-attribute:hover {
+    border-width: calc(1px + 0.25em);
+    color: #FFFFFF;
+    padding: 0.75em;
+  }
+  .c-attribute--description {
+    font-family: RobotoLight, sans-serif;
+    font-size: 0.75em;
+    font-weight: 300;
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+  }
+  .c-attribute:focus .c-attribute--description,
+  .c-attribute:hover .c-attribute--description {
+    opacity: 1;
+  }
+  .c-attribute--name {
+    font-size: 1.5em;
+    margin-bottom: 0.5rem;
+  }
+  .c-attribute--value {
+    font-family: RobotoBold, sans-serif;
+    font-size: 4em;
+    font-weight: 700;
+  }
+    .c-attribute--value-next,
+    .c-attribute:focus .c-attribute--value-current,
+    .c-attribute:hover .c-attribute--value-current {
+      display: none;
+    }
+    .c-attribute:focus .c-attribute--value-next,
+    .c-attribute:hover .c-attribute--value-next {
+      display: block;
+    }
