@@ -42,7 +42,7 @@ content.cards.shield = (() => {
   }
 
   return {
-    archetypes: [...archetypes],
+    archetypes: () => [...archetypes],
     define,
     invent,
   }

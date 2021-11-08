@@ -63,7 +63,7 @@ content.cards.weapon = (() => {
   }
 
   return {
-    archetypes: [...archetypes],
+    archetypes: () => [...archetypes],
     define,
     invent,
     unarmed: () => ({...unarmed}),

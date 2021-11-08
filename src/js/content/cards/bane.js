@@ -49,7 +49,6 @@ content.cards.bane = (() => {
   function define(definition) {
     definition = {...definition}
 
-    definition.isBonus = true
     definition.isPassive = true
     definition.type = 'Bane'
 
@@ -64,7 +63,7 @@ content.cards.bane = (() => {
   }
 
   return {
-    archetypes: [...archetypes],
+    archetypes: () => [...archetypes],
     define,
     invent,
   }

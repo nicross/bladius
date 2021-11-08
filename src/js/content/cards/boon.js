@@ -60,7 +60,7 @@ content.cards.boon = (() => {
   }
 
   return {
-    archetypes: [...archetypes],
+    archetypes: () => [...archetypes],
     define,
     invent,
   }

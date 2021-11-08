@@ -54,7 +54,7 @@ content.cards.armor = (() => {
   }
 
   return {
-    archetypes: [...archetypes],
+    archetypes: () => [...archetypes],
     define,
     invent,
   }

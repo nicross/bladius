@@ -16,9 +16,10 @@ app.screen.hand = (() => {
   })
 
   function drawHand() {
-    content.hero.hand.set(
-      content.deck.drawValidHand(content.hero.hand)
-    )
+    const cards = content.deck.drawValidHand(content.hero.hand)
+
+    content.hero.hand.set(cards)
+    content.hero.attributes.setWithHand(content.hero.hand)
 
     updateCards()
   }
