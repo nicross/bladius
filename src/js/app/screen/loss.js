@@ -8,11 +8,15 @@ app.screen.loss = (() => {
 
     app.state.screen.on('enter-loss', onEnter)
     app.state.screen.on('exit-loss', onExit)
+
+    root.querySelector('.a-loss--next').addEventListener('click', onNextClick)
   })
 
   function onEnter() {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
+
+    updateSubtitle()
   }
 
   function onExit() {
@@ -21,6 +25,10 @@ app.screen.loss = (() => {
 
   function onFrame() {
     const ui = app.controls.ui()
+
+    if (ui.start || (app.utility.focus.is(root) && (ui.confirm || ui.enter || ui.space))) {
+      onNextClick()
+    }
 
     if (ui.confirm) {
       const focused = app.utility.focus.get(root)
@@ -37,6 +45,16 @@ app.screen.loss = (() => {
     if (ui.down || ui.right) {
       return app.utility.focus.setNextFocusable(root)
     }
+  }
+
+  function onNextClick() {
+    engine.state.reset()
+    app.state.screen.dispatch('restart')
+  }
+
+  function updateSubtitle() {
+    const rounds = content.round.get()
+    root.querySelector('.a-loss--subtitle').innerHTML = `Survived ${rounds} ${rounds == 1 ? 'Round' : 'Rounds'}`
   }
 
   return {}

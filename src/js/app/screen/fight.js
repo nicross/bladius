@@ -15,7 +15,7 @@ app.screen.fight = (() => {
     engine.loop.on('frame', onFrame)
 
     // Simulate game
-    if (Math.random() > 0) {
+    if (Math.random() > 1/8) {
       app.state.screen.dispatch('win', {
         kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
       })

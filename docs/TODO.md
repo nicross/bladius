@@ -1,5 +1,6 @@
 # TODO
 ## Interface sprint
+- Progress bar on experience gain screen
 - Sound effects
   - Experience bar filling up
   - Level up available
