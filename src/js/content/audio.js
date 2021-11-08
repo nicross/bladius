@@ -2,16 +2,22 @@ content.audio = {}
 
 content.audio.bus = engine.audio.mixer.createBus()
 
-content.audio.test = ({
-  color = 0.5,
-  duration = 1,
-  modulation = 0.5,
-} = {}) => {
-  const buffer = content.audio.buffer.generateSfx({
-    color,
-    duration,
-    modulation,
-  })
+content.audio.testRandom = () => {
+  const options = {
+    duration: engine.utility.random.float(1/6, 1/3),
+    exponent: engine.utility.random.float(0.5, 2),
+    from: {
+      color: Math.random(),
+      modulation: Math.random(),
+    },
+    pitch: Math.random(),
+    to: {
+      color: Math.random(),
+      modulation: Math.random(),
+    },
+  }
+
+  const buffer = content.audio.buffer.generateSfx(options)
 
   const synth = engine.audio.synth.createBuffer({
     buffer,
@@ -20,9 +26,12 @@ content.audio.test = ({
   const now = engine.audio.time()
 
   synth.param.gain.exponentialRampToValueAtTime(1, now + 1/32)
-  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + duration)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + options.duration)
 
-  synth.stop(now + duration)
+  synth.stop(now + options.duration)
 
-  return synth
+  return {
+    options,
+    synth,
+  }
 }

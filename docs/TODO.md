@@ -30,5 +30,6 @@
   - Footsteps
 - Targeting system
 - Enemy AI
+- Haptic feedback when striking, blocking, or being struck
 
 ## Miscellanaous
