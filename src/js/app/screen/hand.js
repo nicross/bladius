@@ -1,8 +1,10 @@
 app.screen.hand = (() => {
-  let root
+  let redrawButton,
+    root
 
   engine.ready(() => {
     root = document.querySelector('.a-hand')
+    redrawButton = root.querySelector('.a-hand--redraw')
 
     app.utility.focus.trap(root)
 
@@ -10,7 +12,7 @@ app.screen.hand = (() => {
     app.state.screen.on('exit-hand', onExit)
 
     root.querySelector('.a-hand--next').addEventListener('click', onNextClick)
-    root.querySelector('.a-hand--redraw').addEventListener('click', onRedrawClick)
+    redrawButton.addEventListener('click', onRedrawClick)
   })
 
   function drawHand() {
@@ -26,7 +28,7 @@ app.screen.hand = (() => {
     engine.loop.on('frame', onFrame)
 
     drawHand()
-    root.querySelector('.a-hand--redraw').disabled = !content.hero.gold.has(1)
+    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
   }
 
   function onExit() {
@@ -85,10 +87,14 @@ app.screen.hand = (() => {
   }
 
   function onRedrawClick() {
+    if (redrawButton.getAttribute('aria-disabled') == 'true') {
+      return
+    }
+
     drawHand()
 
     content.hero.gold.spend(1)
-    root.querySelector('.a-hand--redraw').disabled = !content.hero.gold.has(1)
+    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
   }
 
   function updateCards() {

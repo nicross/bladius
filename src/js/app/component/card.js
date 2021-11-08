@@ -67,11 +67,19 @@ app.component.card.prototype = {
     this.off()
     return this
   },
+  isDisabled: function () {
+    return this.rootElement.getAttribute('aria-disabled') == 'true'
+  },
   onClick: function (e) {
     e.preventDefault()
     e.stopPropagation()
 
     this.emit('click')
+
+    return this
+  },
+  setDisabled: function (state = false) {
+    this.rootElement.setAttribute('aria-disabled', state ? 'true' : 'false')
 
     return this
   },

@@ -5,6 +5,7 @@
   word-spacing: -0.25em;
 }
 
+[aria-disabled="true"] .c-gold,
 [disabled] .c-gold {
   color: inherit;
 }

@@ -13,6 +13,15 @@ button, button *, button *::after, button *::before, button * {
   cursor: pointer;
 }
 
-button[disabled], button[disabled] *, button[disabled] *::after, button[disabled] *::before, button[disabled] * {
+button[aria-disabled="true"],
+button[disabled],
+button[aria-disabled="true"] *,
+button[disabled] *,
+button[aria-disabled="true"] *::after,
+button[disabled] *::after,
+button[aria-disabled="true"] *::before,
+button[disabled] *::before,
+button[aria-disabled="true"] *,
+button[disabled] * {
   cursor: not-allowed;
 }

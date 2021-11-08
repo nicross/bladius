@@ -1,21 +1,21 @@
 .c-button {
   background-color: #000000;
   border: 1px solid #FF0069;
-  color: #FF0069;
+  color: #FFFFFF;
   font-size: 1em;
   padding: 0.5em 1.5em;
   transition: all 0.25s ease;
-  transition-property: border-width, color, padding;
+  transition-property: border-width, padding;
 }
 
-.c-button:active:not([disabled]),
-.c-button:focus:not([disabled]),
-.c-button:hover:not([disabled]) {
+.c-button:active:not([aria-disabled="true"],[disabled]),
+.c-button:focus:not([aria-disabled="true"],[disabled]),
+.c-button:hover:not([aria-disabled="true"],[disabled]) {
   border-width: calc(1px + 0.25em);
-  color: #FFFFFF;
   padding: 0.25em 1.25em;
 }
 
+.c-button[aria-disabled="true"],
 .c-button[disabled] {
   border-color: #666666;
   color: #666666;
