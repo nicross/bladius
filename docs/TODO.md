@@ -1,19 +1,5 @@
 # TODO
 ## Interface sprint
-- Screen contents and controls
-  - Level Up
-    - Buttons to increase each stat
-  - Store
-    - Buttons for each card
-    - Button to buy potion
-    - Next (Open Booster or Next Fight)
-- Flow
-  - Level up
-    - Increment level and selected attribute
-  - Store
-    - Add card(s) to deck if purchased
-    - Add potion(s) if purchased
-- Screen styles
 - Sound effects
   - Experience bar filling up
   - Level up available

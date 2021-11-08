@@ -47,7 +47,7 @@ app.state.screen = engine.utility.machine.create({
     },
     store: {
       next: function () {
-        const isBooster = content.booster.canRedeem()
+        const isBooster = content.packs.canRedeem()
         this.change(isBooster ? 'booster' : 'hand')
       },
     },
