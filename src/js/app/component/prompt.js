@@ -11,6 +11,7 @@ app.component.prompt.base = {
   close: function () {
     this.rootElement.classList.remove('c-prompt-active')
     this.rootElement.classList.add('c-prompt-inactive')
+    this.rootElement.setAttribute('aria-hidden', 'true')
 
     return engine.utility.timing.promise(1 * 1000)
   },
@@ -20,6 +21,7 @@ app.component.prompt.base = {
     this.rootElement = document.createElement('section')
     this.rootElement.className = 'c-prompt c-screen'
     this.rootElement.tabIndex = -1
+    this.rootElement.setAttribute('aria-hidden', 'true')
 
     this.headerElement = document.createElement('header')
     this.headerElement.className = 'c-screen--header'
@@ -68,7 +70,8 @@ app.component.prompt.base = {
   onConstruct: () => {},
   open: function () {
     this.rootElement.classList.add('c-prompt-active')
-    this.focus()
+    this.rootElement.removeAttribute('aria-hidden')
+    setTimeout(() => this.focus(), 0)
     return this
   },
 }

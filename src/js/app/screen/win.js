@@ -51,7 +51,6 @@ app.screen.win = (() => {
   }
 
   function onEnter(e) {
-    app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
 
     const {bonus} = content.hero.attributes.compute()
@@ -76,24 +75,24 @@ app.screen.win = (() => {
   }
 
   function onFrame() {
-    const ui = app.controls.ui()
+    const focused = app.utility.focus.get(root),
+      isPrompt = focused && focused.matches('.c-prompt'),
+      ui = app.controls.ui()
 
     // Confirm prompts even if not focused
     if (ui.confirm || ui.start) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
-        return focused.matches('.c-prompt')
+        return isPrompt
           ? onPromptConfirm()
           : focused.click()
       }
     }
 
     if (ui.enter || ui.space) {
-      const focused = app.utility.focus.get(root)
-
-      if (focused && focused.matches('.c-prompt')) {
-        onPromptConfirm()
+      if (isPrompt) {
+        return onPromptConfirm()
       }
     }
 
