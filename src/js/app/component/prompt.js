@@ -15,7 +15,7 @@ app.component.prompt.base = {
 
     return engine.utility.timing.promise(1 * 1000)
   },
-  construct: function (...args) {
+  construct: function (options) {
     engine.utility.pubsub.decorate(this)
 
     this.rootElement = document.createElement('section')
@@ -39,7 +39,8 @@ app.component.prompt.base = {
 
     app.utility.focus.trap(this.rootElement)
 
-    this.onConstruct(...args)
+    this.options = options
+    this.onConstruct(options)
 
     return this
   },
@@ -68,9 +69,11 @@ app.component.prompt.base = {
     return this
   },
   onConstruct: () => {},
+  onOpen: () => {},
   open: function () {
     this.rootElement.classList.add('c-prompt-active')
     this.rootElement.removeAttribute('aria-hidden')
+    this.onOpen()
     setTimeout(() => this.focus(), 0)
     return this
   },

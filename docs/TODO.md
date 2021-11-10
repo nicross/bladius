@@ -1,10 +1,11 @@
 # TODO
 ## Interface sprint
-- Progress bar on experience gain screen
+- Total gold on win gold prompt (animated counting?)
+- Progress bar on win experience prompt (animated?)
+- Total potions on store screen
 - Sound effects
   - Experience bar filling up
   - Level up available
-  - Coin get
   - Coin spend?
   - Booster get
   - Draw cards?

@@ -16,12 +16,15 @@ app.screen.booster = (() => {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
 
-    const cards = content.packs.redeem()
-    content.deck.add(...cards).shuffle()
+    const cards = content.packs.redeem(),
+      gold = content.round.get(),
+      isStarter = cards.length > 3,
+      potions = isStarter ? 3 : 1
 
-    const isStarter = cards.length > 3
-    content.hero.potions.add(isStarter ? 3 : 1)
-    content.hero.gold.add(content.round.get())
+    content.deck.add(...cards).shuffle()
+    content.hero.potions.add(potions)
+    content.hero.gold.add(gold)
+    content.audio.sfx.coins(gold)
 
     updateCards(cards)
     updateHeader(cards)
