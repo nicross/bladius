@@ -5,7 +5,7 @@ content.hero.level = (() => {
     let result = 0
 
     for (let i = 1; i <= level; i += 1) {
-      result += i
+      result += 2 * i
     }
 
     return result
