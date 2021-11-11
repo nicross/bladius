@@ -103,7 +103,7 @@ app.screen.booster = (() => {
       ? 'Starter Pack'
       : 'Booster Pack'
 
-    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards + ${app.utility.component.potion(isStarter ? 3 : 1)} + ${app.utility.component.gold(content.round.get())}`
+    root.querySelector('.a-booster--subtitle').innerHTML = `Received ${cards.length} Cards + ${app.utility.component.potion(isStarter ? 3 : 1)} and ${app.utility.component.gold(content.round.get())}`
   }
 
   return {}

@@ -8,7 +8,7 @@ content.audio.sfx.coin = function (when = engine.audio.time()) {
 
   const detune = engine.utility.random.float(-12.5, 12.5),
     frequency = engine.utility.midiToFrequency(note),
-    gain = engine.utility.fromDb(-12)
+    gain = engine.utility.fromDb(-15)
 
   const synth = engine.audio.synth.createSimple({
     detune,

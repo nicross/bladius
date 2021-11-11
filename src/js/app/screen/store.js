@@ -3,12 +3,14 @@ app.screen.store = (() => {
 
   let goldElement,
     potionButton,
+    potionsElement,
     root
 
   engine.ready(() => {
     root = document.querySelector('.a-store')
     goldElement = root.querySelector('.a-store--gold')
     potionButton = root.querySelector('.a-store--potion')
+    potionsElement = root.querySelector('.a-store--potions')
 
     app.utility.focus.trap(root)
 
@@ -39,11 +41,13 @@ app.screen.store = (() => {
 
     updateCards()
 
-    goldElement.removeAttribute('aria-atomic')
     goldElement.removeAttribute('aria-live')
     updateGold()
-    goldElement.setAttribute('aria-atomic', 'true')
     goldElement.setAttribute('aria-live', 'assertive')
+
+    potionsElement.removeAttribute('aria-live')
+    updatePotions()
+    potionsElement.setAttribute('aria-live', 'assertive')
 
     root.querySelector('.a-store--next').innerHTML = content.packs.canRedeem()
       ? 'Open Booster Pack'
@@ -114,21 +118,7 @@ app.screen.store = (() => {
     content.hero.potions.add(1)
 
     updateGold()
-  }
-
-  function updateGold() {
-    // Gold
-    goldElement.innerHTML = `You have ${app.utility.component.gold(content.hero.gold.get())}`
-
-    // Potion button
-    potionButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
-
-    // Cards
-    for (const component of components) {
-      if (!component.isDisabled() && !content.hero.gold.has(component.card.cost)) {
-        component.setDisabled(true)
-      }
-    }
+    updatePotions()
   }
 
   function updateCards() {
@@ -160,6 +150,25 @@ app.screen.store = (() => {
 
       parent.appendChild(container)
     }
+  }
+
+  function updateGold() {
+    // Gold
+    goldElement.innerHTML = app.utility.component.gold(content.hero.gold.get())
+
+    // Potion button
+    potionButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
+
+    // Cards
+    for (const component of components) {
+      if (!component.isDisabled() && !content.hero.gold.has(component.card.cost)) {
+        component.setDisabled(true)
+      }
+    }
+  }
+
+  function updatePotions() {
+    potionsElement.innerHTML = app.utility.component.potion(content.hero.potions.get())
   }
 
   return {}

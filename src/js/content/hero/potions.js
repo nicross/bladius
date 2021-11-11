@@ -20,7 +20,7 @@ content.hero.potions = (() => {
     },
     canBuy: () => content.gold.has(cost),
     canUse: () => potions > 0,
-    count: () => potions,
+    get: () => potions,
     reset: function () {
       potions = 0
       return this
