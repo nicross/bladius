@@ -1,8 +1,10 @@
 content.deck = (() => {
+  const pubsub = engine.utility.pubsub.create()
+
   let deck = [],
     discard = 0
 
-  return {
+  return engine.utility.pubsub.decorate({
     add: function (...cards) {
       for (const card of cards) {
         deck.push({
@@ -46,6 +48,7 @@ content.deck = (() => {
 
       if (!discard) {
         this.shuffle()
+        pubsub.emit('shuffle')
       }
 
       const card = deck.shift()
@@ -67,7 +70,7 @@ content.deck = (() => {
 
       return this
     }
-  }
+  }, pubsub)
 })()
 
 engine.state.on('reset', () => content.deck.reset())

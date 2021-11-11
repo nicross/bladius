@@ -15,20 +15,30 @@ app.screen.hand = (() => {
     redrawButton.addEventListener('click', onRedrawClick)
   })
 
-  function drawHand() {
+  function drawHand(isShuffle = false) {
+    if (!isShuffle) {
+      content.deck.once('shuffle', () => isShuffle = true)
+    }
+
     const cards = content.deck.drawValidHand(content.hero.hand)
 
     content.hero.hand.set(cards)
     content.hero.attributes.setWithHand(content.hero.hand)
 
     updateCards()
+
+    if (isShuffle) {
+      content.audio.sfx.shuffle()
+    } else {
+      content.audio.sfx.draw()
+    }
   }
 
-  function onEnter() {
+  function onEnter(e) {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
 
-    drawHand()
+    drawHand(e.previousState == 'booster')
     redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
   }
 
