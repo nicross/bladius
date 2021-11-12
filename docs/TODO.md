@@ -1,10 +1,9 @@
 # TODO
 ## Interface sprint
-- Total gold on win gold prompt (animated counting?)
 - Progress bar on win experience prompt (animated?)
 - Sound effects
   - Experience bar filling up
-  - Level up available
+  - Leveled up
 
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)

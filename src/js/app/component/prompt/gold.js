@@ -7,7 +7,11 @@ app.component.prompt.gold = app.component.prompt.base.invent({
     this.subtitleElement.innerHTML = `Received ${app.utility.component.gold(gold)}`
 
     // TODO: Call out bonus?
-    // TODO: Display total gold?
+
+    this.totalGold = document.createElement('div')
+    this.totalGold.className = 'c-prompt--gold'
+    this.totalGold.setAttribute('aria-description', 'Total gold')
+    this.rootElement.appendChild(this.totalGold)
 
     const button = document.createElement('button')
     button.className = 'c-button c-prompt--next'
@@ -17,5 +21,31 @@ app.component.prompt.gold = app.component.prompt.base.invent({
   },
   onOpen: function () {
     content.audio.sfx.coins(this.options.gold)
+
+    this.animate({
+      duration: 1,
+      from: content.hero.gold.get() - this.options.gold,
+      to: content.hero.gold.get(),
+    })
+  },
+  animate: function ({
+    duration,
+    from,
+    to,
+  } = {}) {
+    const start = engine.loop.time()
+
+    const animation = () => {
+      const progress = Math.min(1, (engine.loop.time() - start) / duration),
+        value = Math.round(engine.utility.lerp(from, to, progress))
+
+      this.totalGold.innerHTML = app.utility.component.gold(value)
+
+      if (progress == 1) {
+        engine.loop.off('frame', animation)
+      }
+    }
+
+    engine.loop.on('frame', animation)
   },
 })

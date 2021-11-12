@@ -6,6 +6,10 @@
   transition: opacity 1s ease;
   z-index: 0;
 }
+  .c-prompt--gold {
+    font-size: 3em;
+  }
+
 .c-prompt-active {
   opacity: 1;
   z-index: 2;
