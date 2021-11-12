@@ -1,6 +1,9 @@
 .a-splash {
   overflow: hidden;
 }
+  .a-splash > * + * {
+    margin-top: 0;
+  }
   .a-splash--logo {
     align-items: stretch;
     display: flex;

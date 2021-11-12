@@ -10,12 +10,16 @@
   text-align: center;
   width: 100%;
 }
+  .c-screen > * + * {
+    margin-top: 2rem;
+  }
   .c-screen--actions {
     align-items: center;
     display: flex;
     justify-content: center;
     list-style-type: none;
-    margin: 0 -0.5em;
+    margin-left: -0.5em;
+    margin-right: -0.5em;
   }
   .c-screen--action {
     flex: 0 0 auto;
@@ -23,9 +27,6 @@
   }
   .c-screen:focus {
     outline: 0;
-  }
-  .c-screen--header {
-    margin-bottom: 2em;
   }
   .c-screen--subtitle {
     color: #EAEAEA;
