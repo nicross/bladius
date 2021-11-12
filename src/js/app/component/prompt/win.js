@@ -7,7 +7,7 @@ app.component.prompt.win = app.component.prompt.base.invent({
 
     // TODO: Sound effect
 
-    const button = this.titleElement = document.createElement('button')
+    const button = document.createElement('button')
     button.className = 'c-button c-prompt--next'
     button.innerHTML = 'Get Paid'
     button.addEventListener('click', (e) => this.onConfirm(e))

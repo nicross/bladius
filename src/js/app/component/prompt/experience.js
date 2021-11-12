@@ -12,7 +12,7 @@ app.component.prompt.experience = app.component.prompt.base.invent({
     // TODO: Animated bar
     // TODO: Sound effect
 
-    const button = this.titleElement = document.createElement('button')
+    const button = document.createElement('button')
     button.className = 'c-button c-prompt--next'
     button.innerHTML = isLevelUp ? 'Level Up' : 'Visit Shop'
     button.addEventListener('click', (e) => this.onConfirm(e))

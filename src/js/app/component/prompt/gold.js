@@ -9,7 +9,7 @@ app.component.prompt.gold = app.component.prompt.base.invent({
     // TODO: Call out bonus?
     // TODO: Display total gold?
 
-    const button = this.titleElement = document.createElement('button')
+    const button = document.createElement('button')
     button.className = 'c-button c-prompt--next'
     button.innerHTML = 'Get Rest'
     button.addEventListener('click', (e) => this.onConfirm(e))
