@@ -1,7 +1,7 @@
 content.audio.sfx = {}
 
 content.audio.sfx.bus = engine.audio.mixer.createBus()
-content.audio.sfx.bus.gain.value = engine.utility.fromDb(-9)
+content.audio.sfx.bus.gain.value = engine.utility.fromDb(-12)
 
 content.audio.sfx.coin = function (when = engine.audio.time()) {
   const note = 72
