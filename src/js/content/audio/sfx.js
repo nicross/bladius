@@ -113,6 +113,74 @@ content.audio.sfx.experience = function ({
   return synth
 }
 
+content.audio.sfx.horn = function ({
+  frequency,
+  off, // XXX: Must be at least when + 1/16
+  when,
+}) {
+  const humanize = engine.utility.random.float(0, 1/64)
+  off += humanize
+  when += humanize
+
+  const detune = engine.utility.random.float(-5, 5)
+
+  const attack = 1/64,
+    decay = 3/64,
+    release = 1/16,
+    sustain = 1
+
+  const synth = engine.audio.synth.createFm({
+    carrierDetune: detune,
+    carrierFrequency: frequency,
+    carrierType: 'sawtooth',
+    modDepth: frequency * 2,
+    modDetune: detune,
+    modFrequency: frequency,
+    modType: 'triangle',
+    when,
+  }).filtered({
+    detune,
+    frequency: frequency * 4,
+  }).connect(this.bus)
+
+  const attackTime = when + attack,
+    decayTime = attackTime + decay,
+    sustainTime = decayTime + sustain
+
+  synth.param.gain.setValueAtTime(engine.const.zeroGain, when)
+  synth.param.gain.linearRampToValueAtTime(1, attackTime)
+  synth.param.gain.exponentialRampToValueAtTime(1/2, decayTime)
+
+  const endGain = engine.utility.clamp(engine.utility.scale(off, decayTime, sustainTime, 1/2, 3/4), 1/2, 3/4)
+
+  synth.param.gain.linearRampToValueAtTime(endGain, off)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, off + release)
+
+  synth.param.mod.depth.exponentialRampToValueAtTime(frequency / 2, decayTime)
+
+  synth.stop(off + release)
+
+  return synth
+}
+
+content.audio.sfx.level = function (when = engine.audio.time()) {
+  const frequencies = [69, 73, 76].map(engine.utility.midiToFrequency)
+
+  for (const frequency of frequencies) {
+    this.horn({
+      frequency,
+      off: when + 1/16,
+      when,
+    })
+
+    this.horn({
+      frequency,
+      off: when + 7/8,
+      when: when + 1/8,
+    })
+  }
+}
+
 content.audio.sfx.shuffle = function (when = engine.audio.time()) {
   const duration = engine.utility.random.float(0.7, 0.8),
     frequency = engine.utility.random.float(8000, 10000),

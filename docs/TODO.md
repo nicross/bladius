@@ -1,8 +1,4 @@
 # TODO
-## Interface sprint
-- Sound effects
-  - Leveled up
-
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
 - Health component (reusable)

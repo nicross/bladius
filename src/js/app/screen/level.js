@@ -49,6 +49,7 @@ app.screen.level = (() => {
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
 
+    content.audio.sfx.level()
     updateAttributes()
   }
 
