@@ -8,7 +8,6 @@
     - Health
     - Stamina
 - app.screen.fight handles input for hero fighter
-- Treat engine.position as the camera position, following the player fighter
 - Sound design
   - Footsteps
   - Swings
