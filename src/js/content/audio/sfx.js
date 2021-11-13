@@ -74,6 +74,45 @@ content.audio.sfx.draw = function (when = engine.audio.time()) {
   return synth
 }
 
+content.audio.sfx.experience = function ({
+  duration = 1,
+  from = 0,
+  to = 0,
+  when = engine.audio.time(),
+}) {
+  const frequency = engine.utility.midiToFrequency(45)
+
+  const synth = engine.audio.synth.createAm({
+    carrierGain: 3/4,
+    carrierType: 'triangle',
+    carrierFrequency: frequency,
+    modDepth: 1/4,
+    modFrequency: 8,
+    modType: 'sine',
+  }).filtered({
+    frequency: frequency * 4,
+  }).connect(this.bus)
+
+  synth.param.gain.linearRampToValueAtTime(1, when + 1/32)
+  synth.param.gain.setValueAtTime(1, when + duration - 1/32)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+
+  const currentLevel = content.hero.level.calculateLevelFrom(from),
+    currentLevelExperience = content.hero.level.calculateExperienceTo(currentLevel),
+    nextLevel = currentLevel + 1,
+    nextLevelExperience = content.hero.level.calculateExperienceTo(nextLevel)
+
+  const fromDetune = engine.utility.scale(from, currentLevelExperience, nextLevelExperience, 0, 1200),
+    toDetune = engine.utility.scale(to, currentLevelExperience, nextLevelExperience, 0, 1200)
+
+  synth.param.detune.setValueAtTime(fromDetune, when)
+  synth.param.detune.linearRampToValueAtTime(toDetune, when + duration)
+
+  synth.stop(when + duration)
+
+  return synth
+}
+
 content.audio.sfx.shuffle = function (when = engine.audio.time()) {
   const duration = engine.utility.random.float(0.7, 0.8),
     frequency = engine.utility.random.float(8000, 10000),

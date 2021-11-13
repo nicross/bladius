@@ -1,7 +1,6 @@
 # TODO
 ## Interface sprint
 - Sound effects
-  - Experience bar filling up
   - Leveled up
 
 ## Combat sprint

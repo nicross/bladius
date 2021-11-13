@@ -22,12 +22,12 @@ app.component.prompt.experience = app.component.prompt.base.invent({
   },
   onOpen: function () {
     const options = {
-      duration: 1,
+      duration: 1.5,
       from: content.hero.experience.get() - this.options.experience,
       to: content.hero.experience.get(),
     }
 
-    //TODO: content.audio.sfx.experience(options)
+    content.audio.sfx.experience(options)
     this.animate(options)
   },
   animate: function ({
