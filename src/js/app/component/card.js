@@ -41,16 +41,16 @@ app.component.card.prototype = {
       if (values.modifier) {
         const effect = document.createElement('li')
         effect.className = 'c-card--effect'
-        effect.innerHTML = `${values.modifier > 0 ? '+' : ''}${values.modifier} ${attribute.name}`
+        effect.innerHTML = key == 'bonus'
+          ? `Rewards <i aria-label="times ">×</i>${values.modifier + 1}`
+          : `${values.modifier > 0 ? '+' : ''}${values.modifier} ${attribute.name}`
         effects.appendChild(effect)
       }
 
       if (values.multiplier && values.multiplier != 1) {
         const effect = document.createElement('li')
         effect.className = 'c-card--effect'
-        effect.innerHTML = key == 'bonus'
-          ? `Rewards <i aria-label="times ">×</i>${values.multiplier}`
-          : `${attribute.name} ${Math.round(values.multiplier * 100)}%`
+        effect.innerHTML = `${attribute.name} ${Math.round(values.multiplier * 100)}%`
         effects.appendChild(effect)
       }
     }

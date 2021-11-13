@@ -5,10 +5,10 @@ content.component.attribute.bonus = content.component.attribute.register(
     isHero: true,
     isPublic: false,
     compute: function ({
-      multiplier: mask = 1,
+      modifier: mask = 1,
     } = {}) {
       // No bonus by default
-      return 1 * this.multiplier * mask
+      return this.modifier + mask
     },
   })
 )

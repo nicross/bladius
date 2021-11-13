@@ -33,7 +33,7 @@ content.cards.bane = (() => {
       }
 
       attributes.bonus = {
-        multiplier: 1 + level,
+        modifier: level,
       }
 
       invent({
