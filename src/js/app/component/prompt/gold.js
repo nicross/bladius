@@ -35,6 +35,8 @@ app.component.prompt.gold = app.component.prompt.base.invent({
   } = {}) {
     const start = engine.loop.time()
 
+    this.totalGold.setAttribute('aria-busy', 'true')
+
     const animation = () => {
       const progress = Math.min(1, (engine.loop.time() - start) / duration),
         value = Math.round(engine.utility.lerp(from, to, progress))
@@ -42,6 +44,7 @@ app.component.prompt.gold = app.component.prompt.base.invent({
       this.totalGold.innerHTML = app.utility.component.gold(value)
 
       if (progress == 1) {
+        this.totalGold.setAttribute('aria-busy', 'false')
         engine.loop.off('frame', animation)
       }
     }
