@@ -62,7 +62,7 @@ app.component.attribute.prototype = {
     const attribute = content.hero.attributes[this.attribute.key],
       level = attribute.getLevel()
 
-    this.rootElement.setAttribute('aria-label', `Increase ${attribute.name} to ${level + 1}`)
+    this.rootElement.setAttribute('aria-label', `${attribute.name}, Increase to ${level + 1}`)
     this.currentValueElement.innerHTML = level
     this.nextValueElement.innerHTML = level + 1
 
