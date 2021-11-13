@@ -53,7 +53,8 @@ app.screen.loss = (() => {
   }
 
   function updateSubtitle() {
-    const rounds = content.round.get()
+    // XXX: Incremented at start of each round
+    const rounds = content.round.get() - 1
     root.querySelector('.a-loss--subtitle').innerHTML = `Survived ${rounds} ${rounds == 1 ? 'Round' : 'Rounds'}`
   }
 
