@@ -6,6 +6,26 @@
   transition: opacity 1s ease;
   z-index: 0;
 }
+  .c-prompt--experience {
+    background: #000000;
+    border: 1px solid #00C7FF;
+    border-radius: 0;
+    display: block;
+    font-size: 3em;
+    height: 1em;
+    width: 33.333%;
+  }
+    .c-prompt--experience::-webkit-progress-bar {
+      background: #000000;
+      border: 1px solid #00C7FF;
+      border-radius: 0;
+    }
+    .c-prompt--experience::-moz-progress-bar {
+      background: #00C7FF;
+    }
+    .c-prompt--experience::-webkit-progress-value {
+      background: #00C7FF;
+    }
   .c-prompt--gold {
     font-size: 3em;
   }

@@ -1,6 +1,5 @@
 # TODO
 ## Interface sprint
-- Progress bar on win experience prompt (animated?)
 - Sound effects
   - Experience bar filling up
   - Leveled up
