@@ -15,7 +15,7 @@ app.component.prompt.gold = app.component.prompt.base.invent({
 
     const button = document.createElement('button')
     button.className = 'c-button c-prompt--next'
-    button.innerHTML = 'Get Rest'
+    button.innerHTML = 'Get Good'
     button.addEventListener('click', (e) => this.onConfirm(e))
     this.rootElement.appendChild(button)
   },
