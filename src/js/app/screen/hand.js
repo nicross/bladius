@@ -25,10 +25,7 @@ app.screen.hand = (() => {
     }
 
     const cards = content.deck.drawValidHand(content.hero.hand)
-
-    content.hero.hand.set(cards)
-    content.hero.attributes.setWithHand(content.hero.hand)
-
+    content.hero.setHand(cards)
     updateCards()
 
     if (isShuffle) {

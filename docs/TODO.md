@@ -6,9 +6,6 @@
     - Movement / dodging system
     - Input
     - Footsteps
-    - Arms
-    - Hand
-    - Attributes
     - Health
     - Stamina
 - app.screen.fight handles input for hero fighter
