@@ -2,16 +2,16 @@ content.cards.weapon = (() => {
   const archetypes = []
 
   const materials = [
-    {name: 'Wooden', bonus: 1},
+    {name: 'Wooden', bonus: 0},
     {name: 'Bronze', bonus: 2},
-    {name: 'Iron', bonus: 3},
-    {name: 'Steel', bonus: 4},
-    {name: 'Diamond', bonus: 5},
-    {name: 'Obsidian', bonus: 6},
+    {name: 'Iron', bonus: 4},
+    {name: 'Steel', bonus: 6},
+    {name: 'Diamond', bonus: 8},
+    {name: 'Obsidian', bonus: 10},
   ]
 
   const types = [
-    {name: 'Axe', bonus: 5, speed: 0.75},
+    {name: 'Axe', bonus: 6, speed: 0.75},
     {name: 'Dagger', bonus: 1, speed: 1.5},
     {name: 'Mace', bonus: 2, speed: 1},
     {name: 'Sword', bonus: 3, speed: 1},

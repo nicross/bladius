@@ -2,12 +2,12 @@ content.cards.armor = (() => {
   const archetypes = []
 
   const materials = [
-    {name: 'Cloth', bonus: 1},
+    {name: 'Cloth', bonus: 0},
     {name: 'Leather', bonus: 2},
-    {name: 'Bronze', bonus: 3},
-    {name: 'Iron', bonus: 4},
-    {name: 'Steel', bonus: 5},
-    {name: 'Diamond', bonus: 6},
+    {name: 'Bronze', bonus: 4},
+    {name: 'Iron', bonus: 6},
+    {name: 'Steel', bonus: 8},
+    {name: 'Diamond', bonus: 10},
   ]
 
   const types = [
