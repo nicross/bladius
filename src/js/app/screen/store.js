@@ -36,9 +36,6 @@ app.screen.store = (() => {
   }
 
   function onEnter() {
-    app.utility.focus.set(root)
-    engine.loop.on('frame', onFrame)
-
     updateCards()
 
     goldElement.removeAttribute('aria-live')
@@ -52,6 +49,9 @@ app.screen.store = (() => {
     root.querySelector('.a-store--next').innerHTML = content.packs.canRedeem()
       ? 'Open Booster Pack'
       : 'Prepare to Fight'
+
+    app.utility.focus.set(root)
+    engine.loop.on('frame', onFrame)
   }
 
   function onExit() {

@@ -1,9 +1,13 @@
 app.screen.hand = (() => {
-  let redrawButton,
+  let goldElement,
+    potionsElement,
+    redrawButton,
     root
 
   engine.ready(() => {
     root = document.querySelector('.a-hand')
+    goldElement = root.querySelector('.a-hand--gold')
+    potionsElement = root.querySelector('.a-hand--potions')
     redrawButton = root.querySelector('.a-hand--redraw')
 
     app.utility.focus.trap(root)
@@ -35,11 +39,16 @@ app.screen.hand = (() => {
   }
 
   function onEnter(e) {
+    drawHand(e.previousState == 'booster')
+
+    goldElement.removeAttribute('aria-live')
+    updateGold()
+    goldElement.setAttribute('aria-live', 'assertive')
+
+    updatePotions()
+
     app.utility.focus.set(root)
     engine.loop.on('frame', onFrame)
-
-    drawHand(e.previousState == 'booster')
-    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
   }
 
   function onExit() {
@@ -105,7 +114,7 @@ app.screen.hand = (() => {
     drawHand()
 
     content.hero.gold.spend(1)
-    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
+    updateGold()
   }
 
   function updateCards() {
@@ -125,6 +134,18 @@ app.screen.hand = (() => {
 
       parent.appendChild(container)
     }
+  }
+
+  function updateGold() {
+    // Gold
+    goldElement.innerHTML = app.utility.component.gold(content.hero.gold.get())
+
+    // Redraw button
+    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
+  }
+
+  function updatePotions() {
+    potionsElement.innerHTML = app.utility.component.potion(content.hero.potions.get())
   }
 
   return {}
