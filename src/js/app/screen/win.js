@@ -75,12 +75,12 @@ app.screen.win = (() => {
   }
 
   function onFrame() {
-    const focused = app.utility.focus.get(root),
-      isPrompt = focused && focused.matches('.c-prompt'),
-      ui = app.controls.ui()
+    const discrete = app.controls.discrete(),
+      focused = app.utility.focus.get(root),
+      isPrompt = focused && focused.matches('.c-prompt')
 
     // Confirm prompts even if not focused
-    if (ui.confirm || ui.start) {
+    if (discrete.confirm || discrete.start) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
@@ -90,18 +90,18 @@ app.screen.win = (() => {
       }
     }
 
-    if (ui.enter || ui.space) {
+    if (discrete.enter || discrete.space) {
       if (isPrompt) {
         return onPromptConfirm()
       }
     }
 
     // Prompt navigation
-    if (ui.up || ui.left) {
+    if (discrete.up || discrete.left) {
       return app.utility.focus.setPreviousFocusable(root)
     }
 
-    if (ui.down || ui.right) {
+    if (discrete.down || discrete.right) {
       return app.utility.focus.setNextFocusable(root)
     }
   }

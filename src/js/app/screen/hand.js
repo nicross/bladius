@@ -60,9 +60,9 @@ app.screen.hand = (() => {
   }
 
   function onFrame() {
-    const ui = app.controls.ui()
+    const discrete = app.controls.discrete()
 
-    if (ui.confirm) {
+    if (discrete.confirm) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
@@ -70,7 +70,7 @@ app.screen.hand = (() => {
       }
     }
 
-    if (ui.left || ui.right) {
+    if (discrete.left || discrete.right) {
       const leftRight = {
         '.c-cards': '.c-card',
         '.c-screen--actions': '.c-screen--action *',
@@ -78,13 +78,13 @@ app.screen.hand = (() => {
 
       for (const [parent, target] of Object.entries(leftRight)) {
         if (app.utility.focus.isWithin(root.querySelector(parent))) {
-          if (ui.left) {
+          if (discrete.left) {
             return app.utility.focus.setPreviousFocusable(root, (element) => {
               return element.matches(target)
             })
           }
 
-          if (ui.right) {
+          if (discrete.right) {
             return app.utility.focus.setNextFocusable(root, (element) => {
               return element.matches(target)
             })
@@ -93,13 +93,13 @@ app.screen.hand = (() => {
       }
     }
 
-    if (ui.up) {
+    if (discrete.up) {
       return app.utility.focus.setPreviousFocusable(root, (element) => {
         return !element.matches('.c-cards--card:nth-child(n+2) *')
       })
     }
 
-    if (ui.down) {
+    if (discrete.down) {
       return app.utility.focus.setNextFocusable(root, (element) => {
         return !element.matches('.c-cards--card:nth-child(n+2) *')
       })

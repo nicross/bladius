@@ -1,12 +1,15 @@
 app.controls.keyboard = {
-  game: () => {
+  continuous: () => {
     const keys = engine.input.keyboard.get(),
       state = {}
 
-    const moveBackward = keys.ArrowDown || keys.KeyS || keys.Numpad5,
+    const leftArm = keys.ControlLeft || keys.AltRight,
+      moveBackward = keys.ArrowDown || keys.KeyS || keys.Numpad5,
       moveForward = keys.ArrowUp || keys.KeyW || keys.Numpad8,
-      strafeLeft = keys.KeyA || keys.Numpad4,
-      strafeRight = keys.KeyD || keys.Numpad6,
+      rightArm = keys.ControlRight || keys.AltLeft,
+      sprint = keys.ShiftLeft || keys.ShiftRight,
+      strafeLeft = keys.KeyA || keys.KeyZ || keys.Numpad4,
+      strafeRight = keys.KeyD || keys.KeyX || keys.Numpad6,
       turnLeft = keys.ArrowLeft || keys.KeyQ || keys.Numpad7,
       turnRight = keys.ArrowRight || keys.KeyE || keys.Numpad9
 
@@ -28,15 +31,23 @@ app.controls.keyboard = {
       state.rotate = -1
     }
 
+    if (leftArm && !rightArm) {
+      state.leftArm = true
+    }
+
+    if (rightArm && !leftArm) {
+      state.rightArm = true
+    }
+
+    if (sprint) {
+      state.sprint = true
+    }
+
     return state
   },
-  ui: () => {
+  discrete: () => {
     const keys = engine.input.keyboard.get(),
       state = {}
-
-    if (keys.Backspace) {
-      state.backspace = true
-    }
 
     if (keys.Enter || keys.NumpadEnter) {
       state.enter = true
@@ -47,6 +58,7 @@ app.controls.keyboard = {
     }
 
     if (keys.Space) {
+      state.dodge = true
       state.space = true
     }
 
@@ -64,6 +76,18 @@ app.controls.keyboard = {
 
     if (keys.ArrowUp || keys.KeyW || keys.Numpad8) {
       state.up = true
+    }
+
+    if (keys.KeyF || keys.KeyZ || keys.Slash) {
+      state.heal = true
+    }
+
+    if (keys.KeyR || keys.KeyX || keys.Period) {
+      state.targetNext = true
+    }
+
+    if (keys.KeyT || keys.KeyC || keys.Comma) {
+      state.targetPrevious = true
     }
 
     return state

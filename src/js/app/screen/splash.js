@@ -23,13 +23,13 @@ app.screen.splash = (() => {
   }
 
   function onFrame() {
-    const ui = app.controls.ui()
+    const discrete = app.controls.discrete()
 
-    if (ui.start || (app.utility.focus.is(root) && (ui.confirm || ui.enter || ui.space))) {
+    if (discrete.start || (app.utility.focus.is(root) && (discrete.confirm || discrete.enter || discrete.space))) {
       onStartClick()
     }
 
-    if (ui.confirm) {
+    if (discrete.confirm) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
@@ -37,11 +37,11 @@ app.screen.splash = (() => {
       }
     }
 
-    if (ui.up || ui.left) {
+    if (discrete.up || discrete.left) {
       return app.utility.focus.setPreviousFocusable(root)
     }
 
-    if (ui.down || ui.right) {
+    if (discrete.down || discrete.right) {
       return app.utility.focus.setNextFocusable(root)
     }
   }

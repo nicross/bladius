@@ -35,9 +35,9 @@ app.screen.booster = (() => {
   }
 
   function onFrame() {
-    const ui = app.controls.ui()
+    const discrete = app.controls.discrete()
 
-    if (ui.confirm) {
+    if (discrete.confirm) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
@@ -47,13 +47,13 @@ app.screen.booster = (() => {
 
     // Left and right to cycle cards
     if (app.utility.focus.isWithin(root.querySelector('.c-cards'))) {
-      if (ui.left) {
+      if (discrete.left) {
         return app.utility.focus.setPreviousFocusable(root, (element) => {
           return element.matches('.c-card')
         })
       }
 
-      if (ui.right) {
+      if (discrete.right) {
         return app.utility.focus.setNextFocusable(root, (element) => {
           return element.matches('.c-card')
         })
@@ -61,13 +61,13 @@ app.screen.booster = (() => {
     }
 
     // Up and down to main landmarks
-    if (ui.up) {
+    if (discrete.up) {
       return app.utility.focus.setPreviousFocusable(root, (element) => {
         return !element.matches('.c-cards--card:nth-child(n+2) .c-card')
       })
     }
 
-    if (ui.down) {
+    if (discrete.down) {
       return app.utility.focus.setNextFocusable(root, (element) => {
         return !element.matches('.c-cards--card:nth-child(n+2) .c-card')
       })

@@ -118,8 +118,8 @@ Target Previous - T / C / ,
 Turn - Mouse X
 Right Hand - Right Click
 Left Hand - Left Click
-Dodge - Mouse 4
-Heal - Mouse 5
+Dodge - Mouse 5
+Heal - Mouse 4
 Target Next - Mouse Wheel Up
 Target Previous - Mouse Wheel Down
 

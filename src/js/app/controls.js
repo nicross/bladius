@@ -1,47 +1,47 @@
 app.controls = (() => {
-  const gameDefaults = {
+  const continuousDefaults = {
     rotate: 0,
     x: 0,
     y: 0,
   }
 
-  let uiCache = {},
-    uiDelta = {}
+  let discreteCache = {},
+    discreteDelta = {}
 
-  let gameCache = {...gameDefaults}
+  let continuousCache = {...continuousDefaults}
 
   function updateGame() {
-    gameCache = {
-      ...gameDefaults,
-      ...app.controls.gamepad.game(),
-      ...app.controls.keyboard.game(),
+    continuousCache = {
+      ...continuousDefaults,
+      ...app.controls.gamepad.continuous(),
+      ...app.controls.keyboard.continuous(),
     }
   }
 
   function updateUi() {
     const values = {
-      ...app.controls.gamepad.ui(),
-      ...app.controls.keyboard.ui(),
+      ...app.controls.gamepad.discrete(),
+      ...app.controls.keyboard.discrete(),
     }
 
-    uiDelta = {}
+    discreteDelta = {}
 
     for (const key in values) {
-      if (!uiCache[key]) {
-        uiDelta[key] = values[key]
+      if (!discreteCache[key]) {
+        discreteDelta[key] = values[key]
       }
     }
 
-    uiCache = values
+    discreteCache = values
   }
 
   return {
-    game: () => ({...gameCache}),
-    ui: () => ({...uiDelta}),
+    continuous: () => ({...continuousCache}),
+    discrete: () => ({...discreteDelta}),
     reset: function () {
-      gameCache = {}
-      uiCache = {}
-      uiDelta = {}
+      continuousCache = {}
+      discreteCache = {}
+      discreteDelta = {}
       return this
     },
     update: function () {

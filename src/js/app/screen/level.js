@@ -58,9 +58,9 @@ app.screen.level = (() => {
   }
 
   function onFrame() {
-    const ui = app.controls.ui()
+    const discrete = app.controls.discrete()
 
-    if (ui.confirm) {
+    if (discrete.confirm) {
       const focused = app.utility.focus.get(root)
 
       if (focused) {
@@ -68,11 +68,11 @@ app.screen.level = (() => {
       }
     }
 
-    if (ui.up || ui.left) {
+    if (discrete.up || discrete.left) {
       return app.utility.focus.setPreviousFocusable(root)
     }
 
-    if (ui.down || ui.right) {
+    if (discrete.down || discrete.right) {
       return app.utility.focus.setNextFocusable(root)
     }
   }
