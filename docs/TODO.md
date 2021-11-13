@@ -2,7 +2,6 @@
 ## Player sprint
 - Fighter component, used to represent hero and enemies
   - Fighters are composed of
-    - Position / velocity / rotation physics
     - Movement / dodging system
     - Input
     - Footsteps

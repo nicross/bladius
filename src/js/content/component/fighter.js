@@ -7,15 +7,17 @@ content.component.fighter.create = function (...args) {
 content.component.fighter.prototype = {
   construct: function ({
     attributes = {},
-    hand = {},
+    body = {},
+    hand = [],
   } = {}) {
     engine.utility.pubsub.decorate(this)
 
     this.arms = content.component.arm.create()
+    this.body = content.component.body.create(body)
     this.attributes = content.component.attributes.create(attributes)
-    this.hand = content.component.hand.create(hand)
+    this.hand = content.component.hand.create()
 
-    this.attributes.setWithHand(this.hand)
+    this.setHand(hand)
 
     return this
   },
@@ -33,6 +35,11 @@ content.component.fighter.prototype = {
   setHand: function (...args) {
     this.hand.set(...args)
     this.attributes.setWithHand(this.hand)
+
+    return this
+  },
+  update: function (...args) {
+    this.body.update(...args)
 
     return this
   },
