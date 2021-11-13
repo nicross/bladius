@@ -1,21 +1,34 @@
 # TODO
+## Player sprint
+- Fighter component, used to represent hero and enemies
+  - Fighters are composed of
+    - Position / velocity / rotation physics
+    - Movement / dodging system
+    - Input
+    - Footsteps
+    - Arms
+    - Hand
+    - Attributes
+    - Health
+    - Stamina
+- Move content.hero level, experience, gold, and potions into content namespace
+- app.screen.fight handles input for hero fighter
+- Treat engine.position as the camera position, following the player fighter
+- Sound design
+  - Footsteps
+  - Swings
+  - Health
+  - Stamina
+- Buttons to win fight
+
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
-- Health component (reusable)
-- Hero health system
 - Potion use events
-- Movement system
-- Stamina component (reusable)
-- Hero stamina system
-- Dodge system
 - Collision detection
 - Sound design
   - Round start sound
-  - Health
-  - Stamina
-  - Swings
   - Hits
-  - Footsteps
+  - Blocks
 - Targeting system
 - Enemy AI
 - Haptic feedback when striking, blocking, or being struck

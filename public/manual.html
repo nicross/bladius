@@ -133,29 +133,16 @@
         line-height: 1.25;
         padding: 4em 1em;
       }
-        .hero--lockup {
-          animation: hero--lockup 8s linear 0s infinite;
-          -webkit-background-clip: text;
-          background-clip: text;
-          background-color: #FFFFFF;
-          background-size: 200% 200%;
-          color: #FFFFFF;
-          -webkit-text-fill-color: transparent;
-          text-fill-color: transparent;
-        }
+        .hero--lockup {}
         .hero--logo {
+          color: #FF0069;
           font-family: MbElementBrutalized, fantasy;
           font-size: 4em;
         }
         .hero--studio {
+          color: #FFFFFF;
           font-family: FiraMonoRegular, monospace;
           text-align: right;
-        }
-        .hero--title {
-          color: #FFFFFF;
-          margin-top: 2em;
-          text-align: center;
-          text-transform: uppercase;
         }
 
         @keyframes hero--lockup {
@@ -221,11 +208,11 @@
         <h3>Minimum System Requirements</h3>
         <table>
           <tr>
-            <th>CPU</th>
+            <th scope="row">CPU</th>
             <td>SSE2 capable (64-bit)</td>
           </tr>
           <tr>
-            <th>RAM</th>
+            <th scope="row">RAM</th>
             <td>2 GB</td>
           </tr>
         </table>
@@ -233,11 +220,11 @@
         <h3>Recommended System Requirements</h3>
         <table>
           <tr>
-            <th>CPU</th>
+            <th scope="row">CPU</th>
             <td>3.5 GHz Quad-Core (64-bit)</td>
           </tr>
           <tr>
-            <th>RAM</th>
+            <th scope="row">RAM</th>
             <td>4 GB</td>
           </tr>
         </table>
@@ -260,54 +247,102 @@
           <table>
             <thead>
               <tr>
-                <th>Action</th>
-                <th>Key 1</th>
-                <th>Key 2</th>
-                <th>Key 3</th>
+                <th scope="col">Action</th>
+                <th scope="col">Key 1</th>
+                <th scope="col">Key 2</th>
+                <th scope="col">Key 3</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>Move Forward</th>
+                <th scope="row">Move Forward</th>
                 <td>W</td>
                 <td>Up Arrow</td>
                 <td>Numpad 8</td>
               </tr>
               <tr>
-                <th>Move Backward</th>
+                <th scope="row">Move Backward</th>
                 <td>S</td>
                 <td>Down Arrow</td>
                 <td>Numpad 5</td>
               </tr>
               <tr>
-                <th>Strafe Left</th>
+                <th scope="row">Strafe Left</th>
                 <td>A</td>
                 <td>Z</td>
                 <td>Numpad 4</td>
               </tr>
               <tr>
-                <th>Strafe Right</th>
+                <th scope="row">Strafe Right</th>
                 <td>D</td>
                 <td>X</td>
                 <td>Numpad 6</td>
               </tr>
               <tr>
-                <th>Turn Left</th>
+                <th scope="row">Turn Left</th>
                 <td>Q</td>
                 <td>Left Arrow</td>
                 <td>Numpad 7</td>
               </tr>
               <tr>
-                <th>Turn Right</th>
+                <th scope="row">Turn Right</th>
                 <td>E</td>
                 <td>Right Arrow</td>
                 <td>Numpad 9</td>
               </tr>
               <tr>
-                <th>UI Confirm</th>
+                <th scope="row">Use Left Arm</th>
+                <td>Left Control</td>
+                <td>Right Alt</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Use Right Arm</th>
+                <td>Left Alt</td>
+                <td>Right Control</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Sprint</th>
+                <td>Left Shift</td>
+                <td>Right Shift</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Dodge</th>
+                <td>Space</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Use Potion</th>
+                <td>F</td>
+                <td>Z</td>
+                <td>/</td>
+              </tr>
+              <tr>
+                <th scope="row">Target Next</th>
+                <td>R</td>
+                <td>X</td>
+                <td>.</td>
+              </tr>
+              <tr>
+                <th scope="row">Target Previous</th>
+                <td>T</td>
+                <td>R</td>
+                <td>,</td>
+              </tr>
+              <tr>
+                <th scope="row">UI Confirm</th>
                 <td>Enter</td>
                 <td>Space</td>
                 <td>Numpad Enter</td>
+              </tr>
+              <tr>
+                <th scope="row">UI Cancel</th>
+                <td>Backspace</td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -320,22 +355,38 @@
           <table>
             <thead>
               <tr>
-                <th>Action</th>
-                <th>Button</th>
+                <th scope="col">Action</th>
+                <th scope="col">Button</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>Move Forward</th>
+                <th scope="row">Turn</th>
+                <td>Mouse X-Axis</td>
+              </tr>
+              <tr>
+                <th scope="row">Use Left Arm</th>
                 <td>Mouse 1 (Primary)</td>
               </tr>
               <tr>
-                <th>Move Backward</th>
+                <th scope="row">Use Right Arm</th>
                 <td>Mouse 3 (Secondary)</td>
               </tr>
               <tr>
-                <th>Turning</th>
-                <td>Mouse X-Axis</td>
+                <th scope="row">Use Potion</th>
+                <td>Mouse 4</td>
+              </tr>
+              <tr>
+                <th scope="row">Dodge</th>
+                <td>Mouse 5</td>
+              </tr>
+              <tr>
+                <th scope="row">Target Next</th>
+                <td>Mouse Wheel Down</td>
+              </tr>
+              <tr>
+                <th scope="row">Target Previous</th>
+                <td>Mouse Wheel Up</td>
               </tr>
             </tbody>
           </table>
@@ -348,54 +399,102 @@
           <table>
             <thead>
               <tr>
-                <th>Action</th>
-                <th>Button 1</th>
-                <th>Button 2</th>
-                <th>Button 3</th>
+                <th scope="col">Action</th>
+                <th scope="col">Button 1</th>
+                <th scope="col">Button 2</th>
+                <th scope="col">Button 3</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>Move Forward</th>
+                <th scope="row">Move Forward</th>
                 <td>Any Stick</td>
                 <td>D-Pad Up</td>
                 <td></td>
               </tr>
               <tr>
-                <th>Move Backward</th>
+                <th scope="row">Move Backward</th>
                 <td>Any Stick</td>
                 <td>D-Pad Down</td>
                 <td></td>
               </tr>
               <tr>
-                <th>Strafe Left</th>
+                <th scope="row">Strafe Left</th>
                 <td>Left Stick</td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
-                <th>Strafe Right</th>
+                <th scope="row">Strafe Right</th>
                 <td>Left Stick</td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
-                <th>Turn Left</th>
+                <th scope="row">Turn Left</th>
                 <td>Right Stick</td>
                 <td>D-Pad Left</td>
                 <td></td>
               </tr>
               <tr>
-                <th>Turn Right</th>
+                <th scope="row">Turn Right</th>
                 <td>Right Stick</td>
                 <td>D-Pad Right</td>
                 <td></td>
               </tr>
               <tr>
-                <th>UI Confirm</th>
+                <th scope="row">Use Left Arm</th>
+                <td>Left Trigger</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Use Right Arm</th>
+                <td>Right Trigger</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Sprint</th>
+                <td>Hold Left Stick</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Dodge</th>
+                <td>A</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Use Potion</th>
+                <td>B</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Target Next</th>
+                <td>Right Bumper</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Target Previous</th>
+                <td>Left Bumper</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">UI Confirm</th>
                 <td>A</td>
                 <td>Start</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">UI Cancel</th>
+                <td>B</td>
                 <td>Select</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
