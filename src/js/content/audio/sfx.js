@@ -122,7 +122,8 @@ content.audio.sfx.horn = function ({
   off += humanize
   when += humanize
 
-  const detune = engine.utility.random.float(-5, 5)
+  const detune = engine.utility.random.float(-10, 10),
+    gain = engine.utility.fromDb(engine.utility.random.float(-4.5, -3))
 
   const attack = 1/64,
     decay = 3/64,
@@ -148,14 +149,15 @@ content.audio.sfx.horn = function ({
     sustainTime = decayTime + sustain
 
   synth.param.gain.setValueAtTime(engine.const.zeroGain, when)
-  synth.param.gain.linearRampToValueAtTime(1, attackTime)
-  synth.param.gain.exponentialRampToValueAtTime(1/2, decayTime)
+  synth.param.gain.linearRampToValueAtTime(gain, attackTime)
+  synth.param.gain.exponentialRampToValueAtTime(gain/2, decayTime)
 
-  const endGain = engine.utility.clamp(engine.utility.scale(off, decayTime, sustainTime, 1/2, 3/4), 1/2, 3/4)
+  const endGain = gain * engine.utility.clamp(engine.utility.scale(off, decayTime, sustainTime, 1/3, 2/3), 1/3, 2/3)
 
   synth.param.gain.linearRampToValueAtTime(endGain, off)
   synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, off + release)
 
+  synth.param.detune.linearRampToValueAtTime(0, off)
   synth.param.mod.depth.exponentialRampToValueAtTime(frequency / 2, decayTime)
 
   synth.stop(off + release)
