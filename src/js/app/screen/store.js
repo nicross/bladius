@@ -29,7 +29,7 @@ app.screen.store = (() => {
     }
 
     content.deck.add(card)
-    content.hero.gold.spend(card.cost)
+    content.gold.spend(card.cost)
     updateGold()
 
     this.setDisabled(true)
@@ -114,8 +114,8 @@ app.screen.store = (() => {
       return
     }
 
-    content.hero.gold.spend(1)
-    content.hero.potions.add(1)
+    content.gold.spend(1)
+    content.potions.add(1)
 
     updateGold()
     updatePotions()
@@ -154,21 +154,21 @@ app.screen.store = (() => {
 
   function updateGold() {
     // Gold
-    goldElement.innerHTML = app.utility.component.gold(content.hero.gold.get())
+    goldElement.innerHTML = app.utility.component.gold(content.gold.get())
 
     // Potion button
-    potionButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
+    potionButton.setAttribute('aria-disabled', !content.gold.has(1) ? 'true' : 'false')
 
     // Cards
     for (const component of components) {
-      if (!component.isDisabled() && !content.hero.gold.has(component.card.cost)) {
+      if (!component.isDisabled() && !content.gold.has(component.card.cost)) {
         component.setDisabled(true)
       }
     }
   }
 
   function updatePotions() {
-    potionsElement.innerHTML = app.utility.component.potion(content.hero.potions.get())
+    potionsElement.innerHTML = app.utility.component.potion(content.potions.get())
   }
 
   return {}

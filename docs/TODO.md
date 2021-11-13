@@ -11,7 +11,6 @@
     - Attributes
     - Health
     - Stamina
-- Move content.hero level, experience, gold, and potions into content namespace
 - app.screen.fight handles input for hero fighter
 - Treat engine.position as the camera position, following the player fighter
 - Sound design

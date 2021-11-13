@@ -97,10 +97,10 @@ content.audio.sfx.experience = function ({
   synth.param.gain.setValueAtTime(1, when + duration - 1/32)
   synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
 
-  const currentLevel = content.hero.level.calculateLevelFrom(from),
-    currentLevelExperience = content.hero.level.calculateExperienceTo(currentLevel),
+  const currentLevel = content.level.calculateLevelFrom(from),
+    currentLevelExperience = content.level.calculateExperienceTo(currentLevel),
     nextLevel = currentLevel + 1,
-    nextLevelExperience = content.hero.level.calculateExperienceTo(nextLevel)
+    nextLevelExperience = content.level.calculateExperienceTo(nextLevel)
 
   const fromDetune = engine.utility.scale(from, currentLevelExperience, nextLevelExperience, 0, 1200),
     toDetune = engine.utility.scale(to, currentLevelExperience, nextLevelExperience, 0, 1200)

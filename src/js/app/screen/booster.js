@@ -22,8 +22,8 @@ app.screen.booster = (() => {
       potions = isStarter ? 3 : 1
 
     content.deck.add(...cards).shuffle()
-    content.hero.potions.add(potions)
-    content.hero.gold.add(gold)
+    content.potions.add(potions)
+    content.gold.add(gold)
     content.audio.sfx.coins(gold)
 
     updateCards(cards)

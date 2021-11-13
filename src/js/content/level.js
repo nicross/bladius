@@ -1,4 +1,4 @@
-content.hero.level = (() => {
+content.level = (() => {
   const curve = 2
 
   let level = 0
@@ -28,12 +28,12 @@ content.hero.level = (() => {
     calculateExperienceTo,
     calculateLevelFrom,
     canLevelUp: function () {
-      return content.hero.experience.get() >= this.getExperienceToNext()
+      return content.experience.get() >= this.getExperienceToNext()
     },
     get: () => level,
     getExperienceToNext: () => calculateExperienceTo(level + 1),
     getExperienceToNextDelta: function () {
-      const experience = content.hero.experience.get(),
+      const experience = content.experience.get(),
         next = this.getExperienceToNext()
 
       return Math.max(next - experience, 0)
@@ -54,4 +54,4 @@ content.hero.level = (() => {
   }
 })()
 
-engine.state.on('reset', () => content.hero.level.reset())
+engine.state.on('reset', () => content.level.reset())

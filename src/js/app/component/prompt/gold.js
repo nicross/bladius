@@ -24,8 +24,8 @@ app.component.prompt.gold = app.component.prompt.base.invent({
 
     this.animate({
       duration: 1,
-      from: content.hero.gold.get() - this.options.gold,
-      to: content.hero.gold.get(),
+      from: content.gold.get() - this.options.gold,
+      to: content.gold.get(),
     })
   },
   animate: function ({

@@ -36,7 +36,7 @@ app.state.screen = engine.utility.machine.create({
     },
     win: {
       next: function () {
-        const isLevelUp = content.hero.level.canLevelUp()
+        const isLevelUp = content.level.canLevelUp()
         this.change(isLevelUp ? 'level' : 'store')
       },
     },

@@ -39,7 +39,7 @@ app.screen.level = (() => {
   function onAttributeClick() {
     const attribute = this.attribute
 
-    content.hero.level.levelUp()
+    content.level.levelUp()
     content.hero.attributes[attribute.key].incrementLevel()
 
     app.state.screen.dispatch('next')

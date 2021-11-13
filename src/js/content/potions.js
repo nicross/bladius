@@ -1,4 +1,4 @@
-content.hero.potions = (() => {
+content.potions = (() => {
   const cost = 1,
     pubsub = engine.utility.pubsub.create()
 
@@ -38,4 +38,4 @@ content.hero.potions = (() => {
   }, pubsub)
 })()
 
-engine.state.on('reset', () => content.hero.potions.reset())
+engine.state.on('reset', () => content.potions.reset())

@@ -113,7 +113,7 @@ app.screen.hand = (() => {
 
     drawHand()
 
-    content.hero.gold.spend(1)
+    content.gold.spend(1)
     updateGold()
   }
 
@@ -138,14 +138,14 @@ app.screen.hand = (() => {
 
   function updateGold() {
     // Gold
-    goldElement.innerHTML = app.utility.component.gold(content.hero.gold.get())
+    goldElement.innerHTML = app.utility.component.gold(content.gold.get())
 
     // Redraw button
-    redrawButton.setAttribute('aria-disabled', !content.hero.gold.has(1) ? 'true' : 'false')
+    redrawButton.setAttribute('aria-disabled', !content.gold.has(1) ? 'true' : 'false')
   }
 
   function updatePotions() {
-    potionsElement.innerHTML = app.utility.component.potion(content.hero.potions.get())
+    potionsElement.innerHTML = app.utility.component.potion(content.potions.get())
   }
 
   return {}

@@ -58,8 +58,8 @@ app.screen.win = (() => {
     const experience = e.kills * bonus,
       gold = 1 * bonus
 
-    content.hero.experience.add(experience)
-    content.hero.gold.add(gold)
+    content.experience.add(experience)
+    content.gold.add(gold)
     content.round.increment()
 
     createPrompts({

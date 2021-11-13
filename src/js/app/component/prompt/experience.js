@@ -3,7 +3,7 @@ app.component.prompt.experience = app.component.prompt.base.invent({
     bonus,
     experience,
   }) {
-    const isLevelUp = content.hero.level.canLevelUp()
+    const isLevelUp = content.level.canLevelUp()
 
     this.titleElement.innerHTML = 'Progress'
     this.subtitleElement.innerHTML = `Gained ${app.utility.component.experience(experience)}`
@@ -23,8 +23,8 @@ app.component.prompt.experience = app.component.prompt.base.invent({
   onOpen: function () {
     const options = {
       duration: 1.5,
-      from: content.hero.experience.get() - this.options.experience,
-      to: content.hero.experience.get(),
+      from: content.experience.get() - this.options.experience,
+      to: content.experience.get(),
     }
 
     content.audio.sfx.experience(options)
@@ -43,9 +43,9 @@ app.component.prompt.experience = app.component.prompt.base.invent({
       const progress = Math.min(1, (engine.loop.time() - start) / duration),
         value = engine.utility.lerp(from, to, progress)
 
-      const level = content.hero.level.calculateLevelFrom(value),
-        max = content.hero.level.calculateExperienceTo(level + 1),
-        min = content.hero.level.calculateExperienceTo(level)
+      const level = content.level.calculateLevelFrom(value),
+        max = content.level.calculateExperienceTo(level + 1),
+        min = content.level.calculateExperienceTo(level)
 
       // Snap to max if ending on a level up
       const ratio = progress == 1 && value == min
