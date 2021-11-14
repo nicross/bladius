@@ -7,18 +7,34 @@ content.component.arms.create = function (...args) {
 content.component.arms.prototype = {
   construct: function () {
     this.left = content.component.arms.arm.create({
-      quaternionOffset: engine.utility.quaternion.fromEuler({
-        yaw: Math.PI/2,
-      }),
+      angleOffset: Math.PI/2,
+      length: 1, // attacks can hit 2m ahead
+      vectorOffset: {y: 1/3},
     })
 
     this.right = content.component.arms.arm.create({
-      quaternionOffset: engine.utility.quaternion.fromEuler({
-        yaw: -Math.PI/2,
-      }),
+      angleOffset: -Math.PI/2,
+      length: 1, // attacks can hit 2m ahead
+      vectorOffset: {y: -1/3},
     })
 
     return this
+  },
+  getActive: function () {
+    if (this.left.isActive()) {
+      return this.left
+    }
+
+    if (this.right.isActive()) {
+      return this.right
+    }
+  },
+  getActiveCollisionCircle: function () {
+    const active = this.getActive()
+
+    if (active) {
+      return active.collisionCircle()
+    }
   },
   isActive: function () {
     // For allowing only one arm active at a time

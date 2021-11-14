@@ -19,6 +19,12 @@ content.component.fighter.body.prototype = {
 
     return this
   },
+  collisionCircle: function () {
+    return content.utility.circle.create({
+      radius: this.radius,
+      vector: this.vector,
+    })
+  },
   intersectsPoint: function (point = {}) {
     return this.vector.distance(point) <= this.radius
   },

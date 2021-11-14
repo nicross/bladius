@@ -6,15 +6,19 @@ content.component.arms.arm.create = function (...args) {
 
 content.component.arms.arm.prototype = {
   construct: function ({
-    quaternion,
-    quaternionOffset,
+    angle = 0,
+    angleOffset = 0,
+    length = 0,
     vector,
     vectorOffset,
   } = {}) {
-    this.quaternion = engine.utility.quaternion.create(quaternion)
-    this.quaternionOffset = engine.utility.quaternion.create(quaternionOffset)
-    this.vector = engine.utility.vector3d.create(vector)
-    this.vectorOffset = engine.utility.vector3d.create(vectorOffset)
+    this.angle = angle
+    this.angleOffset = angleOffset
+    this.length = length
+    this.vector = engine.utility.vector2d.create(vector)
+    this.vectorOffset = engine.utility.vector2d.create(vectorOffset)
+
+    this.collisionCircle = content.utility.circle.create()
 
     return this
   },
@@ -36,6 +40,27 @@ content.component.arms.arm.prototype = {
 
     return this
   },
+  collisionCircle: function () {
+    if (!this.isActive()) {
+      return
+    }
+
+    const ratio = this.getRatio()
+
+    const angle = engine.utility.lerp(this.angle + this.angleOffset, this.angle, ratio),
+      radius = engine.utility.lerp(0, this.length, ratio)
+
+    const vector = this.vector.add(
+      this.vectorOffset.rotate(this.angle)
+    ).add(
+      engine.utility.vector2d.create({x: this.length}).rotate(angle)
+    )
+
+    return content.utility.circle.create({
+      radius,
+      vector,
+    })
+  },
   deactivate: function ({
     speed = 1,
   } = {}) {
@@ -55,34 +80,6 @@ content.component.arms.arm.prototype = {
     this.timerEnd = time + duration
 
     return this
-  },
-  detectCollision: function ({
-    center,
-    radius = 0,
-  } = {}) {
-    if (!this.isActive()) {
-      return false
-    }
-
-    const ratio = this.getRatio()
-
-    const quaternion = this.quaternion
-      .multiply(this.quaternionOffset)
-      .lerpTo(this.quaternion, ratio)
-
-    const vector = this.vectorOffset
-      .rotateQuaternion(this.quaternion)
-      .add(this.vector)
-
-    if (this.isAttack()) {
-      // TODO: Check attack geometry, cone
-    }
-
-    if (this.isDefend()) {
-      // TODO: Check defense geometry, plane
-    }
-
-    return false
   },
   equip: function (card = {}) {
     this.card = {...card}
@@ -126,16 +123,11 @@ content.component.arms.arm.prototype = {
     return this
   },
   update: function ({
-    quaternion,
+    angle = 0,
     vector,
   }) {
-    if (quaternion) {
-      this.quaternion = engine.utility.quaternion.create(quaternion)
-    }
-
-    if (vector) {
-      this.vector = engine.utility.vector3d.create(vector)
-    }
+    this.angle = angle
+    this.vector = engine.utility.vector2d.create(vector)
 
     return this
   },

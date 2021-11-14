@@ -4,7 +4,6 @@
   - Fighters are composed of
     - Movement / dodging system
     - Input
-    - Footsteps
 - app.screen.fight handles input for hero fighter
 - Sound design
   - Footsteps
@@ -16,7 +15,7 @@
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
 - Potion use events
-- Collision detection
+- Collision detection (prioritize hero before enemies, loop through fighters' arms checking for collisions with arms (blocks, parries) and bodies (damage))
 - Sound design
   - Round start sound
   - Hits
