@@ -1,6 +1,18 @@
-content.audio = {}
+content.audio = (() => {
+  const bus = engine.audio.mixer.createBus(),
+    context = engine.audio.context()
 
-content.audio.bus = engine.audio.mixer.createBus()
+  function createBus() {
+    const gain = context.createGain()
+    gain.connect(bus)
+    return gain
+  }
+
+  return {
+    bus: () => bus,
+    createBus: () => createBus(),
+  }
+})()
 
 content.audio.testRandom = () => {
   const options = {
@@ -21,7 +33,7 @@ content.audio.testRandom = () => {
 
   const synth = engine.audio.synth.createBuffer({
     buffer,
-  }).connect(content.audio.bus)
+  }).connect(content.audio.bus())
 
   const now = engine.audio.time()
 
