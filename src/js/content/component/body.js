@@ -8,7 +8,7 @@ content.component.body.prototype = {
   construct: function ({
     angle = 0,
     vector,
-  }) {
+  } = {}) {
     this.angle = angle
     this.vector = engine.utility.vector2d.create(vector)
 

@@ -5,8 +5,6 @@
     - Movement / dodging system
     - Input
     - Footsteps
-    - Health
-    - Stamina
 - app.screen.fight handles input for hero fighter
 - Sound design
   - Footsteps

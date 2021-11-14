@@ -8,8 +8,8 @@ content.component.attribute.staminaRegen = content.component.attribute.register(
     compute: function ({
       multiplier: mask = 1,
     } = {}) {
-      // Recover quarter of total stamina per second
-      return 0.25 * this.multiplier * mask
+      // Recover points per second
+      return 2.5 * this.multiplier * mask
     },
   })
 )
