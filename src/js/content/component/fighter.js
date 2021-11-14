@@ -12,7 +12,7 @@ content.component.fighter.prototype = {
   } = {}) {
     engine.utility.pubsub.decorate(this)
 
-    this.arms = content.component.arms.create()
+    this.arms = content.component.fighter.arms.create(this)
     this.attributes = content.component.attributes.create(attributes)
     this.body = content.component.fighter.body.create(body)
     this.footsteps = content.component.fighter.footsteps.create({vector: body.vector})

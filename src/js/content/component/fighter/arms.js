@@ -1,18 +1,22 @@
-content.component.arms = {}
+content.component.fighter.arms = {}
 
-content.component.arms.create = function (...args) {
+content.component.fighter.arms.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.arms.prototype = {
-  construct: function () {
-    this.left = content.component.arms.arm.create({
+content.component.fighter.arms.prototype = {
+  construct: function (fighter) {
+    this.fighter = fighter
+
+    this.left = content.component.fighter.arms.arm.create({
+      arms: this,
       angleOffset: Math.PI/2,
       length: 1, // attacks can hit 2m ahead
       vectorOffset: {y: 1/3},
     })
 
-    this.right = content.component.arms.arm.create({
+    this.right = content.component.fighter.arms.arm.create({
+      arms: this,
       angleOffset: -Math.PI/2,
       length: 1, // attacks can hit 2m ahead
       vectorOffset: {y: -1/3},

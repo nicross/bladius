@@ -1,36 +1,37 @@
-content.component.arms.arm = {}
+content.component.fighter.arms.arm = {}
 
-content.component.arms.arm.create = function (...args) {
+content.component.fighter.arms.arm.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.arms.arm.prototype = {
+content.component.fighter.arms.arm.prototype = {
   construct: function ({
+    arms,
     angle = 0,
     angleOffset = 0,
     length = 0,
     vector,
     vectorOffset,
   } = {}) {
+    this.arms = arms
+
     this.angle = angle
     this.angleOffset = angleOffset
     this.length = length
     this.vector = engine.utility.vector2d.create(vector)
     this.vectorOffset = engine.utility.vector2d.create(vectorOffset)
 
-    this.collisionCircle = content.utility.circle.create()
-
     return this
   },
-  activate: function ({
-    speed = 1,
-  } = {}) {
+  activate: function () {
     if (this.isActive() || this.isCooldown()) {
       return this
     }
 
     // XXX: Flat duration of 0.5s
-    const duration = 0.5 * speed,
+    const {attackSpeed} = this.compute()
+
+    const duration = 0.5 * attackSpeed,
       time = engine.loop.time()
 
     this.timerDirection = 1
@@ -61,18 +62,22 @@ content.component.arms.arm.prototype = {
       vector,
     })
   },
-  deactivate: function ({
-    speed = 1,
-  } = {}) {
+  compute: function () {
+    return this.arms && this.arms.fighter
+      ? this.arms.fighter.attributes.compute(this.card ? this.card.attributes : {})
+      : {}
+  },
+  deactivate: function () {
     if (!this.isActive()) {
       return this
     }
 
     // XXX: Flat duration of 0.5s (or active delta, whatever is shortest)
+    const {attackSpeed} = this.compute()
     const time = engine.loop.time()
 
     const delta = time - this.timerStart,
-      duration = Math.min(0.5 * speed, delta)
+      duration = Math.min(0.5 * attackSpeed, delta)
 
     this.timerDirection = -1
     this.timerDuration = duration

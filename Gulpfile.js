@@ -173,10 +173,14 @@ function getContentJs() {
     'src/js/content/component/attribute/base.js',
     'src/js/content/component/*.js',
     'src/js/content/component/*/*.js',
+    'src/js/content/component/*/*/*.js',
+    'src/js/content/component/*/*/*.js',
     'src/js/content/cards.js',
     'src/js/content/cards/*.js',
     'src/js/content/*.js',
-    'src/js/content/**/*.js',
+    'src/js/content/*/*.js',
+    'src/js/content/*/*/*.js',
+    'src/js/content/*/*/*/*.js',
   ]
 
   return srcs
