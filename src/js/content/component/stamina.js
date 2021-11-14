@@ -13,10 +13,15 @@ content.component.stamina.prototype = {
     return this
   },
   getRatio: function () {
-    return this.value / this.max
+    return this.max
+      ? this.value / this.max
+      : 0
   },
   has: function (value = 0) {
     return this.value >= value
+  },
+  isZero: function () {
+    return this.value == 0
   },
   setMax: function (max = 0) {
     max = Math.max(0, max)
