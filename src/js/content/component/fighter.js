@@ -12,7 +12,7 @@ content.component.fighter.prototype = {
   } = {}) {
     engine.utility.pubsub.decorate(this)
 
-    this.arms = content.component.arm.create()
+    this.arms = content.component.arms.create()
     this.attributes = content.component.attributes.create(attributes)
     this.body = content.component.body.create(body)
     this.footsteps = content.component.footsteps.create({vector: body.vector})
@@ -36,6 +36,7 @@ content.component.fighter.prototype = {
     return this
   },
   reset: function () {
+    this.arms.reset()
     this.attributes.reset()
     this.footsteps.reset()
     this.hand.reset()
@@ -45,6 +46,9 @@ content.component.fighter.prototype = {
   setHand: function (...args) {
     this.hand.set(...args)
     this.attributes.setWithHand(this.hand)
+
+    this.arms.right.equip(this.hand.primary)
+    this.arms.left.equip(this.hand.secondary)
 
     const {
       health,
