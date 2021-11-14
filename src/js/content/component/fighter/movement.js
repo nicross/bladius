@@ -1,0 +1,131 @@
+content.component.fighter.movement = {}
+
+content.component.fighter.movement.create = function (...args) {
+  return Object.create(this.prototype).construct(...args)
+}
+
+content.component.fighter.movement.prototype = {
+  construct: function (fighter) {
+    this.fighter = fighter
+
+    this.inputRotation = 0
+    this.inputVelocity = engine.utility.vector2d.create()
+
+    return this
+  },
+  applyInputRotation: function () {
+    const acceleration = Math.PI,
+      deceleration = Math.PI * 2,
+      maxVelocity = Math.PI / 2
+
+    const velocity = this.fighter.body.anglularVelocity
+
+    if (this.inputRotation) {
+      this.fighter.body.angularVelocity = content.utility.accelerate.value(
+        velocity,
+        this.inputRotation * maxVelocity,
+        acceleration
+      )
+    } else {
+      this.fighter.body.angularVelocity = content.utility.accelerate.value(
+        velocity,
+        0,
+        deceleration
+      )
+    }
+
+    return this
+  },
+  applyInputVelocity: function () {
+    const acceleration = 5,
+      deceleration = 10,
+      maxVelocity = 5
+
+    const currentVelocity = this.fighter.body.lateralVelocity
+
+    if (this.inputVelocity.isZero()) {
+      this.fighter.body.lateralVelocity = content.utility.accelerate.vector(
+        currentVelocity,
+        engine.utility.vector3d.create(),
+        deceleration
+      )
+      return this
+    }
+
+    const targetVelocity = this.inputVelocity.scale(maxVelocity)
+
+    const rate = currentVelocity.distance() <= targetVelocity.distance()
+      ? acceleration
+      : deceleration
+
+    this.fighter.body.lateralVelocity = content.utility.accelerate.vector(
+      currentVelocity,
+      targetVelocity,
+      rate
+    )
+
+    return this
+  },
+  canDodge: function () {
+    return !this.isDodging() // TODO: Check stamina
+  },
+  dodge: function () {
+    if (!this.canDodge()) {
+      return this
+    }
+
+    const duration = 1
+    this.dodgeTimer = duration + engine.loop.time()
+
+    // Override input
+    this.inputRotation = 0
+
+    this.inputVelocity = this.inputVelocity.isZero()
+      ? engine.utility.vector2d.unitX().rotate(this.fighter.body.angle + Math.PI) // backwards, sprinting
+      : this.inputVelocity.normalize() // input direction, sprinting
+
+    return this
+  },
+  input: function ({
+    dodge = false,
+    rotate = 0,
+    sprint = false,
+    x = 0,
+    y = 0,
+  } = {}) {
+    if (this.isDodging()) {
+      return this
+    }
+
+    const distance = engine.utility.distance({x, y}),
+      rotateScale = sprint ? 0.5 : 1,
+      xScale = sprint ? 1 : 0.5,
+      yScale = 0.5
+
+    if (distance > 1) {
+      x /= distance
+      y /= distance
+    }
+
+    this.inputRotation = rotate * rotateScale
+    this.inputVelocity = engine.utility.vector2d.create({
+      x: x * xScale,
+      y: y * yScale,
+    })
+
+    if (dodge) {
+      this.dodge()
+    }
+
+    return this
+  },
+  isDodging: function () {
+    return this.dodgeTimer >= engine.loop.time()
+  },
+  update: function () {
+    this.applyInputRotation()
+    this.applyInputVelocity()
+
+    return this
+  },
+}

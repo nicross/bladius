@@ -12,6 +12,7 @@ content.component.fighter.footsteps.prototype = {
     engine.utility.pubsub.decorate(this)
 
     this.length = length
+    this.isLeft = Math.random() > 0.5
     this.vector = engine.utility.vector3d.create(vector)
 
     return this
@@ -24,6 +25,7 @@ content.component.fighter.footsteps.prototype = {
   reset: function ({
     vector = {},
   } = {}) {
+    this.isLeft = Math.random() > 0.5
     this.vector = engine.utility.vector3d.create(vector)
     return this
   },
@@ -33,6 +35,7 @@ content.component.fighter.footsteps.prototype = {
 
     if (shouldTrigger) {
       this.pubsub.emit('step')
+      this.isLeft = !this.isLeft
       this.vector = engine.utility.vector3d.create(vector)
     }
 

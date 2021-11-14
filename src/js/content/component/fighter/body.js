@@ -12,9 +12,7 @@ content.component.fighter.body.prototype = {
     this.angle = angle
     this.vector = engine.utility.vector2d.create(vector)
 
-    this.angularAcceleration = 0
     this.angularVelocity = 0
-    this.lateralAcceleration = engine.utility.vector2d.create()
     this.lateralVelocity = engine.utility.vector2d.create()
 
     return this
@@ -41,12 +39,7 @@ content.component.fighter.body.prototype = {
   update: function () {
     const delta = engine.loop.delta()
 
-    this.angularVelocity += this.angularAcceleration * delta
     this.angle += this.angularVelocity * delta
-
-    this.lateralVelocity = this.lateralVelocity.add(
-      this.lateralAcceleration.scale(delta)
-    )
 
     this.vector = this.vector.add(
       this.lateralVelocity.scale(delta)

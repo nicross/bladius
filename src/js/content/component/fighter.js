@@ -16,6 +16,7 @@ content.component.fighter.prototype = {
     this.attributes = content.component.attributes.create(attributes)
     this.body = content.component.fighter.body.create(body)
     this.footsteps = content.component.fighter.footsteps.create({vector: body.vector})
+    this.movement = content.component.fighter.movement.create(this)
     this.hand = content.component.hand.create()
     this.health = content.component.fighter.health.create()
     this.stamina = content.component.fighter.stamina.create()
@@ -70,6 +71,7 @@ content.component.fighter.prototype = {
     this.health.update(...args)
     this.stamina.update(...args)
 
+    this.movement.update(...args)
     this.body.update(...args)
 
     this.arms.update({
