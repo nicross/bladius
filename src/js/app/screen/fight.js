@@ -32,14 +32,21 @@ app.screen.fight = (() => {
       })
     }
 
+    // Loss condition: zero health
     if (content.hero.health.isZero()) {
       app.state.screen.dispatch('loss')
     }
 
-    // Win condition: No alive enemy fighters
+    // TODO: Win condition: No alive enemy fighters
 
-    // TODO: Movement controls
+    // TODO: Use potions
 
+    // Prevent movement / arms while dodging
+    if (content.hero.movement.isDodging()) {
+      return
+    }
+
+    // Arms
     if (continuous.leftArm) {
       content.hero.arms.activateLeftArm()
     } else {
@@ -51,6 +58,20 @@ app.screen.fight = (() => {
     } else {
       content.hero.arms.deactivateRightArm()
     }
+
+    // Movement
+    const lateral = engine.utility.vector2d.create({
+      x: continuous.y,
+      y: -continuous.x,
+    }).rotate(content.hero.body.angle)
+
+    content.hero.movement.input({
+      dodge: discrete.dodge,
+      rotate: continuous.rotate,
+      sprint: continuous.sprint,
+      x: lateral.x,
+      y: lateral.y,
+    })
   }
 
   return {}

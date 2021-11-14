@@ -1,7 +1,7 @@
 content.camera = {
   update: function () {
     engine.position.setEuler({pitch: content.hero.body.angle})
-    engine.position.setVector(content.hero.vector)
+    engine.position.setVector(content.hero.body.vector)
 
     return this
   },

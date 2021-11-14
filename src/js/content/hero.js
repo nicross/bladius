@@ -5,7 +5,11 @@ content.hero = content.component.fighter.create({
   },
 })
 
-engine.loop.on('frame', () => {
+engine.loop.on('frame', ({paused}) => {
+  if (paused) {
+    return
+  }
+
   content.hero.update()
 })
 
