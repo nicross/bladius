@@ -20,6 +20,9 @@ app.screen.splash = (() => {
 
   function onExit() {
     engine.loop.off('frame', onFrame)
+
+    // First user gesture
+    engine.audio.start()
   }
 
   function onFrame() {

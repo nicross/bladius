@@ -1,6 +1,5 @@
 engine.ready(() => {
-  engine.loop.start().pause()
-  // TODO: Call engine.audio.start() on first user gesture
+  engine.loop.start()
 
   engine.audio.mixer.master.param.limiter.attack.value = 0.003
   engine.audio.mixer.master.param.limiter.gain.value = 1
