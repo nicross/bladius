@@ -13,16 +13,6 @@ app.screen.fight = (() => {
   function onEnter() {
     app.utility.focus.setWithin(root)
     engine.loop.on('frame', onFrame)
-
-    // Simulate game
-    if (Math.random() > 1/8) {
-      app.state.screen.dispatch('win', {
-        kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
-      })
-    } else {
-      app.state.screen.dispatch('loss')
-    }
-
   }
 
   function onExit() {
@@ -30,9 +20,24 @@ app.screen.fight = (() => {
   }
 
   function onFrame() {
+    const continuous = app.controls.continuous(),
+      discrete = app.controls.discrete()
+
+    // XXX: Allow skipping of battles, without combat or win/loss conditions
+    // TODO: Timer to automatically win?
+
+    if (discrete.enter || discrete.escape || discrete.select || discrete.start) {
+      app.state.screen.dispatch('win', {
+        kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
+      })
+    }
+
+    if (content.hero.health.isZero()) {
+      app.state.screen.dispatch('loss')
+    }
+
+    // Win condition: No alive enemy fighters
     // Controls
-    // Win condition
-    // Loss condition
   }
 
   return {}

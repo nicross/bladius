@@ -10,7 +10,6 @@
   - Swings
   - Health
   - Stamina
-- Buttons to win fight
 
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
