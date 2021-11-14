@@ -3,7 +3,6 @@
 - Fighter component, used to represent hero and enemies
   - Fighters are composed of
     - Movement / dodging system
-    - Input
 - app.screen.fight handles input for hero fighter
 - Sound design
   - Footsteps

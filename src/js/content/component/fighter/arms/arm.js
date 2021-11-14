@@ -68,7 +68,7 @@ content.component.fighter.arms.arm.prototype = {
       : {}
   },
   deactivate: function () {
-    if (!this.isActive()) {
+    if (this.isCooldown()) {
       return this
     }
 
@@ -99,6 +99,7 @@ content.component.fighter.arms.arm.prototype = {
       return false
     }
 
+    // Can block indefinitely
     if (this.isDefend()) {
       return true
     }
@@ -133,6 +134,11 @@ content.component.fighter.arms.arm.prototype = {
   }) {
     this.angle = angle
     this.vector = engine.utility.vector2d.create(vector)
+
+    // Force deactivation when active timer is out
+    if (this.timerDirection == 1 && !this.isActive()) {
+      this.deactivate()
+    }
 
     return this
   },

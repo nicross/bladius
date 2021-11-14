@@ -18,10 +18,10 @@ content.cards.weapon = (() => {
   ]
 
   const unarmed = define({
+    attributes: {},
     cost: 0,
     isStarter: false,
     name: 'Unarmed',
-    stats: {},
     weight: 0,
   })
 

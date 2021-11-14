@@ -14,6 +14,7 @@ app.controls = (() => {
     continuousCache = {
       ...continuousDefaults,
       ...app.controls.gamepad.continuous(),
+      ...app.controls.mouse.continuous(),
       ...app.controls.keyboard.continuous(),
     }
   }
@@ -21,6 +22,7 @@ app.controls = (() => {
   function updateUi() {
     const values = {
       ...app.controls.gamepad.discrete(),
+      ...app.controls.mouse.discrete(),
       ...app.controls.keyboard.discrete(),
     }
 

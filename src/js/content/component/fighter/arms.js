@@ -24,6 +24,46 @@ content.component.fighter.arms.prototype = {
 
     return this
   },
+  activateLeftArm: function () {
+    if (this.canActivateLeftArm()) {
+      this.left.activate()
+    }
+
+    return this
+  },
+  activateRightArm: function () {
+    if (this.canActivateRightArm()) {
+      this.right.activate()
+    }
+
+    return this
+  },
+  canActivateLeftArm: function () {
+    return !this.isActive() && !this.left.isCooldown()
+  },
+  canActivateRightArm: function () {
+    return !this.isActive() && !this.right.isCooldown()
+  },
+  canDeactivateLeftArm: function () {
+    return this.left.isActive()
+  },
+  canDeactivateRightArm: function () {
+    return this.right.isActive()
+  },
+  deactivateLeftArm: function () {
+    if (this.canDeactivateLeftArm()) {
+      this.left.deactivate()
+    }
+
+    return this
+  },
+  deactivateRightArm: function () {
+    if (this.canDeactivateRightArm()) {
+      this.right.deactivate()
+    }
+
+    return this
+  },
   getActive: function () {
     if (this.left.isActive()) {
       return this.left

@@ -37,7 +37,20 @@ app.screen.fight = (() => {
     }
 
     // Win condition: No alive enemy fighters
-    // Controls
+
+    // TODO: Movement controls
+
+    if (continuous.leftArm) {
+      content.hero.arms.activateLeftArm()
+    } else {
+      content.hero.arms.deactivateLeftArm()
+    }
+
+    if (continuous.rightArm) {
+      content.hero.arms.activateRightArm()
+    } else {
+      content.hero.arms.deactivateRightArm()
+    }
   }
 
   return {}

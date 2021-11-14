@@ -72,6 +72,11 @@ content.component.fighter.prototype = {
 
     this.body.update(...args)
 
+    this.arms.update({
+      angle: this.body.angle,
+      vector: this.body.vector,
+    })
+
     this.footsteps.update(this.body.vector)
 
     return this
