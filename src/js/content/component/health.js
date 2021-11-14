@@ -6,6 +6,8 @@ content.component.health.create = function (...args) {
 
 content.component.health.prototype = {
   construct: function () {
+    engine.utility.pubsub.decorate(this)
+
     this.max = 0
     this.value = 0
 
@@ -18,6 +20,9 @@ content.component.health.prototype = {
   },
   has: function (value = 0) {
     return this.value >= value
+  },
+  isZero: function () {
+    return this.value == 0
   },
   setMax: function (max = 0) {
     max = Math.max(0, max)
@@ -32,11 +37,23 @@ content.component.health.prototype = {
     return this
   },
   subtract: function (value = 0) {
+    if (!this.value) {
+      return this
+    }
+
     this.value = Math.max(0, this.value - value)
+
+    if (!this.value) {
+      this.emit('kill')
+    }
 
     return this
   },
   update: function () {
+    if (!this.value) {
+      return this
+    }
+
     const delta = engine.loop.delta()
 
     // TODO: Potion heals

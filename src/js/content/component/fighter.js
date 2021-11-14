@@ -23,12 +23,14 @@ content.component.fighter.prototype = {
     this.setHand(hand)
 
     // Forward events
+    this.health.on('kill', () => this.emit('kill'))
     this.footsteps.on('step', () => this.emit('step'))
 
     return this
   },
   destroy: function () {
     this.footsteps.destroy()
+    this.health.destroy()
     this.off()
 
     return this
@@ -57,9 +59,14 @@ content.component.fighter.prototype = {
     return this
   },
   update: function (...args) {
-    this.body.update(...args)
+    if (this.health.isZero()) {
+      return this
+    }
+
     this.health.update(...args)
     this.stamina.update(...args)
+
+    this.body.update(...args)
 
     this.footsteps.update(this.body.vector)
 
