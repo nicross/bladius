@@ -1,10 +1,10 @@
-content.component.arm = {}
+content.component.arms.arm = {}
 
-content.component.arm.create = function (...args) {
+content.component.arms.arm.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.arm.prototype = {
+content.component.arms.arm.prototype = {
   construct: function ({
     quaternion,
     quaternionOffset,

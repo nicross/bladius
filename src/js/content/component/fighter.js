@@ -14,11 +14,11 @@ content.component.fighter.prototype = {
 
     this.arms = content.component.arms.create()
     this.attributes = content.component.attributes.create(attributes)
-    this.body = content.component.body.create(body)
-    this.footsteps = content.component.footsteps.create({vector: body.vector})
+    this.body = content.component.fighter.body.create(body)
+    this.footsteps = content.component.fighter.footsteps.create({vector: body.vector})
     this.hand = content.component.hand.create()
-    this.health = content.component.health.create()
-    this.stamina = content.component.stamina.create()
+    this.health = content.component.fighter.health.create()
+    this.stamina = content.component.fighter.stamina.create()
 
     this.setHand(hand)
 

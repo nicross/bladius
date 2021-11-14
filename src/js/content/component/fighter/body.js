@@ -1,10 +1,10 @@
-content.component.body = {}
+content.component.fighter.body = {}
 
-content.component.body.create = function (...args) {
+content.component.fighter.body.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.body.prototype = {
+content.component.fighter.body.prototype = {
   construct: function ({
     angle = 0,
     vector,

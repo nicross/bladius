@@ -1,10 +1,10 @@
-content.component.footsteps = {}
+content.component.fighter.footsteps = {}
 
-content.component.footsteps.create = function (...args) {
+content.component.fighter.footsteps.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.footsteps.prototype = {
+content.component.fighter.footsteps.prototype = {
   construct: function ({
     length = 0.5,
     vector = {},

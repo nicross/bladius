@@ -6,13 +6,13 @@ content.component.arms.create = function (...args) {
 
 content.component.arms.prototype = {
   construct: function () {
-    this.left = content.component.arm.create({
+    this.left = content.component.arms.arm.create({
       quaternionOffset: engine.utility.quaternion.fromEuler({
         yaw: Math.PI/2,
       }),
     })
 
-    this.right = content.component.arm.create({
+    this.right = content.component.arms.arm.create({
       quaternionOffset: engine.utility.quaternion.fromEuler({
         yaw: -Math.PI/2,
       }),

@@ -1,10 +1,10 @@
-content.component.stamina = {}
+content.component.fighter.stamina = {}
 
-content.component.stamina.create = function (...args) {
+content.component.fighter.stamina.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.stamina.prototype = {
+content.component.fighter.stamina.prototype = {
   construct: function () {
     this.max = 0
     this.regeneration = 0

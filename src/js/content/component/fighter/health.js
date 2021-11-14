@@ -1,10 +1,10 @@
-content.component.health = {}
+content.component.fighter.health = {}
 
-content.component.health.create = function (...args) {
+content.component.fighter.health.create = function (...args) {
   return Object.create(this.prototype).construct(...args)
 }
 
-content.component.health.prototype = {
+content.component.fighter.health.prototype = {
   construct: function () {
     engine.utility.pubsub.decorate(this)
 
