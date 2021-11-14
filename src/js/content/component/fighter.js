@@ -13,23 +13,29 @@ content.component.fighter.prototype = {
     engine.utility.pubsub.decorate(this)
 
     this.arms = content.component.arm.create()
-    this.body = content.component.body.create(body)
     this.attributes = content.component.attributes.create(attributes)
+    this.body = content.component.body.create(body)
+    this.footsteps = content.component.footsteps.create({vector: body.vector})
     this.hand = content.component.hand.create()
     this.health = content.component.health.create()
     this.stamina = content.component.stamina.create()
 
     this.setHand(hand)
 
+    // Forward events
+    this.footsteps.on('step', () => this.emit('step'))
+
     return this
   },
   destroy: function () {
+    this.footsteps.destroy()
     this.off()
 
     return this
   },
   reset: function () {
     this.attributes.reset()
+    this.footsteps.reset()
     this.hand.reset()
 
     return this
@@ -54,6 +60,8 @@ content.component.fighter.prototype = {
     this.body.update(...args)
     this.health.update(...args)
     this.stamina.update(...args)
+
+    this.footsteps.update(this.body.vector)
 
     return this
   },
