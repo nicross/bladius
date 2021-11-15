@@ -6,7 +6,7 @@ content.audio.heartbeat = (() => {
 
   let timer
 
-  bus.gain.value = engine.utility.fromDb(-18)
+  bus.gain.value = engine.utility.fromDb(-15)
 
   function getValue() {
     const health = content.hero.health.getRatio(),

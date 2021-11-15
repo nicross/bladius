@@ -42,14 +42,20 @@ content.component.fighter.stamina.prototype = {
   },
   subtract: function (value = 0) {
     this.value = Math.max(0, this.value - value)
+    this.wasSubtracted = true
 
     return this
   },
   update: function () {
     const delta = engine.loop.delta()
 
-    this.value += this.regeneration * delta
-    this.value = Math.min(this.value, this.max)
+    // Prevent regen if in active use, e.g. sprinting
+    if (!this.wasSubtracted) {
+      this.value += this.regeneration * delta
+      this.value = Math.min(this.value, this.max)
+    }
+
+    this.wasSubtracted = false
 
     return this
   },

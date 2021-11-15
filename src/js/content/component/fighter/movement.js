@@ -13,6 +13,26 @@ content.component.fighter.movement.prototype = {
 
     return this
   },
+  applyDodge: function () {
+    if (!this.canDodge()) {
+      return this
+    }
+
+    const duration = 1
+    this.dodgeTimer = duration + engine.loop.time()
+
+    // Override input
+    this.inputRotation = 0
+
+    this.inputVelocity = this.inputVelocity.isZero()
+      ? engine.utility.vector2d.unitX().rotate(this.fighter.body.angle + Math.PI) // backwards, sprinting
+      : this.inputVelocity.normalize() // input direction, sprinting
+
+    // Spend stamina
+    this.fighter.stamina.subtract(10/3)
+
+    return this
+  },
   applyInputRotation: function () {
     const acceleration = Math.PI,
       deceleration = Math.PI * 2,
@@ -66,25 +86,11 @@ content.component.fighter.movement.prototype = {
 
     return this
   },
-  canDodge: function () {
-    return !this.isDodging() // TODO: Check stamina
+  canSprint: function () {
+    return this.fighter.stamina.has(10/3 * engine.loop.delta())
   },
-  dodge: function () {
-    if (!this.canDodge()) {
-      return this
-    }
-
-    const duration = 1
-    this.dodgeTimer = duration + engine.loop.time()
-
-    // Override input
-    this.inputRotation = 0
-
-    this.inputVelocity = this.inputVelocity.isZero()
-      ? engine.utility.vector2d.unitX().rotate(this.fighter.body.angle + Math.PI) // backwards, sprinting
-      : this.inputVelocity.normalize() // input direction, sprinting
-
-    return this
+  canDodge: function () {
+    return !this.isDodging() && this.fighter.stamina.has(10/3)
   },
   input: function ({
     dodge = false,
@@ -96,6 +102,8 @@ content.component.fighter.movement.prototype = {
     if (this.isDodging()) {
       return this
     }
+
+    sprint = sprint && this.canSprint()
 
     const distance = engine.utility.distance({x, y}),
       rotateScale = sprint ? 0.5 : 1,
@@ -114,7 +122,12 @@ content.component.fighter.movement.prototype = {
     })
 
     if (dodge) {
-      this.dodge()
+      this.applyDodge()
+    }
+
+    if (sprint) {
+      // Spend stamina
+      this.fighter.stamina.subtract(10/3 * engine.loop.delta())
     }
 
     return this

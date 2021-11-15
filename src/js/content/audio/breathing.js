@@ -5,7 +5,7 @@ content.audio.breathing = (() => {
   let formant = chooseFormant(),
     timer
 
-  bus.gain.value = engine.utility.fromDb(-18)
+  bus.gain.value = engine.utility.fromDb(-15)
 
   function chooseFormant() {
     return engine.utility.choose([
