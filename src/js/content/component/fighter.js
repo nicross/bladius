@@ -24,8 +24,8 @@ content.component.fighter.prototype = {
     this.setHand(hand)
 
     // Forward events
-    this.health.on('kill', () => this.emit('kill'))
-    this.footsteps.on('step', () => this.emit('step'))
+    this.health.on('kill', () => this.emit('kill', this))
+    this.footsteps.on('step', () => this.emit('step', this))
 
     return this
   },

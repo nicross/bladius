@@ -6,7 +6,7 @@ content.component.fighter.footsteps.create = function (...args) {
 
 content.component.fighter.footsteps.prototype = {
   construct: function ({
-    length = 0.5,
+    length = 1,
     vector = {},
   } = {}) {
     engine.utility.pubsub.decorate(this)
@@ -34,7 +34,7 @@ content.component.fighter.footsteps.prototype = {
       shouldTrigger = distance >= this.length
 
     if (shouldTrigger) {
-      this.pubsub.emit('step')
+      this.pubsub.emit('step', this)
       this.isLeft = !this.isLeft
       this.vector = engine.utility.vector3d.create(vector)
     }
