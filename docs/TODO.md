@@ -1,14 +1,8 @@
 # TODO
 ## Player sprint
-- Fighter component, used to represent hero and enemies
-  - Fighters are composed of
-    - Movement / dodging system
-- app.screen.fight handles input for hero fighter
 - Sound design
   - Footsteps
   - Swings
-  - Health
-  - Stamina
 
 ## Combat sprint
 - Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
