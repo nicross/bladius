@@ -77,9 +77,6 @@ content.audio.breathing = (() => {
 
   return {
     reset: function () {
-      formant = chooseFormant()
-      stop()
-
       return this
     },
     start: function () {
@@ -97,4 +94,5 @@ content.audio.breathing = (() => {
   }
 })()
 
+engine.ready(() => content.audio.breathing.start())
 engine.state.on('reset', () => content.audio.breathing.reset())

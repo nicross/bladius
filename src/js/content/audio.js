@@ -2,6 +2,8 @@ content.audio = (() => {
   const bus = engine.audio.mixer.createBus(),
     context = engine.audio.context()
 
+  bus.gain.value = engine.const.zeroGain
+
   function createBus() {
     const gain = context.createGain()
     gain.connect(bus)
@@ -11,6 +13,15 @@ content.audio = (() => {
   return {
     bus: () => bus,
     createBus: () => createBus(),
+    createBypass: () => engine.audio.mixer.createBus(),
+    duck: function () {
+      engine.audio.ramp.linear(bus.gain, engine.utility.fromDb(-6), 0.5)
+      return this
+    },
+    unduck: function () {
+      engine.audio.ramp.linear(bus.gain, 1, 0.5)
+      return this
+    },
   }
 })()
 

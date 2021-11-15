@@ -13,10 +13,14 @@ app.screen.fight = (() => {
   function onEnter() {
     app.utility.focus.setWithin(root)
     engine.loop.on('frame', onFrame)
+
+    content.audio.unduck()
   }
 
   function onExit() {
     engine.loop.off('frame', onFrame)
+
+    content.audio.duck()
   }
 
   function onFrame() {

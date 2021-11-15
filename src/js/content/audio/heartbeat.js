@@ -69,8 +69,6 @@ content.audio.heartbeat = (() => {
 
   return {
     reset: function () {
-      stop()
-
       return this
     },
     start: function () {
@@ -88,4 +86,5 @@ content.audio.heartbeat = (() => {
   }
 })()
 
+engine.ready(() => content.audio.heartbeat.start())
 engine.state.on('reset', () => content.audio.heartbeat.reset())
