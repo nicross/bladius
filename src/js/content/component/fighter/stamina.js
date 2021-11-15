@@ -23,6 +23,10 @@ content.component.fighter.stamina.prototype = {
   isZero: function () {
     return this.value == 0
   },
+  markUsed: function () {
+    this.wasUsed = true
+    return this
+  },
   setMax: function (max = 0) {
     max = Math.max(0, max)
 
@@ -42,7 +46,7 @@ content.component.fighter.stamina.prototype = {
   },
   subtract: function (value = 0) {
     this.value = Math.max(0, this.value - value)
-    this.wasSubtracted = true
+    this.markUsed()
 
     return this
   },
@@ -50,12 +54,12 @@ content.component.fighter.stamina.prototype = {
     const delta = engine.loop.delta()
 
     // Prevent regen if in active use, e.g. sprinting
-    if (!this.wasSubtracted) {
+    if (!this.wasUsed) {
       this.value += this.regeneration * delta
       this.value = Math.min(this.value, this.max)
     }
 
-    this.wasSubtracted = false
+    this.wasUsed = false
 
     return this
   },

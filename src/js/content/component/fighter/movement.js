@@ -18,7 +18,7 @@ content.component.fighter.movement.prototype = {
       return this
     }
 
-    const duration = 1
+    const duration = 0.5
     this.dodgeTimer = duration + engine.loop.time()
 
     // Override input
@@ -101,6 +101,11 @@ content.component.fighter.movement.prototype = {
   } = {}) {
     if (this.isDodging()) {
       return this
+    }
+
+    if (sprint) {
+      // Prevent regen of sprint, even if unable to sprint
+      this.fighter.stamina.markUsed()
     }
 
     sprint = sprint && this.canSprint()
