@@ -4,7 +4,3 @@ content.hero = content.fighters.create({
     filter: (attribute) => attribute.isHero,
   },
 })
-
-engine.state.on('reset', () => {
-  content.hero.reset()
-})

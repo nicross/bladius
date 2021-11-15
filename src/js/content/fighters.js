@@ -23,6 +23,18 @@ content.fighters = (() => {
       fighter.once('destroy', () => remove(fighter))
       return fighter
     },
+    reset: function () {
+      for (const fighter of fighters) {
+        // Keep hero but destroy others
+        if (fighter === content.hero) {
+          fighter.reset()
+        }  else {
+          fighter.destory()
+        }
+      }
+
+      return this
+    },
     update: function () {
       for (const fighter of fighters) {
         fighter.update()
@@ -40,3 +52,5 @@ engine.loop.on('frame', ({paused}) => {
 
   content.fighters.update()
 })
+
+engine.state.on('reset', () => content.fighters.reset())
