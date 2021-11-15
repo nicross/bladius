@@ -1,16 +1,8 @@
-content.hero = content.component.fighter.create({
+content.hero = content.fighters.create({
   attributes: {
     defaults: {},
     filter: (attribute) => attribute.isHero,
   },
-})
-
-engine.loop.on('frame', ({paused}) => {
-  if (paused) {
-    return
-  }
-
-  content.hero.update()
 })
 
 engine.state.on('reset', () => {

@@ -30,6 +30,8 @@ content.component.fighter.prototype = {
     return this
   },
   destroy: function () {
+    this.emit('destroy')
+
     this.footsteps.destroy()
     this.health.destroy()
     this.off()
