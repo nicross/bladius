@@ -1,6 +1,6 @@
 content.camera = {
   update: function () {
-    engine.position.setEuler({pitch: content.hero.body.angle})
+    engine.position.setEuler({yaw: content.hero.body.angle})
     engine.position.setVector(content.hero.body.vector)
 
     return this
