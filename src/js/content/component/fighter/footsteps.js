@@ -33,9 +33,10 @@ content.component.fighter.footsteps.prototype = {
   update: function ({
     isDodging = false,
     vector = {},
+    velocity,
   } = {}) {
     const distance = this.vector.distance(vector),
-      shouldTrigger = distance >= (isDodging ? this.length/2 : this.length)
+      shouldTrigger = distance >= (isDodging ? this.length/2 : this.length) || (distance && velocity.isZero())
 
     if (shouldTrigger) {
       this.pubsub.emit('step', this)

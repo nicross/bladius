@@ -85,6 +85,7 @@ content.component.fighter.prototype = {
     this.footsteps.update({
       isDodging: this.movement.isDodging(),
       vector: this.body.vector,
+      velocity: this.body.lateralVelocity,
     })
 
     return this
