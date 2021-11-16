@@ -26,6 +26,7 @@ content.component.fighter.prototype = {
     // Forward events
     this.health.on('kill', () => this.emit('kill', this))
     this.footsteps.on('step', () => this.emit('step', this))
+    this.movement.on('dodge', () => this.emit('dodge', this))
 
     return this
   },
@@ -81,7 +82,10 @@ content.component.fighter.prototype = {
       vector: this.body.vector,
     })
 
-    this.footsteps.update(this.body.vector)
+    this.footsteps.update({
+      isDodging: this.movement.isDodging(),
+      vector: this.body.vector,
+    })
 
     return this
   },

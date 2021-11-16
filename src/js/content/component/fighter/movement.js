@@ -6,6 +6,8 @@ content.component.fighter.movement.create = function (...args) {
 
 content.component.fighter.movement.prototype = {
   construct: function (fighter) {
+    engine.utility.pubsub.decorate(this)
+
     this.fighter = fighter
 
     this.inputRotation = 0
@@ -30,6 +32,7 @@ content.component.fighter.movement.prototype = {
 
     // Spend stamina
     this.fighter.stamina.subtract(10/3)
+    this.emit('dodge')
 
     return this
   },
@@ -91,6 +94,11 @@ content.component.fighter.movement.prototype = {
   },
   canDodge: function () {
     return !this.isDodging() && this.fighter.stamina.has(10/3)
+  },
+  destroy: function () {
+    this.off()
+
+    return this
   },
   input: function ({
     dodge = false,

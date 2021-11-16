@@ -27,11 +27,15 @@ content.component.fighter.footsteps.prototype = {
   } = {}) {
     this.isLeft = Math.random() > 0.5
     this.vector = engine.utility.vector3d.create(vector)
+
     return this
   },
-  update: function (vector = {}) {
+  update: function ({
+    isDodging = false,
+    vector = {},
+  } = {}) {
     const distance = this.vector.distance(vector),
-      shouldTrigger = distance >= this.length
+      shouldTrigger = distance >= (isDodging ? this.length/2 : this.length)
 
     if (shouldTrigger) {
       this.pubsub.emit('step', this)
