@@ -8,6 +8,7 @@ content.component.fighter.prototype = {
   construct: function ({
     attributes = {},
     body = {},
+    detune = Math.random(),
     hand = [],
   } = {}) {
     engine.utility.pubsub.decorate(this)
@@ -15,6 +16,7 @@ content.component.fighter.prototype = {
     this.arms = content.component.fighter.arms.create(this)
     this.attributes = content.component.attributes.create(attributes)
     this.body = content.component.fighter.body.create(body)
+    this.detune = engine.utility.lerp(0, 666, detune)
     this.footsteps = content.component.fighter.footsteps.create({vector: body.vector})
     this.movement = content.component.fighter.movement.create(this)
     this.hand = content.component.hand.create()

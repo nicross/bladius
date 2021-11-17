@@ -11,7 +11,6 @@ content.prop.footstep = engine.prop.base.invent({
   },
   play: function ({
     fighter,
-    isHero = false,
     velocity = 0,
   } = {}) {
     // XXX: Placeholder
@@ -22,7 +21,7 @@ content.prop.footstep = engine.prop.base.invent({
       now = engine.audio.time()
 
     this.synth = engine.audio.synth.createSimple({
-      detune: engine.utility.random.float(-10, 10),
+      detune: fighter.detune + engine.utility.random.float(-10, 10),
       frequency: 32,
       type: 'sawtooth',
     }).connect(this.output)

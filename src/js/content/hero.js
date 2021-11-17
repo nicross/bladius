@@ -3,4 +3,5 @@ content.hero = content.fighters.create({
     defaults: {},
     filter: (attribute) => attribute.isHero,
   },
+  detune: 0,
 })
