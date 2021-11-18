@@ -53,6 +53,11 @@ content.component.fighter.arms.arm.prototype = {
       ? this.arms.fighter.attributes.compute(this.card ? this.card.attributes : {})
       : {}
   },
+  cost: function () {
+    return this.isAttack()
+      ? 2
+      : 0
+  },
   deactivate: function () {
     if (this.isCooldown()) {
       return this
@@ -136,12 +141,20 @@ content.component.fighter.arms.arm.prototype = {
     angle = 0,
     vector,
   }) {
+    const cost = this.cost() * engine.loop.delta() * (1 / this.duration()),
+      isActive = this.isActive()
+
     this.angle = angle
     this.vector = engine.utility.vector2d.create(vector)
 
     // Force deactivation when active timer is out
-    if (this.timerDirection == 1 && !this.isActive()) {
+    if ((this.timerDirection == 1 && !isActive) || !this.arms.fighter.stamina.has(cost)) {
       this.deactivate()
+    }
+
+    // Spend stamina
+    if (isActive) {
+      this.arms.fighter.stamina.subtract(cost)
     }
 
     return this

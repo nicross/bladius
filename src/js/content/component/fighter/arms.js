@@ -54,10 +54,10 @@ content.component.fighter.arms.prototype = {
       || (this.left.isAttack() && this.canActivateLeft())
   },
   canActivateLeft: function () {
-    return !this.isActive() && !this.left.isCooldown() && !this.fighter.movement.isDodging()
+    return !this.isActive() && !this.left.isCooldown() && !this.fighter.movement.isDodging() && this.fighter.stamina.has(this.left.cost())
   },
   canActivateRight: function () {
-    return !this.isActive() && !this.right.isCooldown() && !this.fighter.movement.isDodging()
+    return !this.isActive() && !this.right.isCooldown() && !this.fighter.movement.isDodging() && this.fighter.stamina.has(this.right.cost())
   },
   canDeactivateLeft: function () {
     return this.left.isActive()
