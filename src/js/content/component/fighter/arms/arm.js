@@ -31,7 +31,7 @@ content.component.fighter.arms.arm.prototype = {
     // XXX: Flat duration of 0.5s
     const {attackSpeed} = this.compute()
 
-    const duration = 0.5 * attackSpeed,
+    const duration = this.duration(),
       time = engine.loop.time()
 
     this.timerDirection = 1
@@ -46,20 +46,9 @@ content.component.fighter.arms.arm.prototype = {
       return
     }
 
-    const ratio = this.getRatio()
-
-    const angle = engine.utility.lerp(this.angle + this.angleOffset, this.angle, ratio),
-      radius = engine.utility.lerp(0, this.length, ratio)
-
-    const vector = this.vector.add(
-      this.vectorOffset.rotate(this.angle)
-    ).add(
-      engine.utility.vector2d.create({x: this.length}).rotate(angle)
-    )
-
     return content.utility.circle.create({
-      radius,
-      vector,
+      radius: engine.utility.lerp(0, this.length, this.ratio()),
+      vector: this.position(),
     })
   },
   compute: function () {
@@ -72,12 +61,10 @@ content.component.fighter.arms.arm.prototype = {
       return this
     }
 
-    // XXX: Flat duration of 0.5s (or active delta, whatever is shortest)
-    const {attackSpeed} = this.compute()
     const time = engine.loop.time()
 
     const delta = time - this.timerStart,
-      duration = Math.min(0.5 * attackSpeed, delta)
+      duration = Math.min(this.duration(), delta)
 
     this.timerDirection = -1
     this.timerDuration = duration
@@ -86,13 +73,13 @@ content.component.fighter.arms.arm.prototype = {
 
     return this
   },
+  duration: function () {
+    const {attackSpeed} = this.compute()
+    return 0.5 * attackSpeed
+  },
   equip: function (card = {}) {
     this.card = {...card}
     return this
-  },
-  getRatio: function () {
-    const delta = engine.loop.time() - this.timerStart
-    return engine.utility.clamp(delta / this.timerDuration, 0, 1)
   },
   isActive: function () {
     if (this.timerDirection != 1) {
@@ -104,7 +91,7 @@ content.component.fighter.arms.arm.prototype = {
       return true
     }
 
-    return this.timerEnd >= engine.loop.time()
+    return engine.loop.time() <= this.timerEnd
   },
   isAttack: function () {
     return this.card && this.card.action == 'attack'
@@ -114,10 +101,30 @@ content.component.fighter.arms.arm.prototype = {
       return false
     }
 
-    return this.timerEnd >= engine.loop.time()
+    return engine.loop.time() <= this.timerEnd
   },
   isDefend: function () {
     return this.card && this.card.action == 'defend'
+  },
+  position: function () {
+    const isActive = this.isActive(),
+      ratio = this.ratio()
+
+    const value = isActive
+      ? ratio
+      : (1 - ratio) * (this.timerDuration / this.duration())
+
+    const angle = engine.utility.lerp(this.angle + this.angleOffset, this.angle, value)
+
+    return this.vector.add(
+      this.vectorOffset.rotate(this.angle)
+    ).add(
+      engine.utility.vector2d.create({x: this.length}).rotate(angle)
+    )
+  },
+  ratio: function () {
+    const delta = engine.loop.time() - this.timerStart
+    return engine.utility.clamp(delta / this.timerDuration, 0, 1)
   },
   reset: function () {
     delete this.card

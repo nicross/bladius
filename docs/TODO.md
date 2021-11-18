@@ -1,21 +1,17 @@
 # TODO
-## Player sprint
-- Sound design
-  - Footsteps
-  - Swings
-
-## Combat sprint
-- Enemy generator (strength tied to expected level for round number, can generate 1-3 enemies)
-- Potion use events
+## Combat
+- Enemy generator (strength equivalent to hero stats, generate 1-3 enemies)
 - Collision detection (prioritize hero before enemies, loop through fighters' arms checking for collisions with arms (blocks, parries) and bodies (damage))
 - Sound design
-  - Round start sound
   - Hits
   - Blocks
-- Targeting system
 - Enemy AI
-- Haptic feedback when striking, blocking, or being struck
+- Potions
 
-## Miscellanaous
-- Soundtrack
+## Polish
+- Haptic feedback when striking, blocking, being struck, footsteps
+- Targeting system
+- Sound design
+  - Round start sound
   - Xenakis/THX sound generator on splash and game over screens
+  - Revisit footsteps

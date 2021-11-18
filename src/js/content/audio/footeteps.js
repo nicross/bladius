@@ -13,7 +13,6 @@ content.audio.footsteps = (() => {
     engine.props.create(content.prop.footstep, {
       destination: bus,
       fighter,
-      isHero: fighter === content.hero,
       velocity,
       x: location.x,
       y: location.y,
@@ -30,9 +29,6 @@ content.audio.footsteps = (() => {
       fighter.off('step', onStep)
       return this
     },
-    update: function () {
-      return this
-    },
   }
 })()
 
@@ -42,12 +38,4 @@ engine.ready(() => {
 
   // XXX: Race condition, hero is defined before content.fighters add event is fired
   content.audio.footsteps.onFighterAdd(content.hero)
-})
-
-engine.loop.on('frame', ({paused}) => {
-  if (paused) {
-    return
-  }
-
-  content.audio.footsteps.update()
 })
