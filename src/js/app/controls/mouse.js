@@ -53,11 +53,11 @@ app.controls.mouse = (() => {
       const mouse = engine.input.mouse.get(),
         state = {}
 
-      if (mouse.button[0] && !mouse.button[2]) {
+      if (mouse.button[0]) {
         state.leftArm = true
       }
 
-      if (mouse.button[2] && !mouse.button[0]) {
+      if (mouse.button[2]) {
         state.rightArm = true
       }
 

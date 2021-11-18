@@ -31,11 +31,11 @@ app.controls.keyboard = {
       state.rotate = -1
     }
 
-    if (leftArm && !rightArm) {
+    if (leftArm) {
       state.leftArm = true
     }
 
-    if (rightArm && !leftArm) {
+    if (rightArm) {
       state.rightArm = true
     }
 

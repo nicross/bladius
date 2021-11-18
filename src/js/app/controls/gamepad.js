@@ -44,11 +44,11 @@ app.controls.gamepad = {
       state.y = engine.utility.clamp(y, -1, 1)
     }
 
-    if (digital[6] && !digital[7]) {
+    if (digital[6]) {
       state.leftArm = true
     }
 
-    if (digital[7] && !digital[6]) {
+    if (digital[7]) {
       state.rightArm = true
     }
 
