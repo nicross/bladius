@@ -36,14 +36,11 @@ app.screen.fight = (() => {
     // XXX: Allow skipping of battles, without combat or win/loss conditions
     // TODO: Remove
 
-    if (discrete.enter || discrete.escape || discrete.select || discrete.start) {
-      app.state.screen.dispatch('win', {
-        kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
-      })
-    }
+    if (discrete.enter || discrete.escape || discrete.select || discrete.start || engine.loop.time() >= timeout) {
+      // XXX: Reset movement to prevent footsteps between matches
+      content.hero.movement.reset()
 
-    if (engine.loop.time() >= timeout) {
-      app.state.screen.dispatch('win', {
+      return app.state.screen.dispatch('win', {
         kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
       })
     }

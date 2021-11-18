@@ -148,6 +148,12 @@ content.component.fighter.movement.prototype = {
   isDodging: function () {
     return this.dodgeTimer >= engine.loop.time()
   },
+  reset: function () {
+    this.inputRotation = 0
+    this.inputVelocity = engine.utility.vector2d.create()
+
+    return this
+  },
   update: function () {
     this.applyInputRotation()
     this.applyInputVelocity()
