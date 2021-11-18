@@ -39,16 +39,19 @@ content.component.fighter.arms.prototype = {
     return this
   },
   canActivateLeftArm: function () {
-    return !this.isActive() && !this.left.isCooldown()
+    return !this.isActive() && !this.left.isCooldown() && !this.fighter.movement.isDodging()
   },
   canActivateRightArm: function () {
-    return !this.isActive() && !this.right.isCooldown()
+    return !this.isActive() && !this.right.isCooldown() && !this.fighter.movement.isDodging()
   },
   canDeactivateLeftArm: function () {
     return this.left.isActive()
   },
   canDeactivateRightArm: function () {
     return this.right.isActive()
+  },
+  deactivate: function () {
+    return this.deactivateLeftArm().deactivateRightArm()
   },
   deactivateLeftArm: function () {
     if (this.canDeactivateLeftArm()) {
@@ -111,6 +114,10 @@ content.component.fighter.arms.prototype = {
     return this
   },
   update: function (...args) {
+    if (this.fighter.movement.isDodging()) {
+      this.deactivate()
+    }
+
     this.left.update(...args)
     this.right.update(...args)
 
