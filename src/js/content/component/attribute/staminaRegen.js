@@ -9,7 +9,7 @@ content.component.attribute.staminaRegen = content.component.attribute.register(
       multiplier: mask = 1,
     } = {}) {
       // Recover points per second
-      return 2.5 * this.multiplier * mask
+      return 1 * this.multiplier * mask
     },
   })
 )
