@@ -28,9 +28,6 @@ content.component.fighter.arms.arm.prototype = {
       return this
     }
 
-    // XXX: Flat duration of 0.5s
-    const {attackSpeed} = this.compute()
-
     const duration = this.duration(),
       time = engine.loop.time()
 
