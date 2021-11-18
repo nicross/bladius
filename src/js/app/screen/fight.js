@@ -1,6 +1,9 @@
 app.screen.fight = (() => {
   let root
 
+  // TODO: Remove
+  let timeout
+
   engine.ready(() => {
     root = document.querySelector('.a-fight')
 
@@ -15,6 +18,9 @@ app.screen.fight = (() => {
     engine.loop.on('frame', onFrame)
 
     content.audio.unduck()
+
+    // TODO: Remove
+    timeout = engine.loop.time() + 10
   }
 
   function onExit() {
@@ -28,9 +34,15 @@ app.screen.fight = (() => {
       discrete = app.controls.discrete()
 
     // XXX: Allow skipping of battles, without combat or win/loss conditions
-    // TODO: Timer to automatically win?
+    // TODO: Remove
 
     if (discrete.enter || discrete.escape || discrete.select || discrete.start) {
+      app.state.screen.dispatch('win', {
+        kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
+      })
+    }
+
+    if (engine.loop.time() >= timeout) {
       app.state.screen.dispatch('win', {
         kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
       })
