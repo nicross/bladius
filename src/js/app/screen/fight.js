@@ -55,16 +55,16 @@ app.screen.fight = (() => {
     // TODO: Use potions
 
     // Arms
-    if (continuous.leftArm) {
-      content.hero.arms.activateLeft()
-    } else {
-      content.hero.arms.deactivateLeft()
-    }
-
     if (continuous.rightArm) {
       content.hero.arms.activateRight()
     } else {
       content.hero.arms.deactivateRight()
+    }
+
+    if (continuous.leftArm) {
+      content.hero.arms.activateLeft()
+    } else {
+      content.hero.arms.deactivateLeft()
     }
 
     // Movement
