@@ -45,22 +45,17 @@ app.screen.fight = (() => {
 
     // TODO: Use potions
 
-    // Prevent movement / arms while dodging
-    if (content.hero.movement.isDodging()) {
-      return
-    }
-
     // Arms
     if (continuous.leftArm) {
-      content.hero.arms.activateLeftArm()
+      content.hero.arms.activateLeft()
     } else {
-      content.hero.arms.deactivateLeftArm()
+      content.hero.arms.deactivateLeft()
     }
 
     if (continuous.rightArm) {
-      content.hero.arms.activateRightArm()
+      content.hero.arms.activateRight()
     } else {
-      content.hero.arms.deactivateRightArm()
+      content.hero.arms.deactivateRight()
     }
 
     // Movement

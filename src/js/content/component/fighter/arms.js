@@ -24,45 +24,75 @@ content.component.fighter.arms.prototype = {
 
     return this
   },
-  activateLeftArm: function () {
-    if (this.canActivateLeftArm()) {
+  activateLeft: function () {
+    if (this.canActivateLeft()) {
       this.left.activate()
     }
 
     return this
   },
-  activateRightArm: function () {
-    if (this.canActivateRightArm()) {
+  activateRight: function () {
+    if (this.canActivateRight()) {
       this.right.activate()
     }
 
     return this
   },
-  canActivateLeftArm: function () {
+  attack: function () {
+    if (this.right.isAttack() && this.canActivateRight()) {
+      return this.activateRight()
+    }
+
+    if (this.left.isAttack() && this.canActivateLeft()) {
+      return this.activateLeft()
+    }
+
+    return this
+  },
+  canAttack: function () {
+    return (this.right.isAttack() && this.canActivateRight())
+      || (this.left.isAttack() && this.canActivateLeft())
+  },
+  canActivateLeft: function () {
     return !this.isActive() && !this.left.isCooldown() && !this.fighter.movement.isDodging()
   },
-  canActivateRightArm: function () {
+  canActivateRight: function () {
     return !this.isActive() && !this.right.isCooldown() && !this.fighter.movement.isDodging()
   },
-  canDeactivateLeftArm: function () {
+  canDeactivateLeft: function () {
     return this.left.isActive()
   },
-  canDeactivateRightArm: function () {
+  canDeactivateRight: function () {
     return this.right.isActive()
   },
-  deactivate: function () {
-    return this.deactivateLeftArm().deactivateRightArm()
+  canDefend: function () {
+    return (this.right.isDefend() && this.canActivateRight())
+      || (this.left.isDefend() && this.canActivateLeft())
   },
-  deactivateLeftArm: function () {
-    if (this.canDeactivateLeftArm()) {
+  deactivate: function () {
+    return this.deactivateLeft().deactivateRight()
+  },
+  deactivateLeft: function () {
+    if (this.canDeactivateLeft()) {
       this.left.deactivate()
     }
 
     return this
   },
-  deactivateRightArm: function () {
-    if (this.canDeactivateRightArm()) {
+  deactivateRight: function () {
+    if (this.canDeactivateRight()) {
       this.right.deactivate()
+    }
+
+    return this
+  },
+  defend: function () {
+    if (this.right.isDefend() && this.canActivateRight()) {
+      return this.activateRight()
+    }
+
+    if (this.left.isDefend() && this.canActivateLeft()) {
+      return this.activateLeft()
     }
 
     return this
@@ -87,25 +117,25 @@ content.component.fighter.arms.prototype = {
     // For allowing only one arm active at a time
     return this.left.isActive() || this.right.isActive()
   },
-  isAttackActive: function () {
-    // For AI to inspect player attack status
-    return (this.left.isAttack() && this.left.isActive())
-      || (this.right.isAttack() && this.right.isActive())
-  },
   isAttackCooldown: function () {
     // For AI to inspect player attack status
     return (this.left.isAttack() && this.left.isCooldown())
       || (this.right.isAttack() && this.right.isCooldown())
   },
-  isDefendActive: function () {
-    // For AI to inspect player defend status
-    return (this.left.isDefend() && this.left.isActive())
-      || (this.right.isDefend() && this.right.isActive())
+  isAttacking: function () {
+    // For AI to inspect player attack status
+    return (this.left.isAttack() && this.left.isActive())
+      || (this.right.isAttack() && this.right.isActive())
   },
   isDefendCooldown: function () {
     // For AI to inspect player defend status
     return (this.left.isDefend() && this.left.isCooldown())
       || (this.right.isDefend() && this.right.isCooldown())
+  },
+  isDefending: function () {
+    // For AI to inspect player defend status
+    return (this.left.isDefend() && this.left.isActive())
+      || (this.right.isDefend() && this.right.isActive())
   },
   reset: function () {
     this.left.reset()
