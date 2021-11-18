@@ -48,7 +48,7 @@ content.prop.swing = engine.prop.base.invent({
       : (isAttack ? 100 : 50)
 
     const frequency = engine.utility.lerp(engine.const.minFrequency, maxFrequency, ratio),
-      gain = (1 - Math.abs((2 * ratio) - 1)) ** (1/2)
+      gain = engine.utility.fromDb(-6) * (1 - Math.abs((2 * ratio) - 1))
 
     engine.audio.ramp.set(this.synth.param.gain, gain)
     engine.audio.ramp.set(this.synth.filter.frequency, frequency)
