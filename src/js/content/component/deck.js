@@ -7,7 +7,7 @@ content.component.deck.create = function (...args) {
 content.component.deck.prototype = {
   construct: function () {
     engine.utility.pubsub.decorate(this)
-    
+
     this.cards = []
     this.discard = 0
 
@@ -52,7 +52,9 @@ content.component.deck.prototype = {
 
     return cards
   },
-  get: () => [...this.cards],
+  get: function () {
+    return [...this.cards]
+  },
   length: () => this.cards.length,
   pick: function () {
     if (!this.cards.length) {

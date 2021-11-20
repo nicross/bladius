@@ -18,6 +18,7 @@ app.screen.fight = (() => {
     engine.loop.on('frame', onFrame)
 
     content.audio.unduck()
+    content.enemies.generate()
 
     // TODO: Remove
     timeout = engine.loop.time() + 10
@@ -27,6 +28,7 @@ app.screen.fight = (() => {
     engine.loop.off('frame', onFrame)
 
     content.audio.duck()
+    content.enemies.reset()
   }
 
   function onFrame() {
@@ -41,7 +43,7 @@ app.screen.fight = (() => {
       content.hero.movement.reset()
 
       return app.state.screen.dispatch('win', {
-        kills: Math.round(engine.utility.lerpRandom([1, 1], [1, 3], Math.min(1, content.round.get() / 16))),
+        kills: content.enemies.get().length,
       })
     }
 

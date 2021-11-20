@@ -15,13 +15,14 @@ content.fighters = (() => {
   return engine.utility.pubsub.decorate({
     create: function (...args) {
       const fighter = content.component.fighter.create(...args)
-      return this.manage(fighter)
+      this.manage(fighter)
+      return fighter
     },
     get: () => [...fighters],
     manage: function (fighter) {
       add(fighter)
       fighter.once('destroy', () => remove(fighter))
-      return fighter
+      return this
     },
     reset: function () {
       for (const fighter of fighters) {
