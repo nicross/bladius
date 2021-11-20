@@ -13,23 +13,27 @@ content.prop.footstep = engine.prop.base.invent({
     fighter,
     velocity = 0,
   } = {}) {
-    // XXX: Placeholder
-    // TODO: Implement
+    const now = engine.audio.time()
 
-    const duration = 0.5,
-      gain = engine.utility.humanizeDb(engine.utility.fromDb(engine.utility.lerp(-9, -3, velocity)), -12),
-      now = engine.audio.time()
+    const footDelay = 0,
+      footDetune = fighter.detune + engine.utility.random.float(-10, 10),
+      footDuration = 1/16,
+      footGain = engine.utility.humanizeDb(engine.utility.fromDb(engine.utility.lerp(-9, -3, velocity)), -12)
 
-    this.synth = engine.audio.synth.createSimple({
-      detune: fighter.detune + engine.utility.random.float(-10, 10),
+    const foot = engine.audio.synth.createSimple({
+      detune: footDetune,
       frequency: 32,
       type: 'sawtooth',
+    }).filtered({
+      detune: footDetune,
+      frequency: 32 * (2 ** 5),
     }).connect(this.output)
 
-    this.synth.param.gain.exponentialRampToValueAtTime(gain, now + 1/32)
-    this.synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + duration)
-    this.synth.stop(now + duration)
+    foot.param.gain.setValueAtTime(engine.const.zeroGain, now + footDelay)
+    foot.param.gain.exponentialRampToValueAtTime(footGain, now + footDelay + 1/64)
+    foot.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + footDelay + footDuration)
+    foot.stop(now + footDelay + footDuration)
 
-    return engine.utility.timing.promise(duration * 1000)
+    return engine.utility.timing.promise((footDelay + footDuration) * 1000)
   },
 })
