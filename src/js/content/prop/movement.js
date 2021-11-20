@@ -7,18 +7,12 @@ content.prop.movement = engine.prop.base.invent({
   }) {
     this.fighter = fighter
 
-    this.synth = engine.audio.synth.createBuffer({
-      buffer: engine.audio.buffer.noise.brown(),
-    }).filtered({
-      detune: fighter.detune,
-      frequency: engine.const.minFrequency,
-      type: 'lowpass',
-    }).connect(this.output)
-
     return this
   },
   onDestroy: function () {
-    this.synth.stop()
+    if (this.synth) {
+      this.destroySynth()
+    }
 
     return this
   },
@@ -26,6 +20,36 @@ content.prop.movement = engine.prop.base.invent({
     // XXX: Hardcoded max velocity
     const velocity = this.fighter.body.lateralVelocity.distance() / 5
 
+    if (velocity) {
+      if (!this.synth) {
+        this.createSynth()
+      }
+
+      this.updateSynth(velocity)
+    } else if (this.synth) {
+      this.destroySynth()
+    }
+
+    return this
+  },
+  createSynth: function () {
+    this.synth = engine.audio.synth.createBuffer({
+      buffer: engine.audio.buffer.noise.brown(),
+    }).filtered({
+      detune: this.fighter.detune,
+      frequency: engine.const.minFrequency,
+      type: 'lowpass',
+    }).connect(this.output)
+
+    return this
+  },
+  destroySynth: function () {
+    this.synth.stop()
+    delete this.synth
+
+    return this
+  },
+  updateSynth: function (velocity = 0) {
     const location = this.fighter.body.vector.add(
       this.fighter.body.lateralVelocity.normalize()
     )
