@@ -148,7 +148,7 @@ content.component.fighter.arms.arm.prototype = {
     this.vector = engine.utility.vector2d.create(vector)
 
     // Force deactivation when active timer is out
-    if ((this.timerDirection == 1 && !isActive) || !this.arms.fighter.stamina.has(cost)) {
+    if ((this.timerDirection == 1 && !isActive) || (isActive && !this.arms.fighter.stamina.has(cost))) {
       this.deactivate()
     }
 
