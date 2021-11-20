@@ -63,7 +63,6 @@ content.component.deck.prototype = {
 
     if (!this.discard) {
       this.shuffle()
-      pubsub.emit('shuffle')
     }
 
     const card = this.cards.shift()
@@ -82,6 +81,8 @@ content.component.deck.prototype = {
   shuffle: function () {
     this.cards = engine.utility.shuffle(this.cards)
     this.discard = this.cards.length
+
+    this.emit('shuffle')
 
     return this
   },
