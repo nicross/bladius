@@ -51,8 +51,12 @@ content.component.fighter.prototype = {
   reset: function () {
     this.arms.reset()
     this.attributes.reset()
+    this.body.reset()
     this.footsteps.reset()
     this.hand.reset()
+    this.health.reset()
+    this.movement.reset()
+    this.stamina.reset()
 
     return this
   },

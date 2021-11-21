@@ -121,7 +121,7 @@ content.component.fighter.arms.arm.prototype = {
     return this.vector.add(
       this.vectorOffset.rotate(this.angle)
     ).add(
-      engine.utility.vector2d.create({x: this.length}).rotate(angle)
+      engine.utility.vector2d.create({x: this.length}).scale(ratio).rotate(angle)
     )
   },
   ratio: function () {

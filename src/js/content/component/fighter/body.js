@@ -36,6 +36,14 @@ content.component.fighter.body.prototype = {
   relativeTo: function (point = {}) {
     return this.vector.subtract(point).rotate(this.angle)
   },
+  reset: function () {
+    this.angle = 0
+    this.angularVelocity = 0
+    this.lateralVelocity = engine.utility.vector2d.create()
+    this.vector = engine.utility.vector2d.create()
+
+    return this
+  },
   update: function () {
     const delta = engine.loop.delta()
 

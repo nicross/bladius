@@ -29,6 +29,12 @@ content.component.fighter.health.prototype = {
   isZero: function () {
     return this.value == 0
   },
+  reset: function () {
+    this.max = 0
+    this.value = 0
+
+    return this
+  },
   setMax: function (max = 0) {
     max = Math.max(0, max)
 

@@ -29,7 +29,8 @@ content.fighters = (() => {
         // Keep hero but destroy others
         if (fighter === content.hero) {
           fighter.reset()
-        }  else {
+        } else {
+          remove(fighter)
           fighter.destroy()
         }
       }

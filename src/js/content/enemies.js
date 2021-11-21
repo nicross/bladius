@@ -125,6 +125,10 @@ content.enemies = (() => {
     get: () => [...fighters],
     queue: () => [...queue],
     reset: function () {
+      for (const fighter of fighters) {
+        fighter.destroy()
+      }
+
       fighters.length = 0
       queue.length = 0
 

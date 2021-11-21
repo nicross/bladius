@@ -9,6 +9,7 @@ content.component.fighter.stamina.prototype = {
     this.max = 0
     this.regeneration = 0
     this.value = 0
+    this.wasUsed = false
 
     return this
   },
@@ -25,6 +26,14 @@ content.component.fighter.stamina.prototype = {
   },
   markUsed: function () {
     this.wasUsed = true
+    return this
+  },
+  reset: function () {
+    this.max = 0
+    this.regeneration = 0
+    this.value = 0
+    this.wasUsed = false
+
     return this
   },
   setMax: function (max = 0) {
