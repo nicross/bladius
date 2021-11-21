@@ -1,7 +1,10 @@
 content.collisions = (() => {
   const pubsub = engine.utility.pubsub.create()
 
-  function calculateDamage(attack, defense) {
+  function calculateDamage(attack, defense, ratio = 1) {
+    attack = Math.max(0, attack)
+    defense = Math.max(0, defense)
+
     return attack / (defense + 1)
   }
 
@@ -77,7 +80,9 @@ content.collisions = (() => {
     // Apply damage
     const {attack} = from.arms.getActive().compute()
     const {defense} = to.attributes.compute()
-    const damage = calculateDamage(attack, defense)
+    const ratio = from.arms.getActive().ratio()
+    const damage = calculateDamage(attack, defense, ratio)
+
     to.health.subtract(damage)
 
     // Deactivate arms
@@ -100,7 +105,9 @@ content.collisions = (() => {
     // Apply damage
     const {attack} = from.arms.getActive().compute()
     const {defense} = to.arms.getActive().compute()
-    const damage = calculateDamage(attack, defense)
+    const ratio = from.arms.getActive().ratio()
+    const damage = calculateDamage(attack, defense, ratio)
+
     to.health.subtract(damage)
 
     // Deactivate arms
