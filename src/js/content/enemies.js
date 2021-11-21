@@ -100,6 +100,7 @@ content.enemies = (() => {
   function spawn(options) {
     const fighter = content.fighters.create({
       ...options,
+      ai: true,
       body: {
         vector: generatePosition(),
       },

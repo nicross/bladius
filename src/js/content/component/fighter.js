@@ -6,6 +6,7 @@ content.component.fighter.create = function (...args) {
 
 content.component.fighter.prototype = {
   construct: function ({
+    ai = false,
     attributes = {},
     body = {},
     detune = Math.random(),
@@ -24,6 +25,12 @@ content.component.fighter.prototype = {
     this.stamina = content.component.fighter.stamina.create()
 
     this.setHand(hand)
+
+    if (ai) {
+      this.agent = content.component.agent.create({
+        fighter: this,
+      })
+    }
 
     // Forward events
     this.health.on('kill', () => this.emit('kill', this))
@@ -89,6 +96,10 @@ content.component.fighter.prototype = {
       vector: this.body.vector,
       velocity: this.body.lateralVelocity,
     })
+
+    if (this.agent) {
+      this.agent.update()
+    }
 
     return this
   },

@@ -11,7 +11,7 @@ app.screen.fight = (() => {
   })
 
   function checkLoss() {
-    content.hero.health.isZero()
+    return content.hero.health.isZero()
   }
 
   function checkWin() {

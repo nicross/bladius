@@ -105,7 +105,6 @@ content.collisions = (() => {
 
     // Deactivate arms
     from.arms.deactivate()
-    to.arms.deactivate()
 
     pubsub.emit('block', {
       from,

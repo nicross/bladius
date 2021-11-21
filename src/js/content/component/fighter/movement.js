@@ -154,6 +154,13 @@ content.component.fighter.movement.prototype = {
 
     return this
   },
+  stoppingDistance: function () {
+    const deceleration = 10,
+      delta = engine.loop.delta(),
+      velocity = this.fighter.body.lateralVelocity.distance()
+
+    return (velocity * delta) + ((velocity ** 2) / (2 * deceleration))
+  },
   update: function () {
     this.applyInputRotation()
     this.applyInputVelocity()

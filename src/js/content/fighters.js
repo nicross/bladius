@@ -30,7 +30,7 @@ content.fighters = (() => {
         if (fighter === content.hero) {
           fighter.reset()
         }  else {
-          fighter.destory()
+          fighter.destroy()
         }
       }
 

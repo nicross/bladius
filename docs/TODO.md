@@ -5,7 +5,6 @@
   - Blocks
   - Potions
   - Enemy spawn
-- Enemy AI
 - Potions
 
 ## Polish

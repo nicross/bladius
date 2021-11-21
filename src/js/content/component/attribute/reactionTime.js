@@ -3,5 +3,8 @@ content.component.attribute.reactionTime = content.component.attribute.register(
     key: 'reactionTime',
     name: 'Reaction Time',
     isEnemy: true,
+    compute: function () {
+      return 1
+    },
   })
 )

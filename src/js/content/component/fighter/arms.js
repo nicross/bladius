@@ -143,6 +143,17 @@ content.component.fighter.arms.prototype = {
 
     return this
   },
+  stopDefending: function () {
+    if (this.left.isDefend() && this.left.isActive()) {
+      this.left.deactivate()
+    }
+
+    if (this.right.isDefend() && this.right.isActive()) {
+      this.right.deactivate()
+    }
+
+    return this
+  },
   update: function (...args) {
     if (this.fighter.movement.isDodging()) {
       this.deactivate()

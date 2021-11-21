@@ -13,6 +13,11 @@ content.component.fighter.health.prototype = {
 
     return this
   },
+  destroy: function () {
+    this.off()
+
+    return this
+  },
   getRatio: function () {
     return this.max
       ? this.value / this.max
