@@ -23,6 +23,23 @@ content.cards.weapon = (() => {
     isStarter: false,
     name: 'Unarmed',
     weight: 0,
+
+    // XXX: Not registered
+    sfx: {
+      from: {
+        color: Math.random(),
+        colorRadius: Math.random()/2,
+        mod: Math.random(),
+        modRadius: Math.random()/2,
+      },
+      pitch: Math.random(),
+      to: {
+        color: Math.random(),
+        colorRadius: Math.random()/2,
+        mod: Math.random(),
+        modRadius: Math.random()/2,
+      },
+    },
   })
 
   for (const material of materials) {

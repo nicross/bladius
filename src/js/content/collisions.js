@@ -5,7 +5,7 @@ content.collisions = (() => {
     attack = Math.max(0, attack)
     defense = Math.max(0, defense)
 
-    return attack / (defense + 1)
+    return ratio * attack / (defense + 1)
   }
 
   function check() {
@@ -72,10 +72,12 @@ content.collisions = (() => {
 
   function handleAttack(from, to) {
     // Approximate location
-    const where = engine.utility.centroid([
-      from.arms.getActiveCollisionCircle(),
-      to.body.collisionCircle(),
-    ])
+    const where = to == content.hero
+      ? to.body.vector.clone()
+      : engine.utility.centroid([
+          from.arms.getActive().position(),
+          to.body.vector,
+        ])
 
     // Apply damage
     const {attack} = from.arms.getActive().compute()
@@ -85,21 +87,21 @@ content.collisions = (() => {
 
     to.health.subtract(damage)
 
-    // Deactivate arms
-    from.arms.deactivate()
-
     pubsub.emit('attack', {
       from,
       to,
       where,
     })
+
+    // Deactivate arms
+    from.arms.deactivate()
   }
 
   function handleBlock(from, to) {
     // Approximate location
     const where = engine.utility.centroid([
-      from.arms.getActiveCollisionCircle(),
-      to.arms.getActiveCollisionCircle(),
+      from.arms.getActive().position(),
+      to.arms.getActive().position(),
     ])
 
     // Apply damage
@@ -110,32 +112,32 @@ content.collisions = (() => {
 
     to.health.subtract(damage)
 
-    // Deactivate arms
-    from.arms.deactivate()
-
     pubsub.emit('block', {
       from,
       to,
       where,
     })
+
+    // Deactivate arms
+    from.arms.deactivate()
   }
 
   function handleParry(from, to) {
     // Approximate location
     const where = engine.utility.centroid([
-      from.arms.getActiveCollisionCircle(),
-      to.arms.getActiveCollisionCircle(),
+      from.arms.getActive().position(),
+      to.arms.getActive().position(),
     ])
-
-    // Deactivate arms
-    from.arms.deactivate()
-    to.arms.deactivate()
 
     pubsub.emit('parry', {
       from,
       to,
       where,
     })
+
+    // Deactivate arms
+    from.arms.deactivate()
+    to.arms.deactivate()
   }
 
   return engine.utility.pubsub.decorate({

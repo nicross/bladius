@@ -1,10 +1,9 @@
 # TODO
 ## Combat
 - Sound design
-  - Hits
-  - Blocks
   - Potions
   - Enemy spawn
+  - Damage taken
 - Potions
 
 ## Polish

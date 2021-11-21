@@ -80,7 +80,27 @@ content.cards = (() => {
       return cards
     },
     register: function (definition) {
+      // XXX: Generate random sounds if undefined
+      if (!definition.sfx) {
+        definition.sfx = {
+          from: {
+            color: Math.random(),
+            colorRadius: Math.random()/2,
+            mod: Math.random(),
+            modRadius: Math.random()/2,
+          },
+          pitch: Math.random(),
+          to: {
+            color: Math.random(),
+            colorRadius: Math.random()/2,
+            mod: Math.random(),
+            modRadius: Math.random()/2,
+          },
+        }
+      }
+
       registry.push(definition)
+
       return this
     },
     registry: () => registry.map((card) => ({...card})),
