@@ -16,7 +16,7 @@ content.component.fighter.stamina.prototype = {
   getRatio: function () {
     return this.max
       ? this.value / this.max
-      : 0
+      : 1
   },
   has: function (value = 0) {
     return this.value >= value
