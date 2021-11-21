@@ -122,7 +122,7 @@ content.enemies = (() => {
       return this
     },
     get: () => [...fighters],
-    queued: () => [...queue],
+    queue: () => [...queue],
     reset: function () {
       fighters.length = 0
       queue.length = 0

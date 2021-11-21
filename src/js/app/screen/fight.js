@@ -1,9 +1,6 @@
 app.screen.fight = (() => {
   let root
 
-  // TODO: Remove
-  let timeout
-
   engine.ready(() => {
     root = document.querySelector('.a-fight')
 
@@ -13,15 +10,32 @@ app.screen.fight = (() => {
     app.state.screen.on('exit-fight', onExit)
   })
 
+  function checkLoss() {
+    content.hero.health.isZero()
+  }
+
+  function checkWin() {
+    if (content.enemies.queue().length) {
+      return false
+    }
+
+    const enemies = content.enemies.get()
+
+    for (const enemy of enemies) {
+      if (!enemy.health.isZero()) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   function onEnter() {
     app.utility.focus.setWithin(root)
     engine.loop.on('frame', onFrame)
 
     content.audio.unduck()
     content.enemies.generate()
-
-    // TODO: Remove
-    timeout = engine.loop.time() + 10
   }
 
   function onExit() {
@@ -35,10 +49,8 @@ app.screen.fight = (() => {
     const continuous = app.controls.continuous(),
       discrete = app.controls.discrete()
 
-    // XXX: Allow skipping of battles, without combat or win/loss conditions
-    // TODO: Remove
-
-    if (discrete.enter || discrete.escape || discrete.select || discrete.start || engine.loop.time() >= timeout) {
+    // Handle win conditions
+    if (checkWin()) {
       // XXX: Reset movement to prevent footsteps between matches
       content.hero.movement.reset()
 
@@ -47,12 +59,10 @@ app.screen.fight = (() => {
       })
     }
 
-    // Loss condition: zero health
-    if (content.hero.health.isZero()) {
+    // Handle loss conditions
+    if (checkLoss()) {
       app.state.screen.dispatch('loss')
     }
-
-    // TODO: Win condition: No alive enemy fighters
 
     // TODO: Use potions
 

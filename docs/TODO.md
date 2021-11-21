@@ -4,6 +4,7 @@
   - Hits
   - Blocks
   - Potions
+  - Enemy spawn
 - Enemy AI
 - Potions
 
@@ -11,6 +12,5 @@
 - Haptic feedback when striking, blocking, being struck, footsteps
 - Targeting system
 - Sound design
-  - Round start sound
   - Xenakis/THX sound generator on splash and game over screens
   - Revisit footsteps
