@@ -39,7 +39,7 @@ content.component.agent.prototype = {
       heroIsAttacking = this.rollFor(intelligence) && content.hero.arms.isAttacking(),
       heroIsDefending = this.rollFor(intelligence) && content.hero.arms.isDefending(),
       heroIsDodging = this.rollFor(intelligence) && content.hero.movement.isDodging(),
-      idealDistance = (2 * this.fighter.arms.right.length) + (engine.utility.lerp(-1, 1, intelligence) * this.fighter.body.radius) - engine.const.zero,
+      idealDistance = (2 * this.fighter.arms.right.length) - engine.const.zero,
       isDefending = this.fighter.arms.isDefending(),
       relativeFromHero = this.fighter.body.vector.subtract(content.hero.body.vector).rotate(content.hero.body.angle),
       relativeToHero = content.hero.body.vector.subtract(this.fighter.body.vector).rotate(this.fighter.body.angle),
@@ -58,7 +58,6 @@ content.component.agent.prototype = {
       y: 0,
     }
 
-    // Movement
     if (distanceToHero > idealDistance + stoppingDistance) {
       const inputVector = content.hero.body.vector.subtract(this.fighter.body.vector).normalize()
 
