@@ -3,8 +3,16 @@ content.component.attribute.intelligence = content.component.attribute.register(
     key: 'intelligence',
     name: 'Intelligence',
     isEnemy: true,
-    compute: function () {
-      return 1
+    compute: function (mask) {
+      let value = this.computeLinear({
+        base: 1,
+        increment: 1,
+        mask,
+      }) / (16 + 1)
+
+      value = engine.utility.clamp(value, 0, 1)
+
+      return Math.sqrt(value)
     },
   })
 )
