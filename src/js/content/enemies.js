@@ -89,7 +89,7 @@ content.enemies = (() => {
 
   function generatePosition() {
     const angle = engine.utility.random.float(0, 2 * Math.PI),
-      distance = engine.utility.random.float(25, 50),
+      distance = engine.utility.scale(fighters.length, 0, 3, 15, 45),
       hero = content.hero.body.vector.clone()
 
     return hero.add(
