@@ -116,7 +116,7 @@ content.component.fighter.arms.arm.prototype = {
       ? ratio
       : (1 - ratio) * (this.timerDuration / this.duration())
 
-    const angle = engine.utility.lerp(-this.angle + this.angleOffset, -this.angle, value)
+    const angle = engine.utility.lerp(this.angle + this.angleOffset, this.angle, value)
 
     return this.vector.add(
       this.vectorOffset.rotate(this.angle)
