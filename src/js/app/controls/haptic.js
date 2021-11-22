@@ -24,15 +24,13 @@ app.controls.haptic = (() => {
   }
 
   function isActive() {
-    return app.settings.computed.gamepadVibration > 0
+    return true
   }
 
   function trigger(effect) {
     const actuators = getActuators()
 
     effect = {...defaultEffect, ...effect}
-    effect.strongMagnitude *= app.settings.computed.gamepadVibration
-    effect.weakMagnitude *= app.settings.computed.gamepadVibration
 
     for (const actuator of actuators) {
       if (actuator.playEffect && actuator.type) {
@@ -53,3 +51,52 @@ app.controls.haptic = (() => {
     },
   }
 })()
+
+content.collisions.on('attack', ({
+  from,
+  to,
+} = {}) => {
+  const isHero = to === content.isHero,
+    velocity = from.arms.getActive().ratio()
+
+  app.controls.haptic.trigger({
+    duration: isHero ? 750 : 375,
+    strongMagnitude: isHero ? velocity : 0,
+    weakMagnitude: isHero ? 0 : velocity,
+  })
+})
+
+content.collisions.on('block', ({
+  from,
+  to,
+} = {}) => {
+  const isHero = to === content.isHero,
+    velocity = from.arms.getActive().ratio()
+
+  app.controls.haptic.trigger({
+    duration: isHero ? 750 : 375,
+    strongMagnitude: velocity * (isHero ? 0.75 : 0.25),
+    weakMagnitude: velocity * (isHero ? 0.25 : 0.75),
+  })
+})
+
+content.collisions.on('parry', ({
+  from,
+  to,
+} = {}) => {
+  const velocity = Math.min(1, from.arms.getActive().ratio() + to.arms.getActive().ratio())
+
+  app.controls.haptic.trigger({
+    duration: 500,
+    strongMagnitude: velocity/2,
+    weakMagnitude: velocity/2,
+  })
+})
+
+content.hero.on('step', () => {
+  app.controls.haptic.trigger({
+    duration: 125,
+    strongMagnitude: 0,
+    weakMagnitude: engine.utility.clamp(content.hero.body.lateralVelocity.distance() / 5 / 4, 0, 1),
+  })
+})
