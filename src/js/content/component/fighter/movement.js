@@ -31,7 +31,7 @@ content.component.fighter.movement.prototype = {
       : this.inputVelocity.normalize() // input direction, sprinting
 
     // Spend stamina
-    this.fighter.stamina.subtract(10/3)
+    this.fighter.stamina.subtract(2)
     this.emit('dodge')
 
     return this
@@ -90,10 +90,10 @@ content.component.fighter.movement.prototype = {
     return this
   },
   canSprint: function () {
-    return this.fighter.stamina.has(10/3 * engine.loop.delta())
+    return this.fighter.stamina.has(engine.loop.delta())
   },
   canDodge: function () {
-    return !this.isDodging() && this.fighter.stamina.has(10/3)
+    return !this.isDodging() && this.fighter.stamina.has(2)
   },
   destroy: function () {
     this.off()
@@ -140,7 +140,7 @@ content.component.fighter.movement.prototype = {
 
     if (sprint) {
       // Spend stamina
-      this.fighter.stamina.subtract(10/3 * engine.loop.delta())
+      this.fighter.stamina.subtract(engine.loop.delta())
     }
 
     return this

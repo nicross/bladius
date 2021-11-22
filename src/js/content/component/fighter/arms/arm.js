@@ -55,7 +55,7 @@ content.component.fighter.arms.arm.prototype = {
   },
   cost: function () {
     return this.isAttack()
-      ? 2
+      ? 1
       : 0
   },
   deactivate: function () {
