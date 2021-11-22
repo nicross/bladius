@@ -40,6 +40,7 @@ content.component.agent.prototype = {
       heroIsDefending = this.rollFor(intelligence) && content.hero.arms.isDefending(),
       heroIsDodging = this.rollFor(intelligence) && content.hero.movement.isDodging(),
       idealDistance = (2 * this.fighter.arms.right.length) - engine.const.zero,
+      idealStamina = engine.utility.lerp(0, 5, intelligence),
       isDefending = this.fighter.arms.isDefending(),
       relativeFromHero = this.fighter.body.vector.subtract(content.hero.body.vector).rotate(content.hero.body.angle),
       relativeToHero = content.hero.body.vector.subtract(this.fighter.body.vector).rotate(this.fighter.body.angle),
@@ -47,7 +48,9 @@ content.component.agent.prototype = {
 
     const angleFromHero = Math.atan2(relativeFromHero.y, relativeFromHero.x),
       angleToHero = Math.atan2(relativeToHero.y, relativeToHero.x),
-      distanceToHero = relativeToHero.distance()
+      distanceToHero = relativeToHero.distance(),
+      isInsideIdealDistance = distanceToHero < idealDistance,
+      isOutsideIdealDistance = distanceToHero > idealDistance + stoppingDistance
 
     // Calculate movement
     const input = {
@@ -58,10 +61,12 @@ content.component.agent.prototype = {
       y: 0,
     }
 
-    if (distanceToHero > idealDistance + stoppingDistance) {
-      const inputVector = content.hero.body.vector.subtract(this.fighter.body.vector).normalize()
+    if (isOutsideIdealDistance || isInsideIdealDistance) {
+      const inputVector = isOutsideIdealDistance
+        ? content.hero.body.vector.subtract(this.fighter.body.vector).normalize()
+        : this.fighter.body.vector.subtract(content.hero.body.vector).normalize()
 
-      input.sprint = canSprint && this.fighter.stamina.has(engine.utility.lerp(0, 5, intelligence))
+      input.sprint = canSprint && this.fighter.stamina.has(idealStamina)
       input.x = inputVector.x
       input.y = inputVector.y
     }
