@@ -18,7 +18,7 @@ content.prop.footstep = engine.prop.base.invent({
     const footDelay = 0,
       footDetune = fighter.detune + engine.utility.random.float(-10, 10),
       footDuration = 1/16,
-      footGain = engine.utility.humanizeDb(engine.utility.fromDb(engine.utility.lerp(-9, -3, velocity)), -12)
+      footGain = engine.utility.humanizeDb(engine.utility.fromDb(engine.utility.lerp(-4.5, 0, velocity)), -12)
 
     const foot = engine.audio.synth.createSimple({
       detune: footDetune,
