@@ -12,12 +12,20 @@ content.collisions = (() => {
     const hero = content.hero,
       enemies = content.enemies.get()
 
+    if (hero.movement.isDodging()) {
+      return
+    }
+
     const heroBody = content.hero.body.collisionCircle(),
       heroCollider = content.hero.arms.getActiveCollisionCircle(),
       heroIsAttacking = content.hero.arms.isAttacking(),
       heroIsDefending = content.hero.arms.isDefending()
 
     for (const enemy of enemies) {
+      if (enemy.movement.isDodging()) {
+        continue
+      }
+
       const enemyBody = enemy.body.collisionCircle(),
         enemyCollider = enemy.arms.getActiveCollisionCircle(),
         enemyIsAttacking = enemy.arms.isAttacking(),
