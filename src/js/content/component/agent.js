@@ -42,8 +42,8 @@ content.component.agent.prototype = {
       idealDistance = (2 * this.fighter.arms.right.length) - engine.const.zero,
       idealStamina = engine.utility.lerp(0, 5, intelligence),
       isDefending = this.fighter.arms.isDefending(),
-      relativeFromHero = this.fighter.body.vector.subtract(content.hero.body.vector).rotate(content.hero.body.angle),
-      relativeToHero = content.hero.body.vector.subtract(this.fighter.body.vector).rotate(this.fighter.body.angle),
+      relativeFromHero = this.fighter.body.vector.subtract(content.hero.body.vector).rotate(Math.PI - content.hero.body.angle),
+      relativeToHero = content.hero.body.vector.subtract(this.fighter.body.vector).rotate(Math.PI - this.fighter.body.angle),
       stoppingDistance = this.fighter.movement.stoppingDistance()
 
     const angleFromHero = Math.atan2(relativeFromHero.y, relativeFromHero.x),
