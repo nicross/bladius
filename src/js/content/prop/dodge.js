@@ -47,8 +47,12 @@ content.prop.dodge = engine.prop.base.invent({
 
     this.progress += engine.loop.delta() * engine.utility.lerp(1, this.frequency, 1 - Math.abs((2 * ratio) - 1))
 
-    const frequency = engine.utility.lerpExp(engine.const.minFrequency, 6666, this.noise.value(this.progress), 3),
-      gain = engine.utility.fromDb(-3) * (1 - Math.abs((2 * ratio) - 1))
+    const maxFrequency = this.fighter === content.hero
+      ? 666
+      : 6666
+
+    const frequency = engine.utility.lerpExp(engine.const.minFrequency, maxFrequency, this.noise.value(this.progress), 3),
+      gain = (1 - Math.abs((2 * ratio) - 1))
 
     engine.audio.ramp.set(this.synth.param.gain, gain)
     engine.audio.ramp.set(this.synth.filter.frequency, frequency)

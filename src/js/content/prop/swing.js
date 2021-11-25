@@ -31,6 +31,7 @@ content.prop.swing = engine.prop.base.invent({
     const isActive = this.arm.isActive(),
       isCooldown = this.arm.isCooldown(),
       isAttack = this.arm.isAttack(),
+      isHero = this.arm.arms.fighter === content.hero,
       position = this.arm.position(),
       ratio = this.arm.ratio()
 
@@ -44,8 +45,8 @@ content.prop.swing = engine.prop.base.invent({
     this.recalculate()
 
     const maxFrequency = isActive
-      ? (isAttack ? 2000 : 200)
-      : (isAttack ? 100 : 50)
+      ? ((isAttack ? 2000 : 400) * (isHero ? 0.5 : 1))
+      : ((isAttack ? 200 : 100) * (isHero ? 0.5 : 1))
 
     const frequency = engine.utility.lerp(engine.const.minFrequency, maxFrequency, ratio),
       gain = engine.utility.fromDb(-6) * (1 - Math.abs((2 * ratio) - 1))
