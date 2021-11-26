@@ -62,7 +62,7 @@ content.audio.heartbeat = (() => {
       return
     }
 
-    timer.ondended = null
+    timer.onended = null
     timer.stop()
     timer = null
   }
@@ -86,5 +86,4 @@ content.audio.heartbeat = (() => {
   }
 })()
 
-engine.ready(() => content.audio.heartbeat.start())
 engine.state.on('reset', () => content.audio.heartbeat.reset())

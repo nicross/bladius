@@ -41,6 +41,10 @@ app.screen.fight = (() => {
 
     content.audio.unduck()
     content.enemies.generate()
+
+    // Start breath/heart if not started, e.g. on new game
+    content.audio.breathing.start()
+    content.audio.heartbeat.start()
   }
 
   function onExit() {
@@ -73,6 +77,10 @@ app.screen.fight = (() => {
 
     // Handle loss conditions
     if (checkLoss()) {
+      // Kill breath/heart
+      content.audio.breathing.stop()
+      content.audio.heartbeat.stop()
+
       // Dramatic pause
       isPaused = true
 

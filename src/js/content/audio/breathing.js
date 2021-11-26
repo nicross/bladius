@@ -70,7 +70,7 @@ content.audio.breathing = (() => {
       return
     }
 
-    timer.ondended = null
+    timer.onended = null
     timer.stop()
     timer = null
   }
@@ -94,5 +94,4 @@ content.audio.breathing = (() => {
   }
 })()
 
-engine.ready(() => content.audio.breathing.start())
 engine.state.on('reset', () => content.audio.breathing.reset())
