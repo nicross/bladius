@@ -3,6 +3,8 @@ content.prop.damage = engine.prop.base.invent({
     fighter,
     velocity = 0,
   } = {}) {
+    this.fighter = fighter
+
     const duration = 1/8,
       gain = velocity,
       now = engine.audio.time()
@@ -32,7 +34,7 @@ content.prop.damage = engine.prop.base.invent({
       frequency: 1333,
     }).connect(this.output)
 
-    synth.param.gain.exponentialRampToValueAtTime(gain, now + 1/32)
+    synth.param.gain.linearRampToValueAtTime(gain, now + 1/64)
     synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + duration)
 
     synth.stop(now + duration)
@@ -40,6 +42,13 @@ content.prop.damage = engine.prop.base.invent({
     engine.utility.timing.promise(duration * 1000).then(() => {
       engine.props.destroy(this)
     })
+
+    return this
+  },
+  onUpdate: function () {
+    this.x = this.fighter.body.vector.x
+    this.y = this.fighter.body.vector.y
+    this.recalculate()
 
     return this
   },
