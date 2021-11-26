@@ -6,7 +6,7 @@ content.audio.heartbeat = (() => {
 
   let timer
 
-  bus.gain.value = engine.utility.fromDb(-15)
+  bus.gain.value = engine.utility.fromDb(-13.5)
 
   function getValue() {
     const health = content.hero.health.getRatio(),
@@ -18,7 +18,7 @@ content.audio.heartbeat = (() => {
   function pulse() {
     const value = getValue()
 
-    const bpm = engine.utility.lerp(60, 180, value),
+    const bpm = engine.utility.lerp(60, 240, value),
       duration = 1 / (bpm / 60),
       gain = engine.utility.fromDb(engine.utility.lerpRandom([-3, -2], [-1, 0]), value),
       now = engine.audio.time(),

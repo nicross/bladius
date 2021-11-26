@@ -27,7 +27,7 @@ content.audio.breathing = (() => {
   function pulse() {
     const value = getValue()
 
-    const duration = engine.utility.lerpRandom([2, 1], [0.5, 0.25], value),
+    const duration = engine.utility.lerpRandom([2, 1], [0.25, 0.25], value),
       gain = engine.utility.fromDb(engine.utility.lerpRandom([-3, -2], [-1, 0], value)),
       nextFormant = chooseFormant(),
       now = engine.audio.time()
