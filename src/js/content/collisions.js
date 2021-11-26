@@ -116,7 +116,7 @@ content.collisions = (() => {
     const {attack} = from.arms.getActive().compute()
     const {defense} = to.arms.getActive().compute()
     const ratio = from.arms.getActive().ratio()
-    const damage = calculateDamage(attack, defense, ratio)
+    const damage = calculateDamage(attack, defense, ratio) / 2
 
     to.health.subtract(damage)
 
