@@ -21,8 +21,8 @@ content.component.fighter.prototype = {
     this.footsteps = content.component.fighter.footsteps.create({vector: body.vector})
     this.movement = content.component.fighter.movement.create(this)
     this.hand = content.component.hand.create()
-    this.health = content.component.fighter.health.create()
-    this.stamina = content.component.fighter.stamina.create()
+    this.health = content.component.fighter.health.create(this)
+    this.stamina = content.component.fighter.stamina.create(this)
 
     this.setHand(hand)
 
@@ -75,7 +75,6 @@ content.component.fighter.prototype = {
 
     this.health.setMax(health)
     this.stamina.setMax(stamina)
-    this.stamina.setRegeneration(staminaRegen)
 
     return this
   },

@@ -5,9 +5,10 @@ content.component.fighter.stamina.create = function (...args) {
 }
 
 content.component.fighter.stamina.prototype = {
-  construct: function () {
+  construct: function (fighter) {
+    this.fighter = fighter
+
     this.max = 0
-    this.regeneration = 0
     this.value = 0
     this.wasUsed = false
 
@@ -30,7 +31,6 @@ content.component.fighter.stamina.prototype = {
   },
   reset: function () {
     this.max = 0
-    this.regeneration = 0
     this.value = 0
     this.wasUsed = false
 
@@ -48,11 +48,6 @@ content.component.fighter.stamina.prototype = {
 
     return this
   },
-  setRegeneration: function (regeneration) {
-    this.regeneration = Math.max(0, regeneration)
-
-    return this
-  },
   subtract: function (value = 0) {
     this.value = Math.max(0, this.value - value)
     this.markUsed()
@@ -62,9 +57,12 @@ content.component.fighter.stamina.prototype = {
   update: function () {
     const delta = engine.loop.delta()
 
+    // TODO: Support active effects applied by arm?
+    const {staminaRegen} = this.fighter.attributes.compute()
+
     // Prevent regen if in active use, e.g. sprinting
     if (!this.wasUsed) {
-      this.value += this.regeneration * delta
+      this.value += staminaRegen * delta
       this.value = Math.min(this.value, this.max)
     }
 

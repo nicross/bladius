@@ -5,7 +5,9 @@ content.component.fighter.health.create = function (...args) {
 }
 
 content.component.fighter.health.prototype = {
-  construct: function () {
+  construct: function (fighter) {
+    this.fighter = fighter
+
     engine.utility.pubsub.decorate(this)
 
     this.max = 0
