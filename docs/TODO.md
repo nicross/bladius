@@ -8,7 +8,6 @@
 
 ## Polish
 - Game feel
-  - Prevent parrying when unarmed
   - Longer cooldown on premature arm deactivation
   - Timeout before game win/loss screens
 - Sound design

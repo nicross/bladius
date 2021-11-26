@@ -22,6 +22,7 @@ content.cards.weapon = (() => {
     cost: 0,
     isStarter: false,
     name: 'Unarmed',
+    subtype: 'Unarmed',
     weight: 0,
 
     // XXX: Not registered

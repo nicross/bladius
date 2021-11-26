@@ -19,6 +19,7 @@ content.collisions = (() => {
     const heroBody = content.hero.body.collisionCircle(),
       heroCollider = content.hero.arms.getActiveCollisionCircle(),
       heroIsAttacking = content.hero.arms.isAttacking(),
+      heroIsAttackingUnarmed = heroIsAttacking && content.hero.arms.getActive().card.subtype == 'Unarmed',
       heroIsDefending = content.hero.arms.isDefending()
 
     for (const enemy of enemies) {
@@ -29,29 +30,30 @@ content.collisions = (() => {
       const enemyBody = enemy.body.collisionCircle(),
         enemyCollider = enemy.arms.getActiveCollisionCircle(),
         enemyIsAttacking = enemy.arms.isAttacking(),
+        enemyIsAttackingUnarmed = enemyIsAttacking && enemy.arms.getActive().card.subtype == 'Unarmed',
         enemyIsDefending = enemy.arms.isDefending()
 
-      // Hero and enemy parry
+      // Hero and enemy parry (must not be unarmed)
       if (
-           heroCollider && heroIsAttacking && enemyCollider && enemyIsAttacking
+           heroCollider && heroIsAttacking && (!heroIsAttackingUnarmed || enemyIsAttackingUnarmed) && enemyCollider && enemyIsAttacking && (!enemyIsAttackingUnarmed || heroIsAttackingUnarmed)
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleParry(hero, enemy)
         continue
       }
 
-      // Enemy blocks hero attack
+      // Enemy blocks hero attack (shield or unarmed)
       if (
-           heroCollider && heroIsAttacking && enemyCollider && enemyIsDefending
+           heroCollider && heroIsAttacking && enemyCollider && (enemyIsDefending || enemyIsAttackingUnarmed)
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleBlock(hero, enemy)
         continue
       }
 
-      // Hero blocks enemy attack
+      // Hero blocks enemy attack (shield or unarmed)
       if (
-           heroCollider && heroIsDefending && enemyCollider && enemyIsAttacking
+           heroCollider && (heroIsDefending || heroIsAttackingUnarmed) && enemyCollider && enemyIsAttacking
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleBlock(enemy, hero)
@@ -103,6 +105,7 @@ content.collisions = (() => {
 
     // Deactivate arms
     from.arms.deactivate()
+    to.arms.deactivate()
   }
 
   function handleBlock(from, to) {
@@ -128,6 +131,11 @@ content.collisions = (() => {
 
     // Deactivate arms
     from.arms.deactivate()
+
+    // Deactivate unarmed attacks, but not shields
+    if (to.arms.isAttacking()) {
+      to.arms.deactivate()
+    }
   }
 
   function handleParry(from, to) {
