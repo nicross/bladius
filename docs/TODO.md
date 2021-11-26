@@ -8,7 +8,6 @@
 
 ## Polish
 - Game feel
-  - Longer cooldown on premature arm deactivation
   - Timeout before game win/loss screens
 - Sound design
   - Revisit footsteps

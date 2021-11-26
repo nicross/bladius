@@ -33,6 +33,7 @@ content.component.fighter.arms.arm.prototype = {
 
     this.timerDirection = 1
     this.timerDuration = duration
+    this.timerRatio = 1
     this.timerStart = time
     this.timerEnd = time + duration
 
@@ -66,10 +67,11 @@ content.component.fighter.arms.arm.prototype = {
     const time = engine.loop.time()
 
     const delta = time - this.timerStart,
-      duration = Math.min(this.duration(), delta)
+      duration = this.duration()
 
     this.timerDirection = -1
     this.timerDuration = duration
+    this.timerRatio = Math.min(delta, duration) / duration
     this.timerStart = time
     this.timerEnd = time + duration
 
@@ -114,7 +116,7 @@ content.component.fighter.arms.arm.prototype = {
 
     const value = isActive
       ? ratio
-      : (1 - ratio) * (this.timerDuration / this.duration())
+      : (1 - ratio) * this.timerRatio
 
     const angle = engine.utility.lerp(this.angle + this.angleOffset, this.angle, value)
 
