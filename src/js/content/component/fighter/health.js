@@ -10,6 +10,7 @@ content.component.fighter.health.prototype = {
 
     engine.utility.pubsub.decorate(this)
 
+    this.healing = 0
     this.max = 0
     this.value = 0
 
@@ -26,12 +27,18 @@ content.component.fighter.health.prototype = {
       : 1
   },
   has: function (value = 0) {
-    return this.value >= value
+    return (this.value + this.healing) >= value
+  },
+  heal: function (value = 0) {
+    this.healing = value
+
+    return this
   },
   isZero: function () {
     return this.value == 0
   },
   reset: function () {
+    this.healing = 0
     this.max = 0
     this.value = 0
 
@@ -54,6 +61,12 @@ content.component.fighter.health.prototype = {
       return this
     }
 
+    // Absorb healing
+    const healingReduction = Math.min(this.healing, value)
+    this.healing = Math.max(0, this.healing - healingReduction)
+    value = Math.max(0, value - healingReduction)
+
+    // Apply damage
     this.value = Math.max(0, this.value - value)
 
     if (!this.value) {
@@ -69,7 +82,13 @@ content.component.fighter.health.prototype = {
 
     const delta = engine.loop.delta()
 
-    // TODO: Potion heals
+    // Apply healing
+    if (this.healing) {
+      const {healing} = this.fighter.attributes.compute()
+      const healingAmount = Math.min(delta * healing, this.healing)
+      this.healing = Math.max(0, this.healing - healingAmount)
+      this.value = Math.min(this.value + healingAmount, this.max)
+    }
 
     return this
   },

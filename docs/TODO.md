@@ -3,7 +3,6 @@
 - Sound design
   - Potions
   - Enemy spawn
-- Potions
 - Targeting system
 
 ## Polish

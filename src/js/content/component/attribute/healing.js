@@ -7,8 +7,8 @@ content.component.attribute.healing = content.component.attribute.register(
     compute: function ({
       multiplier: mask = 1,
     } = {}) {
-      // Heal half of total health per second
-      return 0.5 * this.multiplier * mask
+      // Heal half of starting health per second
+      return 5 * this.multiplier * mask
     },
   })
 )

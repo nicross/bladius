@@ -79,7 +79,7 @@ app.controls.keyboard = {
     }
 
     if (keys.KeyF || keys.KeyZ || keys.Slash) {
-      state.heal = true
+      state.potion = true
     }
 
     if (keys.KeyR || keys.KeyX || keys.Period) {

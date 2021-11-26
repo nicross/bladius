@@ -5,3 +5,9 @@ content.hero = content.fighters.create({
   },
   detune: 0,
 })
+
+engine.ready(() => {
+  content.potions.on('use', () => content.hero.health.heal(
+    content.hero.health.max - content.hero.health.value
+  ))
+})

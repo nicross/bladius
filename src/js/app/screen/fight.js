@@ -87,7 +87,9 @@ app.screen.fight = (() => {
       return setTimeout(() => app.state.screen.dispatch('loss'), pauseDelay)
     }
 
-    // TODO: Use potions
+    if (discrete.potion) {
+      content.potions.use()
+    }
 
     // Arms
     if (continuous.rightArm) {

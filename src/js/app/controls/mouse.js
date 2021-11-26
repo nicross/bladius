@@ -80,7 +80,7 @@ app.controls.mouse = (() => {
         state = {}
 
       if (mouse.button[3]) {
-        state.heal = true
+        state.potion = true
       }
 
       if (mouse.button[4]) {
