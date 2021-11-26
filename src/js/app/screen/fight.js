@@ -1,5 +1,8 @@
 app.screen.fight = (() => {
-  let root
+  const pauseDelay = 1.5 * 1000
+
+  let isPaused = false,
+    root
 
   engine.ready(() => {
     root = document.querySelector('.a-fight')
@@ -31,6 +34,8 @@ app.screen.fight = (() => {
   }
 
   function onEnter() {
+    isPaused = false
+
     app.utility.focus.setWithin(root)
     engine.loop.on('frame', onFrame)
 
@@ -46,6 +51,10 @@ app.screen.fight = (() => {
   }
 
   function onFrame() {
+    if (isPaused) {
+      return
+    }
+
     const continuous = app.controls.continuous(),
       discrete = app.controls.discrete()
 
@@ -54,14 +63,20 @@ app.screen.fight = (() => {
       // XXX: Reset movement to prevent footsteps between matches
       content.hero.movement.reset()
 
-      return app.state.screen.dispatch('win', {
+      // Dramatic pause
+      isPaused = true
+
+      return setTimeout(() => app.state.screen.dispatch('win', {
         kills: content.enemies.get().length,
-      })
+      }), pauseDelay)
     }
 
     // Handle loss conditions
     if (checkLoss()) {
-      app.state.screen.dispatch('loss')
+      // Dramatic pause
+      isPaused = true
+
+      return setTimeout(() => app.state.screen.dispatch('loss'), pauseDelay)
     }
 
     // TODO: Use potions

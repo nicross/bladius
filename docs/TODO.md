@@ -7,8 +7,6 @@
 - Targeting system
 
 ## Polish
-- Game feel
-  - Timeout before game win/loss screens
 - Sound design
   - Revisit footsteps
 
