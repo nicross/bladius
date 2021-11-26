@@ -4,6 +4,7 @@ content.audio.collisions = (() => {
   return {
     onAttack: function ({
       from,
+      to,
       where,
     } = {}) {
       engine.props.create(content.prop.collision, {
@@ -14,6 +15,14 @@ content.audio.collisions = (() => {
         velocity: from.arms.getActive().ratio(),
         x: where.x,
         y: where.y,
+      })
+
+      engine.props.create(content.prop.damage, {
+        destination: bus,
+        fighter: to,
+        velocity: from.arms.getActive().ratio(),
+        x: to.body.vector.x,
+        y: to.body.vector.y,
       })
 
       return this
@@ -32,6 +41,14 @@ content.audio.collisions = (() => {
         velocity: from.arms.getActive().ratio(),
         x: where.x,
         y: where.y,
+      })
+
+      engine.props.create(content.prop.damage, {
+        destination: bus,
+        fighter: to,
+        velocity: from.arms.getActive().ratio() / 2,
+        x: to.body.vector.x,
+        y: to.body.vector.y,
       })
 
       return this

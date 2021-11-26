@@ -3,7 +3,6 @@
 - Sound design
   - Potions
   - Enemy spawn
-  - Damage taken
 - Potions
 - Targeting system
 
@@ -11,6 +10,7 @@
 - Game feel
   - Prevent parrying when unarmed
   - Longer cooldown on premature arm deactivation
+  - Timeout before game win/loss screens
 - Sound design
   - Revisit footsteps
 
@@ -38,4 +38,4 @@
 - Global effects on hero/enemy attributes
 - Sound design
   - Xenakis/THX sound ambient music generator on menu screens
-  - Manually craft weapon/shield sounds
+- Statistics on win/loss screens
