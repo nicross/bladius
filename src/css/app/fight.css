@@ -10,11 +10,12 @@
     z-index: 1;
   }
   .a-fight--potions {
-    bottom: 2rem;
-    font-size: 2em;
+    bottom: 0;
+    font-size: 1em;
     left: 0;
+    padding: 2rem;
     position: absolute;
-    text-align: center;
+    text-align: left;
     text-shadow: 0 0 1em #000000;
     width: 100%;
     z-index: 2;
