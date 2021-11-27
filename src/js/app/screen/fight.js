@@ -2,10 +2,12 @@ app.screen.fight = (() => {
   const pauseDelay = 1.5 * 1000
 
   let isPaused = false,
+    potions,
     root
 
   engine.ready(() => {
     root = document.querySelector('.a-fight')
+    potions = root.querySelector('.a-fight--potions')
 
     app.utility.focus.trap(root)
 
@@ -41,6 +43,11 @@ app.screen.fight = (() => {
 
     content.audio.unduck()
     content.enemies.generate()
+
+    //
+    potions.removeAttribute('aria-live')
+    updatePotions()
+    potions.setAttribute('aria-live', 'assertive')
 
     // Start breath/heart if not started, e.g. on new game
     content.audio.breathing.start()
@@ -87,8 +94,9 @@ app.screen.fight = (() => {
       return setTimeout(() => app.state.screen.dispatch('loss'), pauseDelay)
     }
 
-    if (discrete.potion) {
+    if (discrete.potion && content.potions.canUse()) {
       content.potions.use()
+      updatePotions()
     }
 
     // Arms
@@ -117,6 +125,18 @@ app.screen.fight = (() => {
       x: lateral.x,
       y: lateral.y,
     })
+  }
+
+  function updatePotions() {
+    const value = content.potions.get()
+
+    potions.innerHTML = app.utility.component.potion(value)
+
+    if (value) {
+      potions.removeAttribute('aria-disabled')
+    } else {
+      potions.setAttribute('aria-disabled', 'true')
+    }
   }
 
   return {}

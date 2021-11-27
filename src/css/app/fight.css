@@ -9,3 +9,17 @@
     width: 100%;
     z-index: 1;
   }
+  .a-fight--potions {
+    bottom: 2rem;
+    font-size: 2em;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 0 1em #000000;
+    width: 100%;
+    z-index: 2;
+  }
+    .a-fight--potions[aria-disabled] .c-potion {
+      color: #FF0069;
+      filter: none;
+    }
