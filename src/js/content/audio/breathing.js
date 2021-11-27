@@ -34,18 +34,14 @@ content.audio.breathing = (() => {
 
     const synth = engine.audio.synth.createBuffer({
       buffer: engine.audio.buffer.noise.brown(),
-    }).chainAssign('talkbox', engine.audio.effect.createTalkbox({
-      dry: 0,
-      format0: engine.audio.formant.create(formant),
-      formant1: engine.audio.formant.create(nextFormant),
-      mix: 0,
-      wet: 1,
-    })).shaped(
+    }).filtered({
+      detune: engine.utility.random.float(-666, 666),
+      frequency: 333,
+      Q: 1,
+      type: 'bandpass',
+    }).shaped(
       engine.audio.shape.crush6()
     ).connect(bus)
-
-    synth.param.talkbox.mix.setValueAtTime(0, now)
-    synth.param.talkbox.mix.linearRampToValueAtTime(1, now + duration)
 
     synth.param.gain.setValueAtTime(engine.const.zeroGain, now)
     synth.param.gain.linearRampToValueAtTime(gain, now + duration/2)
