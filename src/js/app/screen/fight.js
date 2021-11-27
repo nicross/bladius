@@ -97,6 +97,7 @@ app.screen.fight = (() => {
 
     if (discrete.potion && content.potions.canUse()) {
       content.potions.use()
+      content.audio.sfx.potion()
       updatePotions()
     }
 

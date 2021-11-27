@@ -1,7 +1,7 @@
 # TODO
 ## Combat
 - Sound design
-  - Potions
+  - Kills
   - Enemy spawn
 - Targeting system
 

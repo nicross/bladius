@@ -201,6 +201,39 @@ content.audio.sfx.level = function (when = engine.audio.time()) {
   }
 }
 
+content.audio.sfx.potion = function (when = engine.audio.time()) {
+  const detune = engine.utility.random.float(-25, 25),
+    duration = 1,
+    frequency = engine.utility.midiToFrequency(45)
+
+  const synth = engine.audio.synth.createMod({
+    amodDepth: 1/4,
+    amodFrequency: engine.utility.random.float(6, 10),
+    carrierDetune: detune,
+    carrierFrequency: frequency,
+    carrierGain: 3/4,
+    fmodDetune: detune,
+    fmodDepth: frequency,
+    fmodFrequency: frequency * 2,
+    fmodType: 'triangle',
+    when,
+  }).filtered({
+    detune: 0,
+    frequency: frequency * 4,
+  }).connect(this.bus)
+
+  synth.param.detune.linearRampToValueAtTime(9600 + detune, when + duration)
+
+  synth.param.gain.setValueAtTime(engine.const.zeroGain, when)
+  synth.param.gain.exponentialRampToValueAtTime(1, when + 1/32)
+  synth.param.gain.exponentialRampToValueAtTime(1/4, when + 1/4)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+
+  synth.stop(when + duration)
+
+  return synth
+}
+
 content.audio.sfx.shuffle = function (when = engine.audio.time()) {
   const duration = engine.utility.random.float(0.7, 0.8),
     frequency = engine.utility.random.float(8000, 10000),
