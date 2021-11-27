@@ -1,9 +1,11 @@
 # TODO
 ## Combat
-- Sound design
-  - Kills
-  - Enemy spawn
 - Targeting system
+
+## Polish
+- Sound design
+  - Enemy spawn
+  - Enemy kill
 
 ## Post-jam
 - Attributes
