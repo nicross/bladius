@@ -39,6 +39,10 @@ app.screen.fight.canvas = (() => {
       return 1
     }
 
+    if (content.prop.target.isPrototypeOf(prop)) {
+      return content.hero.body.radius
+    }
+
     return 1/8
   }
 
