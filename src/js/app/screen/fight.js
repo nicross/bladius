@@ -127,6 +127,13 @@ app.screen.fight = (() => {
       x: lateral.x,
       y: lateral.y,
     })
+
+    // Targeting
+    if (discrete.targetNext) {
+      content.target.next()
+    } else if (discrete.targetPrevious) {
+      content.target.previous()
+    }
   }
 
   function updatePotions() {

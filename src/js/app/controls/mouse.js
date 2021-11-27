@@ -88,9 +88,9 @@ app.controls.mouse = (() => {
       }
 
       if (mouse.wheelY > 0) {
-        state.targetPrevious = true
-      } else if (mouse.wheelY < 0) {
         state.targetNext = true
+      } else if (mouse.wheelY < 0) {
+        state.targetPrevious = true
       }
 
       return state
