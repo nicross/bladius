@@ -1,5 +1,5 @@
 content.level = (() => {
-  const curve = 2
+  const curve = 1.5
 
   let level = 0
 
@@ -7,7 +7,7 @@ content.level = (() => {
     let result = 0
 
     for (let i = 1; i <= value; i += 1) {
-      result += curve * i
+      result += Math.round(curve * i)
     }
 
     return result
@@ -17,7 +17,7 @@ content.level = (() => {
     let i = 1
 
     while (experience >= curve * i) {
-      experience -= curve * i
+      experience -= Math.round(curve * i)
       i += 1
     }
 
