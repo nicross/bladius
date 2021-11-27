@@ -1,6 +1,6 @@
 app.screen.fight.canvas = (() => {
   const drawDistance = 50,
-    vfov = engine.utility.degreesToRadians(90) * (9/16)
+    vfov = engine.utility.degreesToRadians(120) * (9/16)
 
   let context,
     height,
@@ -75,13 +75,12 @@ app.screen.fight.canvas = (() => {
     z,
   }) {
     const velocity = engine.utility.vector2d.unitX()
-      .scale(engine.utility.random.float(1/16, 1/4))
+      .scale(engine.utility.random.float(0, 1/8))
       .rotate(Math.PI * engine.utility.random.float(-1, 1))
 
     particles.push({
       isHero,
       life: 1,
-      rotate: Math.PI/8 * engine.utility.random.float(-1, 1),
       vector: engine.utility.vector2d.create({x, y}),
       velocity,
       z,
@@ -92,10 +91,6 @@ app.screen.fight.canvas = (() => {
     for (const prop of engine.props.get()) {
       if (content.prop.movement.isPrototypeOf(prop)) {
         continue
-      }
-
-      if (content.prop.swing.isPrototypeOf(prop) && prop.isHero) {
-        console.log(prop.relative.x, prop.relative.y)
       }
 
       generateParticle({
@@ -126,7 +121,7 @@ app.screen.fight.canvas = (() => {
   function onResize() {
     height = root.height = root.clientHeight
     width = root.width = root.clientWidth
-    hfov = vfov * (height / width)
+    hfov = vfov * (width / height)
     particleRadius = 16 * (width / 1920)
   }
 
@@ -143,7 +138,7 @@ app.screen.fight.canvas = (() => {
       }
 
       particle.vector = particle.vector.add(
-        particle.velocity.scale(delta).rotate(particle.rotate)
+        particle.velocity.scale(delta)
       )
 
       particle.relative = position.subtract(particle.vector).rotate(angle)
