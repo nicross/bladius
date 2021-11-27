@@ -1,6 +1,13 @@
 app.screen.fight.canvas = (() => {
   const drawDistance = 50,
+    grain = document.createElement('canvas'),
+    grainContext = grain.getContext('2d'),
+    grainScale = 3,
+    grainSize = 256,
     vfov = engine.utility.degreesToRadians(120) * (9/16)
+
+  const grainData = grainContext.createImageData(grainSize, grainSize),
+    grainDataLength = 4 * (grainSize ** 2)
 
   let context,
     height,
@@ -9,6 +16,8 @@ app.screen.fight.canvas = (() => {
     particleRadius,
     root,
     width
+
+  grain.height = grain.width = grainSize
 
   engine.ready(() => {
     root = document.querySelector('.a-fight--canvas')
@@ -78,6 +87,12 @@ app.screen.fight.canvas = (() => {
       context.fillStyle = color
       context.fillRect(x, y, radius, radius)
     }
+
+    // Grain
+    context.scale(grainScale, grainScale)
+    context.fillStyle = context.createPattern(grain, 'repeat')
+    context.fillRect(0, 0, width * grainScale, height * grainScale)
+    context.scale(1 / grainScale, 1 / grainScale)
   }
 
   function generateParticle({
@@ -127,8 +142,11 @@ app.screen.fight.canvas = (() => {
   }
 
   function onFrame() {
+    updateGrain()
+
     generateParticles()
     updateParticles()
+
     draw()
   }
 
@@ -137,6 +155,19 @@ app.screen.fight.canvas = (() => {
     width = root.width = root.clientWidth
     hfov = vfov * (width / height)
     particleRadius = 16 * (width / 1920)
+  }
+
+  function updateGrain() {
+    const value = 1 - content.hero.health.getRatio()
+
+    for (let i = 0; i < grainDataLength; i += 4) {
+      grainData.data[i] = 255
+      grainData.data[i + 1] = 0
+      grainData.data[i + 2] = 105
+      grainData.data[i + 3] = engine.utility.random.integer(0, engine.utility.lerp(0, 48, value))
+    }
+
+    grainContext.putImageData(grainData, 0, 0)
   }
 
   function updateParticles() {
