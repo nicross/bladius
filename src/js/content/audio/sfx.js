@@ -50,6 +50,24 @@ content.audio.sfx.coins = function (count = 1) {
   return this
 }
 
+content.audio.sfx.death = function (when = engine.audio.time()) {
+  const duration = 3,
+    gain = engine.utility.fromDb(-9)
+
+  const synth = engine.audio.synth.createSimple({
+    detune: engine.utility.random.float(-100, 100),
+    frequency: 880,
+    type: 'triangle',
+  }).connect(this.bus)
+
+  synth.param.gain.linearRampToValueAtTime(gain, when + duration/2)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+
+  synth.stop(when + duration)
+
+  return synth
+}
+
 content.audio.sfx.draw = function (when = engine.audio.time()) {
   const duration = engine.utility.random.float(0.35, 0.4),
     frequency = engine.utility.random.float(8000, 10000)

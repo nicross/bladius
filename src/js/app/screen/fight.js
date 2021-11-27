@@ -44,7 +44,7 @@ app.screen.fight = (() => {
     content.audio.unduck()
     content.enemies.generate()
 
-    //
+    // Update potions silently
     potions.removeAttribute('aria-live')
     updatePotions()
     potions.setAttribute('aria-live', 'assertive')
@@ -90,6 +90,7 @@ app.screen.fight = (() => {
 
       // Dramatic pause
       isPaused = true
+      content.audio.sfx.death()
 
       return setTimeout(() => app.state.screen.dispatch('loss'), pauseDelay)
     }
