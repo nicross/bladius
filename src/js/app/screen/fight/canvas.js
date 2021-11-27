@@ -21,6 +21,18 @@ app.screen.fight.canvas = (() => {
     app.state.screen.on('exit-fight', onExit)
   })
 
+  function calculateMaxVelocity(prop) {
+    if (content.prop.dodge.isPrototypeOf(prop)) {
+      return 0.5
+    }
+
+    if (content.prop.swing.isPrototypeOf(prop)) {
+      return 1
+    }
+
+    return 1/8
+  }
+
   function clear() {
     context.clearRect(0, 0, width, height)
   }
@@ -70,12 +82,13 @@ app.screen.fight.canvas = (() => {
 
   function generateParticle({
     isHero,
+    maxVelocity,
     x,
     y,
     z,
   }) {
     const velocity = engine.utility.vector2d.unitX()
-      .scale(engine.utility.random.float(0, 1/8))
+      .scale(engine.utility.random.float(0, maxVelocity))
       .rotate(Math.PI * engine.utility.random.float(-1, 1))
 
     particles.push({
@@ -95,6 +108,7 @@ app.screen.fight.canvas = (() => {
 
       generateParticle({
         isHero: prop.isHero,
+        maxVelocity: calculateMaxVelocity(prop),
         x: prop.x,
         y: prop.y,
         z: Math.random(),
