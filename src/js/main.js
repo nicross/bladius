@@ -8,8 +8,8 @@ engine.ready(() => {
   engine.audio.mixer.master.param.limiter.release.value = 0.125
   engine.audio.mixer.master.param.limiter.threshold.value = -36
 
-  engine.audio.mixer.auxiliary.reverb.setImpulse(engine.audio.buffer.impulse.small())
-  engine.audio.mixer.auxiliary.reverb.param.gain.value = engine.utility.fromDb(-9)
+  engine.audio.mixer.auxiliary.reverb.setImpulse(engine.audio.buffer.impulse.medium())
+  engine.audio.mixer.auxiliary.reverb.param.gain.value = engine.utility.fromDb(-6)
 
   engine.prop.base.fadeInDuration = engine.const.zeroTime
   engine.prop.base.fadeOutDuration = engine.const.zeroTime

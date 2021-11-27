@@ -26,7 +26,7 @@ content.prop.footstep = engine.prop.base.invent({
       type: 'sawtooth',
     }).filtered({
       detune: footDetune,
-      frequency: 32 * (2 ** (this.isHero ? 1 : 5)),
+      frequency: 32 * (2 ** (this.isHero ? 0 : 5)),
     }).connect(this.output)
 
     foot.param.gain.setValueAtTime(engine.const.zeroGain, now + footDelay)

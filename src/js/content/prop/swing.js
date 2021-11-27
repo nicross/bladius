@@ -47,7 +47,7 @@ content.prop.swing = engine.prop.base.invent({
     this.recalculate()
 
     const maxFrequency = isActive
-      ? ((isAttack ? 2000 : 400) * (isHero ? 0.5 : 1))
+      ? ((isAttack ? 2000 : 400) * (isHero ? 0.25 : 1))
       : ((isAttack ? 200 : 100) * (isHero ? 0.5 : 1))
 
     const frequency = engine.utility.lerp(engine.const.minFrequency, maxFrequency, ratio),
