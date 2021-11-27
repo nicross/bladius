@@ -5,10 +5,6 @@
   - Enemy spawn
 - Targeting system
 
-## Polish
-- Sound design
-  - Revisit footsteps
-
 ## Post-jam
 - Attributes
   - Health Regen

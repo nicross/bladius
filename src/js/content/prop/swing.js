@@ -8,7 +8,9 @@ content.prop.swing = engine.prop.base.invent({
     const fighter = arm.arms.fighter
 
     engine.utility.pubsub.decorate(this)
+
     this.arm = arm
+    this.isHero = fighter === content.hero
 
     this.synth = engine.audio.synth.createBuffer({
       buffer: engine.audio.buffer.noise.white(),

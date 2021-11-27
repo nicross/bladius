@@ -1,8 +1,8 @@
 content.prop.footstep = engine.prop.base.invent({
   name: 'footstep',
-  fadeInDuration: engine.const.zeroTime,
-  fadeOutDuration: engine.const.zeroTime,
   onConstruct: function (options) {
+    this.isHero = options.fighter === content.hero
+
     this.play(options).then(() => {
       engine.props.destroy(this)
     })
@@ -26,7 +26,7 @@ content.prop.footstep = engine.prop.base.invent({
       type: 'sawtooth',
     }).filtered({
       detune: footDetune,
-      frequency: 32 * (2 ** 5),
+      frequency: 32 * (2 ** (this.isHero ? 1 : 5)),
     }).connect(this.output)
 
     foot.param.gain.setValueAtTime(engine.const.zeroGain, now + footDelay)

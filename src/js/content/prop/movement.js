@@ -1,11 +1,10 @@
 content.prop.movement = engine.prop.base.invent({
   name: 'movement',
-  fadeInDuration: engine.const.zeroTime,
-  fadeOutDuration: engine.const.zeroTime,
   onConstruct: function ({
     fighter,
   }) {
     this.fighter = fighter
+    this.isHero = fighter === content.hero
 
     return this
   },

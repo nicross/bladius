@@ -1,12 +1,11 @@
 content.prop.dodge = engine.prop.base.invent({
   name: 'dodge',
-  fadeInDuration: engine.const.zeroTime,
-  fadeOutDuration: engine.const.zeroTime,
   onConstruct: function ({
     fighter,
   }) {
     this.fighter = fighter
     this.frequency = engine.utility.random.float(20, 24)
+    this.isHero = fighter === content.hero
     this.progress = 0
     this.time = engine.loop.time()
 

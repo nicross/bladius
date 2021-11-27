@@ -4,6 +4,7 @@ content.prop.damage = engine.prop.base.invent({
     velocity = 0,
   } = {}) {
     this.fighter = fighter
+    this.isHero = fighter === content.hero
 
     const duration = 1/8,
       gain = velocity,

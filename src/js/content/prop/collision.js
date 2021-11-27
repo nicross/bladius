@@ -1,8 +1,12 @@
 content.prop.collision = engine.prop.base.invent({
   onConstruct: function ({
     cards = [],
+    from,
+    to,
     velocity = 0,
   } = {}) {
+    this.isHero = from === content.hero
+
     const isDeflect = cards.length == 2
     let delay = 0
 

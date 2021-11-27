@@ -53,11 +53,11 @@ app.screen.fight.canvas = (() => {
       }
 
       // Calculate width
-      const radius = engine.utility.lerpExp(0, particleRadius, 1 - (distance / drawDistance), 8)
+      const radius = engine.utility.lerpExp(0, particleRadius, 1 - (distance / drawDistance), 16)
 
       // Draw
       const color = particle.isHero
-        ? `rgba(255, 255, 255, ${particle.life})`
+        ? `rgba(0, 199, 255, ${particle.life})`
         : `rgba(255, 0, 105, ${particle.life})`
 
       const x = (width / 2) - (width * hangle / hfov) - (radius / 2)
@@ -94,6 +94,10 @@ app.screen.fight.canvas = (() => {
         continue
       }
 
+      if (content.prop.swing.isPrototypeOf(prop) && prop.isHero) {
+        console.log(prop.relative.x, prop.relative.y)
+      }
+
       generateParticle({
         isHero: prop.isHero,
         x: prop.x,
@@ -123,7 +127,7 @@ app.screen.fight.canvas = (() => {
     height = root.height = root.clientHeight
     width = root.width = root.clientWidth
     hfov = vfov * (height / width)
-    particleRadius = 8 * (width / 1920)
+    particleRadius = 16 * (width / 1920)
   }
 
   function updateParticles() {
