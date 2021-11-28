@@ -39,7 +39,7 @@ content.collisions = (() => {
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleParry(hero, enemy)
-        continue
+        break
       }
 
       // Enemy blocks hero attack (shield or unarmed)
@@ -48,7 +48,7 @@ content.collisions = (() => {
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleBlock(hero, enemy)
-        continue
+        break
       }
 
       // Hero blocks enemy attack (shield or unarmed)
@@ -57,7 +57,7 @@ content.collisions = (() => {
         && heroCollider.intersectsCircle(enemyCollider)
       ) {
         handleBlock(enemy, hero)
-        continue
+        break
       }
 
       // Hero attacks enemy
@@ -66,7 +66,7 @@ content.collisions = (() => {
         && heroCollider.intersectsCircle(enemyBody)
       ) {
         handleAttack(hero, enemy)
-        continue
+        break
       }
 
       // Enemy attacks hero
@@ -75,7 +75,7 @@ content.collisions = (() => {
         && enemyCollider.intersectsCircle(heroBody)
       ) {
         handleAttack(enemy, hero)
-        continue
+        break
       }
     }
   }
