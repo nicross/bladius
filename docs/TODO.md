@@ -1,9 +1,4 @@
 # TODO
-## Polish
-- Manual
-- Sound design
-  - Enemy spawn
-
 ## Post-jam
 - Attributes
   - Health Regen
@@ -28,5 +23,6 @@
 - Global effects on hero/enemy attributes
 - Sound design
   - Xenakis/THX sound ambient music generator on menu screens
+  - Enemy spawn
 - Statistics on win/loss screens
 - Handle rare multiple level ups in single round
