@@ -41,9 +41,14 @@ content.prop.target = engine.prop.base.invent({
     return this
   },
   onUpdate: function () {
-    // TODO: Accelerate toward point
-    this.x = this.fighter.body.vector.x
-    this.y = this.fighter.body.vector.y
+    const destination = content.utility.accelerate.vector(
+      this.vector(),
+      this.fighter.body.vector.clone(),
+      10
+    )
+
+    this.x = destination.x
+    this.y = destination.y
     this.recalculate()
 
     const {
