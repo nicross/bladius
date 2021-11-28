@@ -89,7 +89,7 @@ content.enemies = (() => {
 
   function generatePosition() {
     const angle = engine.utility.random.float(0, 2 * Math.PI),
-      distance = engine.utility.scale(fighters.length, 0, 3, 15, 45),
+      distance = engine.utility.scale(fighters.length, 0, 2, 15, 120),
       hero = content.hero.body.vector.clone()
 
     return hero.add(
@@ -143,7 +143,7 @@ content.enemies = (() => {
 
       if (timer <= 0) {
         spawn(queue.shift())
-        timer = engine.utility.random.float(0.5, 1)
+        timer = engine.utility.random.float(0, 15)
       }
 
       return this
