@@ -16,8 +16,6 @@ content.audio.target = (() => {
 
   return {
     onChange: function (fighter) {
-      console.log(fighter)
-
       if (fighter) {
         if (prop) {
           prop.retarget(fighter)

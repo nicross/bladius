@@ -1,8 +1,6 @@
 # TODO
-## Combat
-- Targeting system
-
 ## Polish
+- Manual
 - Sound design
   - Enemy spawn
   - Enemy kill
