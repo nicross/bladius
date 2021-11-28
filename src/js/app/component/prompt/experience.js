@@ -43,7 +43,7 @@ app.component.prompt.experience = app.component.prompt.base.invent({
       const progress = Math.min(1, (engine.loop.time() - start) / duration),
         value = engine.utility.lerp(from, to, progress)
 
-      const level = content.level.calculateLevelFrom(value),
+      const level = content.level.calculateLevelFrom(Math.floor(value)),
         max = content.level.calculateExperienceTo(level + 1),
         min = content.level.calculateExperienceTo(level)
 
