@@ -29,3 +29,4 @@
 - Sound design
   - Xenakis/THX sound ambient music generator on menu screens
 - Statistics on win/loss screens
+- Handle rare multiple level ups in single round
