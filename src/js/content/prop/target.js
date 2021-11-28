@@ -55,13 +55,17 @@ content.prop.target = engine.prop.base.invent({
       amodDepth,
       amodFrequency,
       carrierGain,
+      detune,
       filterFrequency,
     } = this.calculateParameters()
 
     engine.audio.ramp.set(this.synth.filter.frequency, filterFrequency)
+    engine.audio.ramp.set(this.synth.filter.detune, detune)
     engine.audio.ramp.set(this.synth.param.amod.depth, amodDepth)
     engine.audio.ramp.set(this.synth.param.amod.frequency, amodFrequency)
     engine.audio.ramp.set(this.synth.param.carrierGain, carrierGain)
+    engine.audio.ramp.set(this.synth.param.detune, detune)
+    engine.audio.ramp.set(this.synth.param.fmod.detune, detune)
 
     return this
   },
@@ -75,22 +79,14 @@ content.prop.target = engine.prop.base.invent({
       amodDepth,
       amodFrequency: engine.utility.lerp(16, 4, this.fighter.health.getRatio()),
       carrierGain: 1 - amodDepth,
-      detune: this.fighter.detune + engine.utility.lerp(-1200, 0, headingRatio),
+      detune: this.fighter.detune + engine.utility.lerp(-666, 0, headingRatio),
       filterFrequency: this.rootFrequency * engine.utility.lerp(8, 1, headingRatio),
     }
   },
   retarget: function (fighter) {
     this.fighter = fighter
 
-    const {
-      detune,
-    } = this.calculateParameters()
-
-    engine.audio.ramp.linear(this.synth.param.detune, detune, 1/2)
-    engine.audio.ramp.linear(this.synth.param.fmod.detune, detune, 1/2)
-    engine.audio.ramp.linear(this.synth.filter.detune, detune, 1/2)
-
     return this
   },
-  rootFrequency: engine.utility.midiToFrequency(33),
+  rootFrequency: engine.utility.midiToFrequency(39),
 })

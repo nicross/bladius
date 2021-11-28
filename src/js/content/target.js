@@ -9,7 +9,7 @@ content.target = (() => {
     has: () => Boolean(target),
     get: () => target,
     onFighterAdd: function (fighter) {
-      if (targets.includes(target) || fighter === content.hero) {
+      if (targets.includes(fighter) || fighter === content.hero) {
         return this
       }
 
