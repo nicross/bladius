@@ -3,7 +3,6 @@
 - Manual
 - Sound design
   - Enemy spawn
-  - Enemy kill
 
 ## Post-jam
 - Attributes

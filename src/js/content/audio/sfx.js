@@ -183,6 +183,37 @@ content.audio.sfx.horn = function ({
   return synth
 }
 
+content.audio.sfx.kill = function (when = engine.audio.time()) {
+  const detune = engine.utility.random.float(-100, 100),
+    frequency = engine.utility.midiToFrequency(33)
+
+  const synth = engine.audio.synth.createSimple({
+    detune: detune + 1200,
+    frequency,
+    type: 'square',
+    when,
+  }).filtered({
+    frequency: frequency,
+  }).connect(this.bus)
+
+  const duration = 1.5,
+    gain = engine.utility.fromDb(0),
+    now = engine.audio.time()
+
+  synth.param.gain.exponentialRampToValueAtTime(gain, when + 1/32)
+  synth.param.gain.exponentialRampToValueAtTime(gain/8, when + duration/4)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, when + duration)
+
+  synth.param.detune.linearRampToValueAtTime(detune, when + duration/4)
+  synth.param.detune.linearRampToValueAtTime(detune - 1200, when + duration)
+
+  synth.filter.frequency.exponentialRampToValueAtTime(frequency * 8, now + duration)
+
+  synth.stop(now + duration)
+
+  return this
+}
+
 content.audio.sfx.level = function (when = engine.audio.time()) {
   const frequencies = [69, 73, 76].map(engine.utility.midiToFrequency)
 
