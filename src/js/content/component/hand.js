@@ -72,9 +72,14 @@ content.component.hand.prototype = {
       return b.attributes.attack.modifier - a.attributes.attack.modifier
     })
 
+    // Determine padding method (this places shields in offhand when unarmed)
+    const method = actives.length == 1 && actives[0].type == 'Shield'
+      ? 'unshift'
+      : 'push'
+
     // Pad actives with special unarmed cards
     while (actives.length < 2) {
-      actives.push(content.cards.weapon.unarmed())
+      actives[method](content.cards.weapon.unarmed())
     }
 
     this.primary = actives.shift()
