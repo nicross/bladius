@@ -1,6 +1,16 @@
 # Bladius
 A roguelike game of gladiatorial combat with deckbuilding elements built with [syngen](https://github.com/nicross/syngen).
 
+## How to play
+There are a few ways to acquire Bladius:
+- [Download or play in the browser on itch.io.](https://shiftbacktick.itch.io/bladius)
+- [Download a release on GitHub.](https://github.com/nicross/bladius/releases)
+- Clone this repository and build from source.
+
+A [game manual](https://bladius.shiftbacktick.io/manual.html) has been provided to improve your success in Bladius.
+There you will find a complete reference to the game, its controls, and its mechanics.
+How long will you survive in the arena?
+
 ## Getting started
 To get started, please  use [npm](https://nodejs.org) to install the required dependencies:
 ```sh
